@@ -3,8 +3,8 @@
   cursor: pointer;
 }
 .close:after {
-  content: "▼";
+  content: "點擊伸展";
 }
 .open:after {
-  content: "▲";
+  content: "點擊收縮";
 }
