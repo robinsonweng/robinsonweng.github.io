@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-09-19T10:20:30.930Z</updated>
+  <updated>2019-09-19T10:46:21.568Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Selter Zone 的開課紀錄</title>
+    <link href="http://yoursite.com/2019/09/19/selterzone-teaching/"/>
+    <id>http://yoursite.com/2019/09/19/selterzone-teaching/</id>
+    <published>2019-09-19T10:37:22.000Z</published>
+    <updated>2019-09-19T10:46:21.568Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>最好的學習方法就是盡可能的去教人</p></blockquote><p><a href="https://shelterzone627.wixsite.com/shelter-zone" target="_blank" rel="noopener"><code>Shelter Zone</code></a>是我偶然在網路上找到的一個Discord群組，有一個很漂亮的官方網站，主要討論3D, 2D, 跟寫程式, 因為聊天氣氛好, 於是就決定在這邊偶爾開個課</p><h2 id="爬蟲基本教學"><a href="#爬蟲基本教學" class="headerlink" title="爬蟲基本教學"></a>爬蟲基本教學</h2><ul><li><a href="https://www.youtube.com/watch?v=P_sMSCegEgM&feature=youtu.be" target="_blank" rel="noopener">影片</a></li><li><a href="https://hackmd.io/@bzzRZCqwToKWV4FAPzPr4Q/HkUHM1abB" target="_blank" rel="noopener">投影片</a></li><li><a href="http://bit.ly/31aoWsG" target="_blank" rel="noopener">程式範例</a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;最好的學習方法就是盡可能的去教人&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://shelterzone627.wixsite.com/shelter-zone&quot; target=&quot;_blank&quot; rel=&quot;noopene
+      
+    
+    </summary>
+    
+    
+      <category term="程式" scheme="http://yoursite.com/categories/%E7%A8%8B%E5%BC%8F/"/>
+    
+      <category term="教學" scheme="http://yoursite.com/categories/%E7%A8%8B%E5%BC%8F/%E6%95%99%E5%AD%B8/"/>
+    
+    
+      <category term="教學" scheme="http://yoursite.com/tags/%E6%95%99%E5%AD%B8/"/>
+    
+  </entry>
   
   <entry>
     <title>如何將Json存入資料庫當中</title>
