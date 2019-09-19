@@ -6,18 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="點擊 粗乃">
+    <meta name="description" content="md內TagPlugin by    jsFiddle在文章中嵌入 jsFiddle。   Image在文章中插入指定大小的圖片。  Link在文章中插入連結，並在外連連結自動加上 target=”_blank” 屬性。 text url [external] [title] Include Code插入 source/downloads/code 資料夾內的程式檔，資料夾取决于你在配置文件中 c">
 <meta name="keywords" content="testing">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo syntax">
 <meta property="og:url" content="https://robinsonweng.github.io/2019/09/19/hide-seek/index.html">
 <meta property="og:site_name" content="春雨的部落格">
-<meta property="og:description" content="點擊 粗乃">
+<meta property="og:description" content="md內TagPlugin by    jsFiddle在文章中嵌入 jsFiddle。   Image在文章中插入指定大小的圖片。  Link在文章中插入連結，並在外連連結自動加上 target=”_blank” 屬性。 text url [external] [title] Include Code插入 source/downloads/code 資料夾內的程式檔，資料夾取决于你在配置文件中 c">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:updated_time" content="2019-09-19T16:59:57.660Z">
+<meta property="og:image" content="https://robinsonweng.github.io/path/to/image">
+<meta property="og:updated_time" content="2019-09-19T17:45:05.062Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo syntax">
-<meta name="twitter:description" content="點擊 粗乃">
+<meta name="twitter:description" content="md內TagPlugin by    jsFiddle在文章中嵌入 jsFiddle。   Image在文章中插入指定大小的圖片。  Link在文章中插入連結，並在外連連結自動加上 target=”_blank” 屬性。 text url [external] [title] Include Code插入 source/downloads/code 資料夾內的程式檔，資料夾取决于你在配置文件中 c">
+<meta name="twitter:image" content="https://robinsonweng.github.io/path/to/image">
     
     
         
@@ -129,13 +131,18 @@
       
         <time datetime="2019-09-19T14:06:04.000Z" itemprop="datePublished">2019-09-19</time>
         
-        (Updated: <time datetime="2019-09-19T16:59:57.660Z" itemprop="dateModified">2019-09-20</time>)
+        (Updated: <time datetime="2019-09-19T17:45:05.062Z" itemprop="dateModified">2019-09-20</time>)
         
       
     </div>
 
 
       
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/未分類/">未分類</a>
+    </div>
+
 
       
     <div class="article-tag">
@@ -149,10 +156,36 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p><div><div class="fold_hider"><div class="close hider_title">點擊</div></div><div class="fold">
-<p>粗乃</p>
+    <div><div class="fold_hider"><div class="close hider_title">md內TagPlugin</div></div><div class="fold">
+<p><a href="https://blog.rmiao.top/hexo-fold-block/" target="_blank" rel="noopener">by</a></p>
 
-</div></div></p>
+</div></div>
+
+<p>jsFiddle<br>在文章中嵌入 jsFiddle。</p>
+<iframe scrolling="no" width="[width]" height="[height]" src="//jsfiddle.net/shorttag/embedded/[tabs]/[skin]" frameborder="0" allowfullscreen></iframe>
+
+<p>Image<br>在文章中插入指定大小的圖片。</p>
+<img src="/path/to/image" class="[class names]" title="[width] [height] [title text [alt text]]">
+<p>Link<br>在文章中插入連結，並在外連連結自動加上 target=”_blank” 屬性。</p>
+<a>text url [external] [title]</a>
+<p>Include Code<br>插入 source/downloads/code 資料夾內的程式檔，資料夾取决于你在配置文件中 code_dir 的配置。</p>
+
+<p>Youtube<br>在文章中插入 Youtube 影片。</p>
+<div class="video-container"><iframe src="//www.youtube.com/embed/video_id" frameborder="0" allowfullscreen></iframe></div>
+<p>Vimeo<br>在文章中插入 Vimeo 影片。</p>
+<div class="video-container"><iframe src="//player.vimeo.com/video/video_id" frameborder="0" allowfullscreen></iframe></div>
+
+<p>引用文章<br>引用其他文章的連結。</p>
+
+
+
+
+<p>引用資產<br>引用文章的資產。</p>
+
+
+
+
+
 
   </div>
 </article>
@@ -248,7 +281,7 @@
   <script type="text/javascript">
   $(function() {
     // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
     btn += '<i class="far fa-clone"></i>';
     btn += '</span>'; 
     // mount it!
@@ -259,7 +292,7 @@
       }
     });
     clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "Copied!");
+      e.trigger.setAttribute('aria-label', "复制成功!");
       e.clearSelection();
     })
   })
