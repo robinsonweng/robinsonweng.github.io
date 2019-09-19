@@ -10,7 +10,7 @@
 <meta name="keywords" content="SQL,Database">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何將Json存入資料庫當中">
-<meta property="og:url" content="http://yoursite.com/2019/09/19/json-to-database/index.html">
+<meta property="og:url" content="https://robinsonweng.github.io/2019/09/19/json-to-database/index.html">
 <meta property="og:site_name" content="春雨的部落格">
 <meta property="og:description" content="有兩種解決的方法 在資料庫支援的情況下, 以Documention為輔完成任務 沒有資料庫不支援的情況下, 將Json的每個key拆開變成獨立的表格, 並加上ID建立所謂的關係來連結不同的表格   Json example:  1234567891011121314151617181920212223&amp;#123;    &quot;id&quot;: &quot;1&quot;,    &quot;name&quot;: &quot;Jane&quot;,    &quot;hobby">
 <meta property="og:locale" content="zh-TW">
@@ -89,16 +89,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/09/19/json-to-database/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/09/19/json-to-database/&text=如何將Json存入資料庫當中"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/09/19/json-to-database/&title=如何將Json存入資料庫當中"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/09/19/json-to-database/&is_video=false&description=如何將Json存入資料庫當中"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=如何將Json存入資料庫當中&body=Check out this article: http://yoursite.com/2019/09/19/json-to-database/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/09/19/json-to-database/&title=如何將Json存入資料庫當中"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/09/19/json-to-database/&title=如何將Json存入資料庫當中"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/09/19/json-to-database/&title=如何將Json存入資料庫當中"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/09/19/json-to-database/&title=如何將Json存入資料庫當中"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/09/19/json-to-database/&name=如何將Json存入資料庫當中&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://robinsonweng.github.io/2019/09/19/json-to-database/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://robinsonweng.github.io/2019/09/19/json-to-database/&text=如何將Json存入資料庫當中"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://robinsonweng.github.io/2019/09/19/json-to-database/&title=如何將Json存入資料庫當中"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://robinsonweng.github.io/2019/09/19/json-to-database/&is_video=false&description=如何將Json存入資料庫當中"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=如何將Json存入資料庫當中&body=Check out this article: https://robinsonweng.github.io/2019/09/19/json-to-database/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://robinsonweng.github.io/2019/09/19/json-to-database/&title=如何將Json存入資料庫當中"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://robinsonweng.github.io/2019/09/19/json-to-database/&title=如何將Json存入資料庫當中"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://robinsonweng.github.io/2019/09/19/json-to-database/&title=如何將Json存入資料庫當中"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://robinsonweng.github.io/2019/09/19/json-to-database/&title=如何將Json存入資料庫當中"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://robinsonweng.github.io/2019/09/19/json-to-database/&name=如何將Json存入資料庫當中&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -244,16 +244,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2019/09/19/json-to-database/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2019/09/19/json-to-database/&text=如何將Json存入資料庫當中"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2019/09/19/json-to-database/&title=如何將Json存入資料庫當中"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2019/09/19/json-to-database/&is_video=false&description=如何將Json存入資料庫當中"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=如何將Json存入資料庫當中&body=Check out this article: http://yoursite.com/2019/09/19/json-to-database/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2019/09/19/json-to-database/&title=如何將Json存入資料庫當中"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2019/09/19/json-to-database/&title=如何將Json存入資料庫當中"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2019/09/19/json-to-database/&title=如何將Json存入資料庫當中"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2019/09/19/json-to-database/&title=如何將Json存入資料庫當中"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2019/09/19/json-to-database/&name=如何將Json存入資料庫當中&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://robinsonweng.github.io/2019/09/19/json-to-database/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://robinsonweng.github.io/2019/09/19/json-to-database/&text=如何將Json存入資料庫當中"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://robinsonweng.github.io/2019/09/19/json-to-database/&title=如何將Json存入資料庫當中"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://robinsonweng.github.io/2019/09/19/json-to-database/&is_video=false&description=如何將Json存入資料庫當中"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=如何將Json存入資料庫當中&body=Check out this article: https://robinsonweng.github.io/2019/09/19/json-to-database/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://robinsonweng.github.io/2019/09/19/json-to-database/&title=如何將Json存入資料庫當中"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://robinsonweng.github.io/2019/09/19/json-to-database/&title=如何將Json存入資料庫當中"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://robinsonweng.github.io/2019/09/19/json-to-database/&title=如何將Json存入資料庫當中"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://robinsonweng.github.io/2019/09/19/json-to-database/&title=如何將Json存入資料庫當中"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://robinsonweng.github.io/2019/09/19/json-to-database/&name=如何將Json存入資料庫當中&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

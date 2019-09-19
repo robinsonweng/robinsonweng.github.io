@@ -2,42 +2,49 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2019/09/19/selterzone-teaching/</loc>
+    <loc>https://robinsonweng.github.io/2019/09/19/hide-seek/</loc>
+    
+    <lastmod>2019-09-19T13:22:02.725Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://robinsonweng.github.io/2019/09/19/selterzone-teaching/</loc>
     
     <lastmod>2019-09-19T10:46:21.568Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/09/19/json-to-database/</loc>
+    <loc>https://robinsonweng.github.io/2019/09/19/json-to-database/</loc>
     
     <lastmod>2019-09-19T10:20:30.930Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/index.html</loc>
+    <loc>https://robinsonweng.github.io/categories/index.html</loc>
     
     <lastmod>2019-09-19T08:40:07.747Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/about/index.html</loc>
+    <loc>https://robinsonweng.github.io/about/index.html</loc>
     
     <lastmod>2019-09-19T08:25:09.612Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/projects/index.html</loc>
+    <loc>https://robinsonweng.github.io/projects/index.html</loc>
     
     <lastmod>2019-09-19T08:21:45.903Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/index.html</loc>
+    <loc>https://robinsonweng.github.io/tags/index.html</loc>
     
     <lastmod>2019-09-18T08:19:47.136Z</lastmod>
     
