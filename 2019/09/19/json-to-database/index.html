@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="如何將Json存入資料庫當中有兩種解決的方法 在資料庫支援的情況下, 以Documention為輔完成任務 沒有資料庫不支援的情況下, 將Json的每個key拆開變成獨立的表格, 並加上ID建立所謂的關係來連結不同的表格   Json example:  1234567891011121314151617181920212223&amp;#123;    &quot;id&quot;: &quot;1&quot;,    &quot;name&quot;: &quot;Ja">
+    <meta name="description" content="如何將Json存入資料庫當中 有兩種解決的方法  在資料庫支援的情況下, 以Documention為輔完成任務 沒有資料庫不支援的情況下, 將Json的每個key拆開變成獨立的表格, 並加上ID建立所謂的關係來連結不同的表格   Json example: 1234567891011121314151617181920212223&amp;#123;    &quot;id&quot;: &quot;1&quot;,    &quot;name&quot;: &quot;J">
 <meta name="keywords" content="SQL,Database">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何將Json存入資料庫當中">
 <meta property="og:url" content="http://yoursite.com/2019/09/19/json-to-database/index.html">
 <meta property="og:site_name" content="春雨的部落格">
-<meta property="og:description" content="如何將Json存入資料庫當中有兩種解決的方法 在資料庫支援的情況下, 以Documention為輔完成任務 沒有資料庫不支援的情況下, 將Json的每個key拆開變成獨立的表格, 並加上ID建立所謂的關係來連結不同的表格   Json example:  1234567891011121314151617181920212223&amp;#123;    &quot;id&quot;: &quot;1&quot;,    &quot;name&quot;: &quot;Ja">
+<meta property="og:description" content="如何將Json存入資料庫當中 有兩種解決的方法  在資料庫支援的情況下, 以Documention為輔完成任務 沒有資料庫不支援的情況下, 將Json的每個key拆開變成獨立的表格, 並加上ID建立所謂的關係來連結不同的表格   Json example: 1234567891011121314151617181920212223&amp;#123;    &quot;id&quot;: &quot;1&quot;,    &quot;name&quot;: &quot;J">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:updated_time" content="2019-09-19T09:35:39.071Z">
+<meta property="og:updated_time" content="2019-09-19T09:51:15.683Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何將Json存入資料庫當中">
-<meta name="twitter:description" content="如何將Json存入資料庫當中有兩種解決的方法 在資料庫支援的情況下, 以Documention為輔完成任務 沒有資料庫不支援的情況下, 將Json的每個key拆開變成獨立的表格, 並加上ID建立所謂的關係來連結不同的表格   Json example:  1234567891011121314151617181920212223&amp;#123;    &quot;id&quot;: &quot;1&quot;,    &quot;name&quot;: &quot;Ja">
+<meta name="twitter:description" content="如何將Json存入資料庫當中 有兩種解決的方法  在資料庫支援的情況下, 以Documention為輔完成任務 沒有資料庫不支援的情況下, 將Json的每個key拆開變成獨立的表格, 並加上ID建立所謂的關係來連結不同的表格   Json example: 1234567891011121314151617181920212223&amp;#123;    &quot;id&quot;: &quot;1&quot;,    &quot;name&quot;: &quot;J">
     
     
         
@@ -101,7 +101,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#如何將Json存入資料庫當中"><span class="toc-number">1.</span> <span class="toc-text">如何將Json存入資料庫當中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#有兩種解決的方法"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">有兩種解決的方法</span></a></li></ol></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">1.</span> <span class="toc-text">如何將Json存入資料庫當中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">有兩種解決的方法</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -127,7 +127,7 @@
       
         <time datetime="2019-09-19T09:06:30.000Z" itemprop="datePublished">2019-09-19</time>
         
-        (Updated: <time datetime="2019-09-19T09:35:39.071Z" itemprop="dateModified">2019-09-19</time>)
+        (Updated: <time datetime="2019-09-19T09:51:15.683Z" itemprop="dateModified">2019-09-19</time>)
         
       
     </div>
@@ -152,20 +152,69 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h1 id="如何將Json存入資料庫當中"><a href="#如何將Json存入資料庫當中" class="headerlink" title="如何將Json存入資料庫當中"></a>如何將Json存入資料庫當中</h1><h4 id="有兩種解決的方法"><a href="#有兩種解決的方法" class="headerlink" title="有兩種解決的方法"></a>有兩種解決的方法</h4><ol>
+    <h1>如何將Json存入資料庫當中</h1>
+<h4>有兩種解決的方法</h4>
+<ol>
 <li>在資料庫支援的情況下, 以Documention為輔完成任務</li>
 <li>沒有資料庫不支援的情況下, 將Json的每個key拆開變成獨立的表格, 並加上ID建立所謂的關係來連結不同的表格</li>
 </ol>
 <blockquote>
-<p>Json example:</p>
+<p>Json example:
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"id"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"Jane"</span>,</span><br><span class="line">    <span class="attr">"hobby"</span>:<span class="string">"Cooking"</span>,</span><br><span class="line">    <span class="attr">"Age"</span>: <span class="string">"10"</span>,</span><br><span class="line">    <span class="attr">"Pet"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span> :<span class="string">"David"</span>,</span><br><span class="line">        <span class="attr">"species"</span>: <span class="string">"Dog"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"4"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"id"</span>: <span class="string">"2"</span>,</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"Lucy"</span>,</span><br><span class="line">    <span class="attr">"hobby"</span>:<span class="string">"Jogging"</span>,</span><br><span class="line">    <span class="attr">"Age"</span>: <span class="string">"18"</span>,</span><br><span class="line">    <span class="attr">"Pet"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"Kitto"</span>,</span><br><span class="line">        <span class="attr">"species"</span>: <span class="string">"Cat"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"4"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"id"</span>: <span class="string">"1"</span>,</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"Jane"</span>,</span><br><span class="line">    <span class="attr">"hobby"</span>:<span class="string">"Cooking"</span>,</span><br><span class="line">    <span class="attr">"Age"</span>: <span class="string">"10"</span>,</span><br><span class="line">    <span class="attr">"Pet"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span> :<span class="string">"David"</span>,</span><br><span class="line">        <span class="attr">"species"</span>: <span class="string">"Dog"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"4"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"id"</span>: <span class="string">"2"</span>,</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"Lucy"</span>,</span><br><span class="line">    <span class="attr">"hobby"</span>:<span class="string">"Jogging"</span>,</span><br><span class="line">    <span class="attr">"Age"</span>: <span class="string">"18"</span>,</span><br><span class="line">    <span class="attr">"Pet"</span>: &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"Kitto"</span>,</span><br><span class="line">        <span class="attr">"species"</span>: <span class="string">"Cat"</span>,</span><br><span class="line">        <span class="attr">"age"</span>: <span class="string">"4"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>Table example:</p>
 </blockquote>
-<p><code>table: Name</code><br>ID | Name | Hobby   | Age<br>—|——|———|—–<br>1  | Jane | Cooking | 10<br>2  | Lucy | Jogging | 18  </p>
-<p><code>table: Pet</code><br>ID | Name  | species | Age<br>—|——-|———|—–<br>1  | David | Dog     | 10<br>2  | Kitto | Cat     | 18  </p>
+<p><code>table: Name</code></p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th style="text-align:left">Hobby</th>
+<th style="text-align:center">Age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Jane</td>
+<td style="text-align:left">Cooking</td>
+<td style="text-align:center">10</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Lucy</td>
+<td style="text-align:left">Jogging</td>
+<td style="text-align:center">18</td>
+</tr>
+</tbody>
+</table>
+<p><code>table: Pet</code></p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th style="text-align:center">species</th>
+<th>Age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>David</td>
+<td style="text-align:center">Dog</td>
+<td>10</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Kitto</td>
+<td style="text-align:center">Cat</td>
+<td>18</td>
+</tr>
+</tbody>
+</table>
 
   </div>
 </article>
@@ -193,7 +242,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#如何將Json存入資料庫當中"><span class="toc-number">1.</span> <span class="toc-text">如何將Json存入資料庫當中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#有兩種解決的方法"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">有兩種解決的方法</span></a></li></ol></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">1.</span> <span class="toc-text">如何將Json存入資料庫當中</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">有兩種解決的方法</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
