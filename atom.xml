@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://robinsonweng.github.io/"/>
-  <updated>2019-09-19T18:40:59.161Z</updated>
+  <updated>2019-09-23T14:35:37.418Z</updated>
   <id>https://robinsonweng.github.io/</id>
   
   <author>
@@ -17,20 +17,87 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>hexo syntax</title>
-    <link href="https://robinsonweng.github.io/2019/09/19/hide-seek/"/>
-    <id>https://robinsonweng.github.io/2019/09/19/hide-seek/</id>
-    <published>2019-09-19T14:06:04.000Z</published>
-    <updated>2019-09-19T18:40:59.161Z</updated>
+    <title>利用作業系統的Shell來優化logging</title>
+    <link href="https://robinsonweng.github.io/2019/09/23/logcmd/"/>
+    <id>https://robinsonweng.github.io/2019/09/23/logcmd/</id>
+    <published>2019-09-23T14:22:58.000Z</published>
+    <updated>2019-09-23T14:35:37.418Z</updated>
     
-    <content type="html"><![CDATA[<p><div><div class="fold_hider"><div class="close hider_title">md內TagPlugin</div></div><div class="fold"><p><a href="https://blog.rmiao.top/hexo-fold-block/" target="_blank" rel="noopener">by</a></p></div></div></p><p>jsFiddle在文章中嵌入 jsFiddle。</p><p><iframe scrolling="no" width="[width]" height="[height]" src="//jsfiddle.net/shorttag/embedded/[tabs]/[skin]" frameborder="0" allowfullscreen></iframe></p><p>Image在文章中插入指定大小的圖片。</p><p><img src="/path/to/image" class="[class names]" title="[width] [height] [title text [alt text]]">Link在文章中插入連結，並在外連連結自動加上 target=&quot;_blank&quot; 屬性。</p><p><a>text url [external] [title]</a>Include Code插入 source/downloads/code 資料夾內的程式檔，資料夾取决于你在配置文件中 code_dir 的配置。</p><p>Youtube在文章中插入 Youtube 影片。</p><p><div class="video-container"><iframe src="//www.youtube.com/embed/video_id" frameborder="0" allowfullscreen></iframe></div>Vimeo在文章中插入 Vimeo 影片。</p><p><div class="video-container"><iframe src="//player.vimeo.com/video/video_id" frameborder="0" allowfullscreen></iframe></div></p><p>引用文章引用其他文章的連結。</p><p></p><p></p><p>引用資產引用文章的資產。</p><p></p><p></p><p></p>]]></content>
+    <content type="html"><![CDATA[<p>前幾天遇到一個從進修部轉進日間部的同學，聊著聊著就聊到我最近在幫人弄logging，他就建議:</p><blockquote class="colorquote info"><p>logging的輸出建議可以配合作業系統當中的shell，速度上可以提升很多</p></blockquote><p>好主意阿兄弟 !</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;&lt;div&gt;&lt;div class=&quot;fold_hider&quot;&gt;&lt;div class=&quot;close hider_title&quot;&gt;md內TagPlugin&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;fold&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;https://blog.rmiao.top
+        &lt;p&gt;前幾天遇到一個從進修部轉進日間部的同學，聊著聊著就聊到我最近在幫人弄logging，他就建議:&lt;/p&gt;
+&lt;blockquote class=&quot;colorquote info&quot;&gt;&lt;p&gt;logging的輸出建議可以配合作業系統當中的shell，速度上可以提升很多&lt;/p&gt;
+&lt;/b
+      
+    
+    </summary>
+    
+    
+      <category term="程式" scheme="https://robinsonweng.github.io/categories/%E7%A8%8B%E5%BC%8F/"/>
+    
+      <category term="Python" scheme="https://robinsonweng.github.io/categories/%E7%A8%8B%E5%BC%8F/Python/"/>
+    
+      <category term="開坑" scheme="https://robinsonweng.github.io/categories/%E7%A8%8B%E5%BC%8F/Python/%E9%96%8B%E5%9D%91/"/>
+    
+    
+      <category term="cmd" scheme="https://robinsonweng.github.io/tags/cmd/"/>
+    
+      <category term="logging" scheme="https://robinsonweng.github.io/tags/logging/"/>
+    
+      <category term="Python" scheme="https://robinsonweng.github.io/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>學程式要幹嘛?</title>
+    <link href="https://robinsonweng.github.io/2019/09/23/howtoprogram/"/>
+    <id>https://robinsonweng.github.io/2019/09/23/howtoprogram/</id>
+    <published>2019-09-23T10:31:49.000Z</published>
+    <updated>2019-09-23T14:21:39.291Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="請以解決問題為目的學程式語言"><a href="#請以解決問題為目的學程式語言" class="headerlink" title="請以解決問題為目的學程式語言"></a>請以解決問題為目的學程式語言</h1><p>網路上時常就會看到:</p><blockquote class="colorquote warning"><p>「我某語言學到OO(物件導向)，請問我可以拿來幹嘛」</p></blockquote><p>這是一種學語言的壞習慣，為了學而學，除非你有著考大學大考的毅力，以及制訂一份到退休的人生規劃，不然你很容易在名為程式的知識大海當中迷茫</p><p>在軟工發達的現今社會，光是熱門的程式語言就有數十種，連站穩腳跟都辦不到的人就別做夢了</p><p>如果僅僅是要拓展自己的科技樹，可以從這個語言的特色學起，例如Python的應用範圍如下:</p><ol><li>Web程式(Django, Flask, Pyramid)</li><li>作業系統(Anaconda)</li><li>GUI開發(TKinter, PyQt)</li><li>遊戲(pygame)</li><li>數據處理(numpy, scipy, matplotlib)</li><li>機器學習/深度學習(Tensorflow2.0, Pytorch)</li><li>爬蟲(Scrapy, BeautifulSoup)</li></ol><p>如果沒有熱忱與堅持，學程式語言會死得很難看，不過聽說畢業的大學生也不一定會寫程式，會程式語言不知道要朝哪個方向好像也是合情合理(?</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;請以解決問題為目的學程式語言&quot;&gt;&lt;a href=&quot;#請以解決問題為目的學程式語言&quot; class=&quot;headerlink&quot; title=&quot;請以解決問題為目的學程式語言&quot;&gt;&lt;/a&gt;請以解決問題為目的學程式語言&lt;/h1&gt;&lt;p&gt;網路上時常就會看到:&lt;/p&gt;
+&lt;blockq
+      
+    
+    </summary>
+    
+    
+      <category term="程式" scheme="https://robinsonweng.github.io/categories/%E7%A8%8B%E5%BC%8F/"/>
+    
+      <category term="觀念" scheme="https://robinsonweng.github.io/categories/%E7%A8%8B%E5%BC%8F/%E8%A7%80%E5%BF%B5/"/>
+    
+    
+      <category term="學習" scheme="https://robinsonweng.github.io/tags/%E5%AD%B8%E7%BF%92/"/>
+    
+      <category term="思想" scheme="https://robinsonweng.github.io/tags/%E6%80%9D%E6%83%B3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo syntax</title>
+    <link href="https://robinsonweng.github.io/2019/09/19/mdsyntax/"/>
+    <id>https://robinsonweng.github.io/2019/09/19/mdsyntax/</id>
+    <published>2019-09-19T14:06:04.000Z</published>
+    <updated>2019-09-23T06:17:14.190Z</updated>
+    
+    <content type="html"><![CDATA[<div><div class="fold_hider"><div class="close hider_title">md內TagPlugin</div></div><div class="fold"><p><a href="https://blog.rmiao.top/hexo-fold-block/" target="_blank" rel="noopener">by</a></p></div></div><p>jsFiddle<br>在文章中嵌入 jsFiddle。</p><iframe scrolling="no" width="[width]" height="[height]" src="//jsfiddle.net/shorttag/embedded/[tabs]/[skin]" frameborder="0" allowfullscreen></iframe><p>Image<br>在文章中插入指定大小的圖片。</p><img src="/path/to/image" class="[class names]" title="[width] [height] [title text [alt text]]"><p>Link<br>在文章中插入連結，並在外連連結自動加上 target=”_blank” 屬性。</p><a>text url [external] [title]</a><p>Include Code<br>插入 source/downloads/code 資料夾內的程式檔，資料夾取决于你在配置文件中 code_dir 的配置。</p><p>Youtube<br>在文章中插入 Youtube 影片。</p><div class="video-container"><iframe src="//www.youtube.com/embed/video_id" frameborder="0" allowfullscreen></iframe></div><p>Vimeo<br>在文章中插入 Vimeo 影片。</p><div class="video-container"><iframe src="//player.vimeo.com/video/video_id" frameborder="0" allowfullscreen></iframe></div><p>引用文章<br>引用其他文章的連結。</p><p>引用資產<br>引用文章的資產。</p><h5 id="color-quote"><a href="#color-quote" class="headerlink" title="color quote"></a>color quote</h5><blockquote class="colorquote info"><p>Example: info</p></blockquote><blockquote class="colorquote success"><p>Example: info</p></blockquote><blockquote class="colorquote warning"><p>Example: info</p></blockquote><blockquote class="colorquote danger"><p>Example: info</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;div&gt;&lt;div class=&quot;fold_hider&quot;&gt;&lt;div class=&quot;close hider_title&quot;&gt;md內TagPlugin&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;fold&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;https://blog.rmiao.top/he
       
     
     </summary>
@@ -50,7 +117,7 @@
     <published>2019-09-19T10:37:22.000Z</published>
     <updated>2019-09-19T17:10:47.184Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>最好的學習方法就是盡可能的去教人</p></blockquote><p><a href="https://shelterzone627.wixsite.com/shelter-zone" target="_blank" rel="noopener"><code>Shelter Zone</code></a>是我偶然在網路上找到的一個Discord群組，有一個很漂亮的官方網站，主要討論3D, 2D, 跟寫程式, 因為聊天氣氛好, 於是就決定在這邊偶爾開個課</p><h2>爬蟲基本教學</h2><ul><li><a href="https://hackmd.io/@bzzRZCqwToKWV4FAPzPr4Q/HkUHM1abB" target="_blank" rel="noopener">投影片</a></li><li><a href="http://bit.ly/31aoWsG" target="_blank" rel="noopener">程式範例</a></li><li>直播影片 <div class="video-container"><iframe src="//www.youtube.com/embed/P_sMSCegEgM" frameborder="0" allowfullscreen></iframe></div></li></ul>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>最好的學習方法就是盡可能的去教人</p></blockquote><p><a href="https://shelterzone627.wixsite.com/shelter-zone" target="_blank" rel="noopener"><code>Shelter Zone</code></a>是我偶然在網路上找到的一個Discord群組，有一個很漂亮的官方網站，主要討論3D, 2D, 跟寫程式, 因為聊天氣氛好, 於是就決定在這邊偶爾開個課</p><h2 id="爬蟲基本教學"><a href="#爬蟲基本教學" class="headerlink" title="爬蟲基本教學"></a>爬蟲基本教學</h2><ul><li><a href="https://hackmd.io/@bzzRZCqwToKWV4FAPzPr4Q/HkUHM1abB" target="_blank" rel="noopener">投影片</a></li><li><a href="http://bit.ly/31aoWsG" target="_blank" rel="noopener">程式範例</a></li><li>直播影片 <div class="video-container"><iframe src="//www.youtube.com/embed/P_sMSCegEgM" frameborder="0" allowfullscreen></iframe></div></li></ul>]]></content>
     
     <summary type="html">
     
@@ -79,20 +146,17 @@
     <link href="https://robinsonweng.github.io/2019/09/19/json-to-database/"/>
     <id>https://robinsonweng.github.io/2019/09/19/json-to-database/</id>
     <published>2019-09-19T09:06:30.000Z</published>
-    <updated>2019-09-19T18:26:52.107Z</updated>
+    <updated>2019-09-23T14:33:49.992Z</updated>
     
-    <content type="html"><![CDATA[<h2>有兩種解決的方法</h2><ol><li>在資料庫支援的情況下, 以Documention為輔完成任務</li><li>沒有資料庫不支援的情況下, 將Json的每個key拆開變成獨立的表格, 並加上ID建立所謂的關係來連結不同的表格</li></ol><p><figure class="highlight plain"><figcaption><span>data.json</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;id&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;name&quot;: &quot;Jane&quot;,</span><br><span class="line">    &quot;hobby&quot;:&quot;Cooking&quot;,</span><br><span class="line">    &quot;Age&quot;: &quot;10&quot;,</span><br><span class="line">    &quot;Pet&quot;: &#123;</span><br><span class="line">        &quot;name&quot; :&quot;David&quot;,</span><br><span class="line">        &quot;species&quot;: &quot;Dog&quot;,</span><br><span class="line">        &quot;age&quot;: &quot;4&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">    &quot;id&quot;: &quot;2&quot;,</span><br><span class="line">    &quot;name&quot;: &quot;Lucy&quot;,</span><br><span class="line">    &quot;hobby&quot;:&quot;Jogging&quot;,</span><br><span class="line">    &quot;Age&quot;: &quot;18&quot;,</span><br><span class="line">    &quot;Pet&quot;: &#123;</span><br><span class="line">        &quot;name&quot;: &quot;Kitto&quot;,</span><br><span class="line">        &quot;species&quot;: &quot;Cat&quot;,</span><br><span class="line">        &quot;age&quot;: &quot;4&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><blockquote><p>Table example:</p></blockquote><p><code>table: Name</code></p><table><thead><tr><th>ID</th><th>Name</th><th style="text-align:left">Hobby</th><th style="text-align:center">Age</th></tr></thead><tbody><tr><td>1</td><td>Jane</td><td style="text-align:left">Cooking</td><td style="text-align:center">10</td></tr><tr><td>2</td><td>Lucy</td><td style="text-align:left">Jogging</td><td style="text-align:center">18</td></tr></tbody></table><p><code>table: Pet</code></p><table><thead><tr><th>ID</th><th>Name</th><th style="text-align:center">species</th><th>Age</th></tr></thead><tbody><tr><td>1</td><td>David</td><td style="text-align:center">Dog</td><td>4</td></tr><tr><td>2</td><td>Kitto</td><td style="text-align:center">Cat</td><td>4</td></tr></tbody></table>]]></content>
+    <content type="html"><![CDATA[<h2 id="有兩種解決的方法"><a href="#有兩種解決的方法" class="headerlink" title="有兩種解決的方法"></a>有兩種解決的方法</h2><ol><li>在資料庫支援的情況下, 以Documention為輔完成任務</li><li>沒有資料庫不支援的情況下, 將Json的每個key拆開變成獨立的表格, 並加上ID建立所謂的關係來連結不同的表格</li></ol><figure class="highlight plain"><figcaption><span>data.json</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;id&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;name&quot;: &quot;Jane&quot;,</span><br><span class="line">    &quot;hobby&quot;:&quot;Cooking&quot;,</span><br><span class="line">    &quot;Age&quot;: &quot;10&quot;,</span><br><span class="line">    &quot;Pet&quot;: &#123;</span><br><span class="line">        &quot;name&quot; :&quot;David&quot;,</span><br><span class="line">        &quot;species&quot;: &quot;Dog&quot;,</span><br><span class="line">        &quot;age&quot;: &quot;4&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">    &quot;id&quot;: &quot;2&quot;,</span><br><span class="line">    &quot;name&quot;: &quot;Lucy&quot;,</span><br><span class="line">    &quot;hobby&quot;:&quot;Jogging&quot;,</span><br><span class="line">    &quot;Age&quot;: &quot;18&quot;,</span><br><span class="line">    &quot;Pet&quot;: &#123;</span><br><span class="line">        &quot;name&quot;: &quot;Kitto&quot;,</span><br><span class="line">        &quot;species&quot;: &quot;Cat&quot;,</span><br><span class="line">        &quot;age&quot;: &quot;4&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>Table example:</p></blockquote><p><code>table: Name</code></p><table><thead><tr><th>ID</th><th>Name</th><th align="left">Hobby</th><th align="center">Age</th></tr></thead><tbody><tr><td>1</td><td>Jane</td><td align="left">Cooking</td><td align="center">10</td></tr><tr><td>2</td><td>Lucy</td><td align="left">Jogging</td><td align="center">18</td></tr></tbody></table><p><code>table: Pet</code></p><table><thead><tr><th>ID</th><th>Name</th><th align="center">species</th><th>Age</th></tr></thead><tbody><tr><td>1</td><td>David</td><td align="center">Dog</td><td>4</td></tr><tr><td>2</td><td>Kitto</td><td align="center">Cat</td><td>4</td></tr></tbody></table>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h2&gt;有兩種解決的方法&lt;/h2&gt;
-&lt;ol&gt;
+        &lt;h2 id=&quot;有兩種解決的方法&quot;&gt;&lt;a href=&quot;#有兩種解決的方法&quot; class=&quot;headerlink&quot; title=&quot;有兩種解決的方法&quot;&gt;&lt;/a&gt;有兩種解決的方法&lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;在資料庫支援的情況下, 以Documention為輔完成任務&lt;/li&gt;
-&lt;li&gt;沒有資料庫不支援的情況下, 將Json的每個key拆開變成獨立的表格, 並加上ID建立所謂的關係來連結不同的表格&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;f
+&lt;li&gt;
       
     
     </summary>
@@ -100,9 +164,9 @@
     
       <category term="程式" scheme="https://robinsonweng.github.io/categories/%E7%A8%8B%E5%BC%8F/"/>
     
-      <category term="心得" scheme="https://robinsonweng.github.io/categories/%E7%A8%8B%E5%BC%8F/%E5%BF%83%E5%BE%97/"/>
+      <category term="SQL" scheme="https://robinsonweng.github.io/categories/%E7%A8%8B%E5%BC%8F/SQL/"/>
     
-      <category term="SQL" scheme="https://robinsonweng.github.io/categories/%E7%A8%8B%E5%BC%8F/%E5%BF%83%E5%BE%97/SQL/"/>
+      <category term="開坑" scheme="https://robinsonweng.github.io/categories/%E7%A8%8B%E5%BC%8F/SQL/%E9%96%8B%E5%9D%91/"/>
     
     
       <category term="SQL" scheme="https://robinsonweng.github.io/tags/SQL/"/>

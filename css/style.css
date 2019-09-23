@@ -458,7 +458,7 @@ body {
   font-display: swap;
   font-weight: 400;
   font-size: 14px;
-  font-family: "Menlo", "Meslo LG", monospace;
+  font-family: "Menlo", "Meslo LG", "monospace";
   line-height: 1.725;
   text-rendering: geometricPrecision;
   flex: 1;
@@ -1105,62 +1105,85 @@ article .content .video-container embed {
   width: 100%;
   height: 100%;
 }
-article .content blockquote {
-  margin: 1rem 10px;
-  padding: 0.5em 10px;
-  background: inherit;
-  color: #ccffb6;
-  quotes: "\201C" "\201D" "\2018" "\2019";
-  font-weight: bold;
+blockquote {
+  position: static;
+  font-family: font-serif;
+  font-size: 1.1em;
+  padding: 10px 20px 10px 54px;
+  background: rgba(0,0,0,0.03);
+  border-left: 5px solid #ee6e73;
 }
-article .content blockquote p {
-  margin: 0;
-}
-article .content blockquote:before {
-  margin-right: 0.25em;
-  color: #ccffb6;
-  content: "\201C";
-  vertical-align: -0.4em;
-  font-size: 2em;
-  line-height: 0.1em;
-}
-article .content blockquote footer {
-  margin: line-height 0;
-  color: #666;
-  font-size: 11px;
-}
-article .content blockquote footer a {
-  background-image: linear-gradient(transparent, transparent 5px, #666 5px, #666);
-  color: #666;
-}
-article .content blockquote footer a:hover {
-  background-image: linear-gradient(transparent, transparent 4px, #858585 4px, #858585);
-  color: #858585;
-}
-article .content blockquote footer cite:before {
-  padding: 0 0.5em;
-  content: "—";
-}
-article .content .pullquote {
-  margin: 0;
-  width: 45%;
-  text-align: left;
-}
-article .content .pullquote.left {
-  margin-right: 1em;
-  margin-left: 0.5em;
-}
-article .content .pullquote.right {
-  margin-right: 0.5em;
-  margin-left: 1em;
-}
-article .content .caption {
-  position: relative;
-  display: block;
-  margin-top: 0.5em;
-  color: #666;
+blockquote:before {
+  top: 20px;
+  left: -40px;
+  content: "\f10d";
+  color: #e2e2e2;
+  font-size: 32px;
+  font-family: FontAwesome;
   text-align: center;
-  font-size: 0.9em;
+  position: relative;
+}
+blockquote footer {
+  font-size: font-size;
+  margin: line-height 0;
+  font-family: font-sans;
+}
+blockquote footer cite:before {
+  content: "—";
+  padding: 0 0.5em;
+}
+.colorquote {
+  position: relative;
+  padding: 0.1em 1.5em;
+  color: #4a4a4a;
+  margin-bottom: 1em;
+}
+.colorquote:before {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  left: -14.5px;
+  margin-top: -12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  text-align: center;
+  color: #fff;
+  background-size: 16px 16px;
+  background-position: 4px 4px;
+  background-repeat: no-repeat;
+}
+.colorquote.info {
+  border-color: #209cee;
+  background-color: #def0fd;
+}
+.colorquote.info:before {
+  background-color: #209cee;
+  background-image: url("../images/info.svg");
+}
+.colorquote.success {
+  border-color: #23d160;
+  background-color: #cbf6da;
+}
+.colorquote.success:before {
+  background-color: #23d160;
+  background-image: url("../images/check.svg");
+}
+.colorquote.warning {
+  border-color: #ffdd57;
+  background-color: #fff6d1;
+}
+.colorquote.warning:before {
+  background-color: #ffdd57;
+  background-image: url("../images/question.svg");
+}
+.colorquote.danger {
+  border-color: #ff3860;
+  background-color: #ffb3c2;
+}
+.colorquote.danger:before {
+  background-color: #ff3860;
+  background-image: url("../images/exclamation.svg");
 }
 .posttitle {
   text-transform: none;
@@ -1374,7 +1397,7 @@ article .content .caption {
   font-display: swap;
   font-weight: 400;
   font-size: 11.200000000000001px;
-  font-family: "Menlo", "Meslo LG", monospace;
+  font-family: "Menlo", "Meslo LG", "monospace";
   line-height: 1.725;
   text-rendering: geometricPrecision;
   text-align: center;
@@ -1544,7 +1567,7 @@ pre {
   border: 1px dotted #666;
   border-radius: 4px;
   font-size: 13px;
-  font-family: "Menlo", "Meslo LG", monospace;
+  font-family: "Menlo", "Meslo LG", "monospace";
   line-height: 22px;
   -webkit-border-radius: 4px;
 }
@@ -1565,7 +1588,7 @@ code {
   padding: 10px 15px;
   border-radius: 4px;
   background: #212326;
-  font-family: "Menlo", "Meslo LG", monospace;
+  font-family: "Menlo", "Meslo LG", "monospace";
   -webkit-border-radius: 4px;
 }
 .highlight figcaption {
@@ -1621,6 +1644,9 @@ code {
 .highlight .line {
   height: 22px;
 }
+/*
+folding
+*/
 .hider_title {
   font-family: "Microsoft Yahei";
   cursor: pointer;
