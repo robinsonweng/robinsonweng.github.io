@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://robinsonweng.github.io/about/index.html</loc>
+    
+    <lastmod>2019-09-26T11:49:51.684Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://robinsonweng.github.io/projects/index.html</loc>
+    
+    <lastmod>2019-09-26T11:49:30.263Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://robinsonweng.github.io/2019/09/26/skill-tree/</loc>
+    
+    <lastmod>2019-09-26T11:47:42.671Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://robinsonweng.github.io/2019/09/23/logcmd/</loc>
     
     <lastmod>2019-09-23T14:35:37.418Z</lastmod>
@@ -37,23 +58,9 @@
   </url>
   
   <url>
-    <loc>https://robinsonweng.github.io/about/index.html</loc>
-    
-    <lastmod>2019-09-19T15:07:21.013Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://robinsonweng.github.io/categories/index.html</loc>
     
     <lastmod>2019-09-19T15:06:31.629Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://robinsonweng.github.io/projects/index.html</loc>
-    
-    <lastmod>2019-09-19T08:21:45.903Z</lastmod>
     
   </url>
   
