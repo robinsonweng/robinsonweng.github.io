@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://robinsonweng.github.io/"/>
-  <updated>2019-09-26T11:47:42.671Z</updated>
+  <updated>2019-10-06T06:13:54.802Z</updated>
   <id>https://robinsonweng.github.io/</id>
   
   <author>
@@ -15,6 +15,62 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ML-WAYR-20191006</title>
+    <link href="https://robinsonweng.github.io/2019/10/06/ML-wayr-20191006/"/>
+    <id>https://robinsonweng.github.io/2019/10/06/ML-wayr-20191006/</id>
+    <published>2019-10-06T06:01:26.000Z</published>
+    <updated>2019-10-06T06:13:54.802Z</updated>
+    
+    <content type="html"><![CDATA[<p>這個禮拜我終於把 Gradient-Based Learning Applied to Document Recongnitiond 看了1/3了，也逐漸抓到看論文的訣竅。<br>從當初點開以為要把4X頁的論文全部看完到現在發現只需要看不到三頁，多虧了網路上的資料以及朋友的協助，希望全部看懂以後可以開始學著寫論文導讀</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;這個禮拜我終於把 Gradient-Based Learning Applied to Document Recongnitiond 看了1/3了，也逐漸抓到看論文的訣竅。&lt;br&gt;從當初點開以為要把4X頁的論文全部看完到現在發現只需要看不到三頁，多虧了網路上的資料以及朋友的
+      
+    
+    </summary>
+    
+    
+      <category term="資料科學" scheme="https://robinsonweng.github.io/categories/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
+    
+      <category term="機器學習" scheme="https://robinsonweng.github.io/categories/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92/"/>
+    
+    
+      <category term="機器學習" scheme="https://robinsonweng.github.io/tags/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ML WAYR 一覽</title>
+    <link href="https://robinsonweng.github.io/2019/10/06/introwayr/"/>
+    <id>https://robinsonweng.github.io/2019/10/06/introwayr/</id>
+    <published>2019-10-06T05:47:33.000Z</published>
+    <updated>2019-10-06T06:03:04.699Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="colorquote info"><p>這是一個在Reddit的r/MachineLearning版上面看到的鐵人項目，每個禮拜發一篇現在看的任何有關機器學習(論文，期刊，文章)的心得，我認為應該可以提升我的信心以及實力等等，於是就開始了這個項目</p></blockquote><p>月份 | 第一個禮拜 | 第二個禮拜| 第三個禮拜 | 第四個禮拜 |<br>—|—|:—|:-:<br>十月 | <a href>Week1</a> | Week2 | Week3 | Week4 | </p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote class=&quot;colorquote info&quot;&gt;&lt;p&gt;這是一個在Reddit的r/MachineLearning版上面看到的鐵人項目，每個禮拜發一篇現在看的任何有關機器學習(論文，期刊，文章)的心得，我認為應該可以提升我的信心以及實力等等，於是就開始了這個
+      
+    
+    </summary>
+    
+    
+      <category term="資料科學" scheme="https://robinsonweng.github.io/categories/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
+    
+      <category term="機器學習" scheme="https://robinsonweng.github.io/categories/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92/"/>
+    
+    
+      <category term="機器學習" scheme="https://robinsonweng.github.io/tags/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92/"/>
+    
+  </entry>
   
   <entry>
     <title>新米工程師要怎麼點技能樹?</title>

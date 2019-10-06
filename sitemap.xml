@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://robinsonweng.github.io/about/index.html</loc>
+    <loc>https://robinsonweng.github.io/2019/10/06/ML-wayr-20191006/</loc>
     
-    <lastmod>2019-09-26T11:49:51.684Z</lastmod>
+    <lastmod>2019-10-06T06:13:54.802Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://robinsonweng.github.io/2019/10/06/introwayr/</loc>
+    
+    <lastmod>2019-10-06T06:03:04.699Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://robinsonweng.github.io/projects/index.html</loc>
     
-    <lastmod>2019-09-26T11:49:30.263Z</lastmod>
+    <lastmod>2019-10-06T05:49:51.670Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://robinsonweng.github.io/about/index.html</loc>
+    
+    <lastmod>2019-09-26T11:49:51.684Z</lastmod>
     
   </url>
   
