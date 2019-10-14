@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://robinsonweng.github.io/"/>
-  <updated>2019-10-07T17:11:27.243Z</updated>
+  <updated>2019-10-14T14:52:07.539Z</updated>
   <id>https://robinsonweng.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ML-wayr-20191014</title>
+    <link href="https://robinsonweng.github.io/2019/10/14/ML-wayr-20191014/"/>
+    <id>https://robinsonweng.github.io/2019/10/14/ML-wayr-20191014/</id>
+    <published>2019-10-14T14:46:02.000Z</published>
+    <updated>2019-10-14T14:52:07.539Z</updated>
+    
+    <content type="html"><![CDATA[<p>這禮拜身體不是很舒服，就沒看論文，改看清大副教授吳尚鴻的教學文章，教學課程的特色跟其他能不講數學就不講數學的教學相反，幾乎每頁都有公式<br>而且在第一堂課的附件是數學公式，非常貼心</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;這禮拜身體不是很舒服，就沒看論文，改看清大副教授吳尚鴻的教學文章，教學課程的特色跟其他能不講數學就不講數學的教學相反，幾乎每頁都有公式&lt;br&gt;而且在第一堂課的附件是數學公式，非常貼心&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="資料科學" scheme="https://robinsonweng.github.io/categories/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/"/>
+    
+      <category term="機器學習" scheme="https://robinsonweng.github.io/categories/%E8%B3%87%E6%96%99%E7%A7%91%E5%AD%B8/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92/"/>
+    
+    
+      <category term="機器學習" scheme="https://robinsonweng.github.io/tags/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92/"/>
+    
+  </entry>
   
   <entry>
     <title>ML-WAYR-20191006</title>
@@ -49,9 +78,9 @@
     <link href="https://robinsonweng.github.io/2019/10/06/introwayr/"/>
     <id>https://robinsonweng.github.io/2019/10/06/introwayr/</id>
     <published>2019-10-06T05:47:33.000Z</published>
-    <updated>2019-10-07T17:11:52.542Z</updated>
+    <updated>2019-10-14T14:46:06.320Z</updated>
     
-    <content type="html"><![CDATA[<blockquote class="colorquote info"><p>這是一個在Reddit的r/MachineLearning版上面看到的鐵人項目，每個禮拜發一篇現在看的任何有關機器學習(論文，期刊，文章)的心得，我認為應該可以提升我的信心以及實力等等，於是就開始了這個項目</p></blockquote><table><thead><tr><th>月份</th><th align="center">第一個禮拜</th><th align="center">第二個禮拜</th><th align="center">第三個禮拜</th><th align="center">第四個禮拜</th></tr></thead><tbody><tr><td>十月</td><td align="center"><a href="https://robinsonweng.github.io/2019/10/06/ML-wayr-20191006/">Week1</a></td><td align="center">Week2</td><td align="center">Week3</td><td align="center">Week4</td></tr></tbody></table>]]></content>
+    <content type="html"><![CDATA[<blockquote class="colorquote info"><p>這是一個在Reddit的r/MachineLearning版上面看到的鐵人項目，每個禮拜發一篇現在看的任何有關機器學習(論文，期刊，文章)的心得，我認為應該可以提升我的信心以及實力等等，於是就開始了這個項目</p></blockquote><table><thead><tr><th>月份</th><th align="center">第一個禮拜</th><th align="center">第二個禮拜</th><th align="center">第三個禮拜</th><th align="center">第四個禮拜</th></tr></thead><tbody><tr><td>十月</td><td align="center"><a href="https://robinsonweng.github.io/2019/10/06/ML-wayr-20191006/">Week1</a></td><td align="center"><a href>Week2</a></td><td align="center">Week3</td><td align="center">Week4</td></tr></tbody></table>]]></content>
     
     <summary type="html">
     
