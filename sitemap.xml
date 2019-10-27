@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://robinsonweng.github.io/2019/10/06/ML-wayr-intro/</loc>
+    
+    <lastmod>2019-10-27T15:13:07.548Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://robinsonweng.github.io/2019/10/27/ML-wayr-20191027/</loc>
     
     <lastmod>2019-10-27T09:22:54.093Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>https://robinsonweng.github.io/2019/10/25/gitkexperience/</loc>
     
     <lastmod>2019-10-27T08:55:23.485Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://robinsonweng.github.io/2019/10/06/introwayr/</loc>
-    
-    <lastmod>2019-10-14T14:56:52.128Z</lastmod>
     
   </url>
   
