@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://robinsonweng.github.io/2019/09/23/logcmd/</loc>
+    
+    <lastmod>2019-12-09T09:20:15.058Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://robinsonweng.github.io/2019/10/06/python's-Class-Development-Toolkit/</loc>
     
-    <lastmod>2019-12-07T12:00:36.012Z</lastmod>
+    <lastmod>2019-12-09T09:19:39.227Z</lastmod>
     
   </url>
   
@@ -68,13 +75,6 @@
     <loc>https://robinsonweng.github.io/2019/09/26/skill-tree/</loc>
     
     <lastmod>2019-09-26T11:47:42.671Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://robinsonweng.github.io/2019/09/23/logcmd/</loc>
-    
-    <lastmod>2019-09-23T14:35:37.418Z</lastmod>
     
   </url>
   
