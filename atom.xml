@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://robinsonweng.github.io/"/>
-  <updated>2019-11-10T13:03:42.610Z</updated>
+  <updated>2020-03-10T10:15:39.910Z</updated>
   <id>https://robinsonweng.github.io/</id>
   
   <author>
@@ -17,13 +17,47 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>將社群軟體通知以RSS整合至Discord</title>
+    <link href="https://robinsonweng.github.io/2020/03/10/rss_discord_hook/"/>
+    <id>https://robinsonweng.github.io/2020/03/10/rss_discord_hook/</id>
+    <published>2020-03-10T10:15:33.000Z</published>
+    <updated>2020-03-10T10:15:39.910Z</updated>
+    
+    <content type="html"><![CDATA[<p>曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。</p><h2 id="工具介紹"><a href="#工具介紹" class="headerlink" title="工具介紹"></a>工具介紹</h2><ol><li><p><a href="https://docs.rsshub.app/" target="_blank" rel="noopener">RSSHUB</a></p><p> RSShub能幫助你將網站更新內容轉換為RSS通知的神奇網站，如果你技術力足夠，也可以根據官方網站步驟申請自己想要的網站。其中包含:</p><ul><li>Facebook</li><li>Twitter</li><li>Pixiv</li><li>Youtube 等網站</li></ul></li><li><p><a href="https://ifttt.com/" target="_blank" rel="noopener">ifTTT</a></p><p> 這個網站主打一個很簡單的邏輯:</p> <blockquote class="colorquote info"><p>「如果這件事情發生了，那就做這件事情」</p></blockquote><p> 以不需寫程式，接拼圖的方法來打造自動化王國，從「如果相機拍照就將照片上傳至GoogleDrive」，到「按一個按鈕就讓家中智慧家電開燈(網站有支援的前提)」應有盡有</p></li><li><p>Discord的webhook網址</p></li></ol><h2 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h2><ul><li>首先在 RSSHUB中找到你想要的網址，假設我想得到猫宮ひなた的推文通知、轉推但不需要回復，根据官網說明的路由:</li></ul><p><img src="https://i.imgur.com/2rOqoyX.png" alt></p><p>我的RSS網址應該長這樣:</p><blockquote class="colorquote success"><p><a href="https://rsshub.app/twitter/user/Nekomiya_Hinata/exclude_replies" target="_blank" rel="noopener">https://rsshub.app/twitter/user/Nekomiya_Hinata/exclude_replies</a></p></blockquote><ul><li>接下來到ifTTT網站，註冊/登入以後，點選右上角的explore</li></ul><p><img src="https://i.imgur.com/DWd08ZO.png" alt></p><ul><li>點選那個很不顯眼的加號</li></ul><p><img src="https://i.imgur.com/QH0UOcl.png" alt></p><ul><li>我們就來到先前提到的 「if this then that」，點下「This」</li></ul><p><img src="https://i.imgur.com/UuqBlSQ.png" alt></p><ul><li>在搜尋框裡面輸入RSS</li></ul><p><img src="https://i.imgur.com/oGjcaBp.png" alt></p><ul><li>點開RSS選擇左邊的觸發條件「每當有新通知時觸發」</li></ul><p><img src="https://i.imgur.com/kdjutFe.png" alt></p><ul><li>輸入剛剛從RSShub拿到的網址後點選「Create Trigger」</li></ul><p><img src="https://i.imgur.com/0xHzaM0.png" alt></p><ul><li>這步跟剛剛一樣點選 「That」，只是這次要搜尋「webhooks」</li></ul><p><img src="https://i.imgur.com/qwbZnrJ.png" alt></p><ul><li>點選「Make a webrequest」以後，接下來就是重頭戲</li></ul><p><img src="https://i.imgur.com/qhm5Zlp.png" alt></p><ol><li><p>URL: 這邊要輸入的是discord當中的webhook網址，可以參考<a href="https://support.discordapp.com/hc/zh-tw/articles/228383668-%E4%BD%BF%E7%94%A8%E7%B6%B2%E7%B5%A1%E9%89%A4%E6%89%8B-Webhooks-" target="_blank" rel="noopener">Discord官方教學</a></p></li><li><p>Method: 由於我們是需要傳送訊息到Discord，所以這邊一律設定為Post</p></li><li><p>Content Type: 這邊選擇application/json</p></li><li><p>Body: 這裡就是我們要傳送至discord的文字，雖然他支持discord的embed message，不過這邊我們先簡單一點，標記一個人並傳送標題與網址</p></li></ol><p>選擇下面的小按鈕「Add ingredient」<br>這邊可以調整你要rss通知中的內容出現在指定的位置</p><p><img src="https://i.imgur.com/78dpqYD.png" alt></p><ol start="5"><li>最後按下action就皆大歡喜了</li></ol><p>P.S 由於RSShub是採取贊助制度，速度不一定可以讓你滿意，可以去尋找其他服務代替</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只
+      
+    
+    </summary>
+    
+    
+      <category term="程式" scheme="https://robinsonweng.github.io/categories/%E7%A8%8B%E5%BC%8F/"/>
+    
+      <category term="教學" scheme="https://robinsonweng.github.io/categories/%E7%A8%8B%E5%BC%8F/%E6%95%99%E5%AD%B8/"/>
+    
+    
+      <category term="IFTTT" scheme="https://robinsonweng.github.io/tags/IFTTT/"/>
+    
+      <category term="RSS" scheme="https://robinsonweng.github.io/tags/RSS/"/>
+    
+      <category term="webhook" scheme="https://robinsonweng.github.io/tags/webhook/"/>
+    
+      <category term="Discord" scheme="https://robinsonweng.github.io/tags/Discord/"/>
+    
+  </entry>
+  
+  <entry>
     <title>ML-wayr-20191110</title>
     <link href="https://robinsonweng.github.io/2019/11/10/ML-wayr-20191110/"/>
     <id>https://robinsonweng.github.io/2019/11/10/ML-wayr-20191110/</id>
     <published>2019-11-10T12:45:05.000Z</published>
     <updated>2019-11-10T13:03:42.610Z</updated>
     
-    <content type="html"><![CDATA[<p>這次因為專題需求，改從Evolving Neural Networks through Augmenting Topologies(NEAT)這篇起手，閱讀方式也從以前大不相同，從遇到問題標記改成一個一個看懂，姑且Abstract是看完了，不過花了不少時間在補完知識上面</p><p>這篇主要在討論關於某些問題在強化學習的過程中並沒有辦法很好的給出反饋，於是改用所謂的神經進化(neuroevolution)來生成網路，希望藉由進化算法來取代梯度下降造成的回饋不足文章中認為這個神經進化網路有效率的地方在於:</p><ol><li>給予一個規則來讓拓樸交叉</li><li>利用本身的可進化性來保持網路具創新性</li><li>神經網路的成長是從最小架構開始進行同時他也提到對於這個網路有做過所謂一種模型簡化測試(ablation studies)來證實每個架構對於網路都是重要且連接在一起的</li></ol>]]></content>
+    <content type="html"><![CDATA[<p>這次因為專題需求，改從Evolving Neural Networks through Augmenting Topologies(NEAT)這篇起手，閱讀方式也從以前大不相同，從遇到問題標記改成一個一個看懂，姑且Abstract是看完了，不過花了不少時間在補完知識上面</p><p>這篇主要在討論關於某些問題在強化學習的過程中並沒有辦法很好的給出反饋，於是改用所謂的神經進化(neuroevolution)來生成網路，希望藉由進化算法來取代梯度下降造成的回饋不足<br>文章中認為這個神經進化網路有效率的地方在於:</p><ol><li>給予一個規則來讓拓樸交叉</li><li>利用本身的可進化性來保持網路具創新性</li><li>神經網路的成長是從最小架構開始進行<br>同時他也提到對於這個網路有做過所謂一種模型簡化測試(ablation studies)來證實每個架構對於網路都是重要且連接在一起的</li></ol>]]></content>
     
     <summary type="html">
     
@@ -53,7 +87,7 @@
     <published>2019-10-27T09:16:08.000Z</published>
     <updated>2019-10-27T09:22:54.093Z</updated>
     
-    <content type="html"><![CDATA[<p>把 Lenet5(Gradient-Based Learning Applied to Document Recongnitiond) 這篇看完想要看的部分以後，雖然對於細節的理論還不是很熟悉，卻抓到很多看論文的技巧，例如看論文要先看實驗目的，優先在論文當中找專業術語的解釋，以及熟悉、習慣沒看過的英文單字，就第一次而言算是收穫滿滿。由於專題需要，這禮拜轉向看NEAT(Evolving Neural Networks throughAugmenting Topologies)這篇，目標是訓練出像MarI/O相同的神經網路</p>]]></content>
+    <content type="html"><![CDATA[<p>把 Lenet5(Gradient-Based Learning Applied to Document Recongnitiond) 這篇看完想要看的部分以後，雖然對於細節的理論還不是很熟悉，卻抓到很多看論文的技巧，例如看論文要先看實驗目的，優先在論文當中找專業術語的解釋，以及熟悉、習慣沒看過的英文單字，就第一次而言算是收穫滿滿。<br>由於專題需要，這禮拜轉向看NEAT(Evolving Neural Networks through<br>Augmenting Topologies)這篇，目標是訓練出像MarI/O相同的神經網路</p>]]></content>
     
     <summary type="html">
     
@@ -83,7 +117,7 @@
     <published>2019-10-25T14:08:47.000Z</published>
     <updated>2019-10-27T08:55:23.485Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="https://i.imgur.com/nl83IML.png" alt></p><p>前幾天把跟網友一起寫的專案用git上傳上去，礙於我不是很熟練指令，就跟照著網路上的教學把指令照打了進去，結果不小心pull到，我打的程式就被覆蓋過去了</p><p>後來基於朋友的幫助下又再次恢復了先前的branch，順便認知到git的重要性以及git指令的熟練度</p><p>而恢復原本的branch的方法則是用gitk這個工具來把git branch GUI化，一看就懂，非常方便!</p><p><img src="https://i.imgur.com/9Ll3S88.png" alt></p><h2>10/27更新:</h2><p>附上錯誤的指令、倒退至原本branch的神奇方法、被GUI化的branches以及起承轉合</p><p>我從github上面pull了一個專案下來，但是寫好以後想要push到我的github的fork，在指令不熟的狀況下意外地把專案又pull下來一次，導致origin master覆蓋local branch(SS)</p><p><code>出事後的branch們</code></p><p><img src="https://i.imgur.com/e4w3MDK.png" alt></p><p><code>不應該用pull，會導致覆蓋local branch</code></p><p><img src="https://i.imgur.com/JL7lux4.png" alt></p><p><code>倒退回brach的方法</code></p><ul><li>選定(checkout)想要被回朔的branch</li><li>複製想要回朔branch的sha1碼前幾位(4~7)</li><li>git reset --soft [commit hash]</li></ul><p>這樣就完成了</p>]]></content>
+    <content type="html"><![CDATA[<p><img src="https://i.imgur.com/nl83IML.png" alt></p><p>前幾天把跟網友一起寫的專案用git上傳上去，礙於我不是很熟練指令，就跟照著網路上的教學把指令照打了進去，結果不小心pull到，我打的程式就被覆蓋過去了</p><p>後來基於朋友的幫助下又再次恢復了先前的branch，順便認知到git的重要性以及git指令的熟練度</p><p>而恢復原本的branch的方法則是用gitk這個工具來把git branch GUI化，一看就懂，非常方便!</p><p><img src="https://i.imgur.com/9Ll3S88.png" alt></p><h2 id="10-27更新"><a href="#10-27更新" class="headerlink" title="10/27更新:"></a>10/27更新:</h2><p>附上錯誤的指令、倒退至原本branch的神奇方法、被GUI化的branches以及起承轉合</p><p>我從github上面pull了一個專案下來，但是寫好以後想要push到我的github的fork，在指令不熟的狀況下意外地把專案又pull下來一次，導致origin master覆蓋local branch(SS)</p><p><code>出事後的branch們</code></p><p><img src="https://i.imgur.com/e4w3MDK.png" alt></p><p><code>不應該用pull，會導致覆蓋local branch</code></p><p><img src="https://i.imgur.com/JL7lux4.png" alt></p><p><code>倒退回brach的方法</code></p><ul><li>選定(checkout)想要被回朔的branch</li><li>複製想要回朔branch的sha1碼前幾位(4~7)</li><li>git reset –soft [commit hash]</li></ul><p>這樣就完成了</p>]]></content>
     
     <summary type="html">
     
@@ -115,14 +149,13 @@
     <published>2019-10-14T14:46:02.000Z</published>
     <updated>2019-10-27T09:17:04.179Z</updated>
     
-    <content type="html"><![CDATA[<p>這禮拜身體不是很舒服，就沒看論文，改看清大副教授吳尚鴻的教學文章，教學課程的特色跟其他能不講數學就不講數學的教學相反，幾乎每頁都有公式而且在第一堂課的附件是數學公式，非常貼心</p>]]></content>
+    <content type="html"><![CDATA[<p>這禮拜身體不是很舒服，就沒看論文，改看清大副教授吳尚鴻的教學文章，教學課程的特色跟其他能不講數學就不講數學的教學相反，幾乎每頁都有公式<br>而且在第一堂課的附件是數學公式，非常貼心</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;這禮拜身體不是很舒服，就沒看論文，改看清大副教授吳尚鴻的教學文章，教學課程的特色跟其他能不講數學就不講數學的教學相反，幾乎每頁都有公式
-而且在第一堂課的附件是數學公式，非常貼心&lt;/p&gt;
+        &lt;p&gt;這禮拜身體不是很舒服，就沒看論文，改看清大副教授吳尚鴻的教學文章，教學課程的特色跟其他能不講數學就不講數學的教學相反，幾乎每頁都有公式&lt;br&gt;而且在第一堂課的附件是數學公式，非常貼心&lt;/p&gt;
 
       
     
@@ -147,14 +180,13 @@
     <published>2019-10-06T06:01:26.000Z</published>
     <updated>2019-10-27T09:16:56.539Z</updated>
     
-    <content type="html"><![CDATA[<p>這個禮拜我終於把 Lenet5(Gradient-Based Learning Applied to Document Recongnitiond) 看了1/3了，也逐漸抓到看論文的訣竅。從當初點開以為要把4X頁的論文全部看完到現在發現只需要看不到三頁，多虧了網路上的資料以及朋友的協助，希望全部看懂以後可以開始學著寫論文導讀</p>]]></content>
+    <content type="html"><![CDATA[<p>這個禮拜我終於把 Lenet5(Gradient-Based Learning Applied to Document Recongnitiond) 看了1/3了，也逐漸抓到看論文的訣竅。<br>從當初點開以為要把4X頁的論文全部看完到現在發現只需要看不到三頁，多虧了網路上的資料以及朋友的協助，希望全部看懂以後可以開始學著寫論文導讀</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;這個禮拜我終於把 Lenet5(Gradient-Based Learning Applied to Document Recongnitiond) 看了1/3了，也逐漸抓到看論文的訣竅。
-從當初點開以為要把4X頁的論文全部看完到現在發現只需要看不到三頁，多虧了網路上的資料
+        &lt;p&gt;這個禮拜我終於把 Lenet5(Gradient-Based Learning Applied to Document Recongnitiond) 看了1/3了，也逐漸抓到看論文的訣竅。&lt;br&gt;從當初點開以為要把4X頁的論文全部看完到現在發現只需要看不到三頁，多虧了網路上
       
     
     </summary>
@@ -178,13 +210,13 @@
     <published>2019-10-06T05:47:33.000Z</published>
     <updated>2019-11-10T13:12:07.067Z</updated>
     
-    <content type="html"><![CDATA[<p><blockquote class="colorquote info"><p>這是一個在Reddit的r/MachineLearning版上面看到的鐵人項目，每個禮拜發一篇現在看的任何有關機器學習(論文，期刊，文章)的心得，我認為應該可以提升我的信心以及實力等等，於是就開始了這個項目</p></blockquote></p><table><thead><tr><th>月份</th><th style="text-align:center">第一個禮拜</th><th style="text-align:center">第二個禮拜</th><th style="text-align:center">第三個禮拜</th><th style="text-align:center">第四個禮拜</th></tr></thead><tbody><tr><td>十月</td><td style="text-align:center"><a href="https://robinsonweng.github.io/2019/10/06/ML-wayr-20191006/">Week1</a></td><td style="text-align:center"><a href="https://robinsonweng.github.io/2019/10/14/ML-wayr-20191014/">Week2</a></td><td style="text-align:center">Week3</td><td style="text-align:center"><a href="ML-wayr-20191006">Week4</a></td></tr><tr><td>十一月</td><td style="text-align:center">Week1</td><td style="text-align:center"><a href="https://robinsonweng.github.io/2019/11/10/ML-wayr-20191110/">Week2</a></td><td style="text-align:center">Week3</td><td style="text-align:center">Week4</td></tr></tbody></table>]]></content>
+    <content type="html"><![CDATA[<blockquote class="colorquote info"><p>這是一個在Reddit的r/MachineLearning版上面看到的鐵人項目，每個禮拜發一篇現在看的任何有關機器學習(論文，期刊，文章)的心得，我認為應該可以提升我的信心以及實力等等，於是就開始了這個項目</p></blockquote><table><thead><tr><th>月份</th><th align="center">第一個禮拜</th><th align="center">第二個禮拜</th><th align="center">第三個禮拜</th><th align="center">第四個禮拜</th></tr></thead><tbody><tr><td>十月</td><td align="center"><a href="https://robinsonweng.github.io/2019/10/06/ML-wayr-20191006/">Week1</a></td><td align="center"><a href="https://robinsonweng.github.io/2019/10/14/ML-wayr-20191014/">Week2</a></td><td align="center">Week3</td><td align="center"><a href="ML-wayr-20191006">Week4</a></td></tr><tr><td>十一月</td><td align="center">Week1</td><td align="center"><a href="https://robinsonweng.github.io/2019/11/10/ML-wayr-20191110/">Week2</a></td><td align="center">Week3</td><td align="center">Week4</td></tr></tbody></table>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;&lt;blockquote class=&quot;colorquote info&quot;&gt;&lt;p&gt;這是一個在Reddit的r/MachineLearning版上面看到的鐵人項目，每個禮拜發一篇現在看的任何有關機器學習(論文，期刊，文章)的心得，我認為應該可以提升我的信心以及實力等等，於是就開始
+        &lt;blockquote class=&quot;colorquote info&quot;&gt;&lt;p&gt;這是一個在Reddit的r/MachineLearning版上面看到的鐵人項目，每個禮拜發一篇現在看的任何有關機器學習(論文，期刊，文章)的心得，我認為應該可以提升我的信心以及實力等等，於是就開始了這個
       
     
     </summary>
@@ -206,14 +238,13 @@
     <published>2019-10-06T05:47:33.000Z</published>
     <updated>2019-12-09T09:19:39.227Z</updated>
     
-    <content type="html"><![CDATA[<h1>關於 Python's Class Development Toolkit 的重點整理</h1><p><blockquote class="colorquote info"><p><code>Raymond Hettinger</code> 一位常常出現在Python程式語言演講的大佬，曾經聽過他的<code>Transforming Code into Beautiful, Idiomatic Python</code> 聽過一次就愛上了他的演講風格，乾淨、簡潔、速度適中且幽默十足</p></blockquote></p><ol><li><p><code>__init__</code> is not a constructor:</p><ul><li>我曾經在寫Python也有這個疑問，為甚麼Python的建構子是叫做<code>__init__</code>而不是<code>__constructor__</code>?而實際上確實不是，self是本身class的實作，也就是說在<code>__init__</code>宣告以前，class已經建構好了，他是一個<code>initializer</code>，任務是將影片中的Radius存入字典當中</li></ul></li><li><p><code>@classmethod</code>:</p><ul><li>如果我想要只呼叫一個method就可以達成:計算新的Radius同時更新到Class裡面，你可以在method中直接呼叫Class本身，但是這個舉動會導致繼承以後的method被影響，所以為了呼叫原class更新參數的當下又不會影響到繼承後的class，就是該使用 <code>@classmethod</code>中的cls參數來呼叫class的場合</li></ul></li><li><p><code>@staticmethod</code>:</p><ul><li><p>我想要寫一個function在class裡面，但是這個function的功能與class無關，所以你會陷入一種<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 寫進class裡面，但是用這個與class無關的function還是要實作一次物件</span><br><span class="line">2. 寫在class外面，但是這樣使用這個class的人就會找不到這個function</span><br></pre></td></tr></table></figure></p></li><li><p>這時候就是<code>@staticmethod</code>的出場時刻了，不需要實作但是仍然放在class裡面的method</p></li></ul></li><li><p><code>__method</code>:</p><ul><li>當我們在一個class當中要從一個method呼叫另外一個method我們會用<code>self.method()</code>但是self其實是指實作後的自己，也就是說self不只是class他自己，也包括被繼承的那些class，當繼承父class的子class也使用了相同名稱的method，原本的父class method就會被覆蓋。那麼要怎麼解決這個方法呢? 講者這邊提出個兩種方法，第一種方法就是在method被呼叫以前先複製一份，這樣一來，父class有自己的一份，繼承的子class也不會蓋過去原class的method，皆大歡喜(? 但是這對你來說是好方法，對其他人來說也是好方法，如果子class也照做一次，這段程式碼又會失效了XD<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def method(self):</span><br><span class="line">    ...something</span><br><span class="line"></span><br><span class="line">_method = method</span><br></pre></td></tr></table></figure></li></ul><p>「所以為了贏得這個小學一年級的學你戰爭，我們需要在複製以前加上名字，這樣他只要複製到你很醜，他看到的就是某某很醜」，也就是在method前面加上class的名稱避免誤用，而這套流程因為太實用了，所以Python把它加了進去，也就是所謂的<code>__method</code><blockquote class="colorquote info"><p>所以其實<code>__method</code>跟privacy一點關係都沒有，反而是他的相反，它可以讓你的子class能夠更自由的去繼承、覆寫</p></blockquote></p></li><li><p><code>@property</code>:有兩個用途1. 是在取得<code>.屬性</code>的時候，可以神奇的執行一件事情並取得這個值2. 當為了執行效率使用<code>__slots__</code>時，他會破壞原本取得變數的字典，而<code>@property</code>正是他的補救方案</p></li></ol><p>結語:這篇演講真的是非常非常的紮實，學到很多東西以及觀念補正，推薦正在看class的朋友們!</p><p>有沒有曾經看過<code>@classmethod</code>或是<code>@staticmethod</code>的語法但還是搞不清楚應該用在甚麼情境的? 那你應該也來聽聽看<a href="https://www.youtube.com/watch?v=HTLu2DFOdTg&amp;feature=youtu.be" target="_blank" rel="noopener">這個演講</a></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="關於-Python’s-Class-Development-Toolkit-的重點整理"><a href="#關於-Python’s-Class-Development-Toolkit-的重點整理" class="headerlink" title="關於 Python’s Class Development Toolkit 的重點整理"></a>關於 Python’s Class Development Toolkit 的重點整理</h1><blockquote class="colorquote info"><p><code>Raymond Hettinger</code> 一位常常出現在Python程式語言演講的大佬，曾經聽過他的<code>Transforming Code into Beautiful, Idiomatic Python</code> 聽過一次就愛上了他的演講風格，乾淨、簡潔、速度適中且幽默十足</p></blockquote><ol><li><p><code>__init__</code> is not a constructor:</p><ul><li>我曾經在寫Python也有這個疑問，為甚麼Python的建構子是叫做<code>__init__</code>而不是<code>__constructor__</code>?而實際上確實不是，self是本身class的實作，也就是說在<code>__init__</code>宣告以前，class已經建構好了，他是一個<code>initializer</code>，任務是將影片中的Radius存入字典當中</li></ul></li><li><p><code>@classmethod</code>:</p><ul><li>如果我想要只呼叫一個method就可以達成:計算新的Radius同時更新到Class裡面，你可以在method中直接呼叫Class本身，但是這個舉動會導致繼承以後的method被影響，所以為了呼叫原class更新參數的當下又不會影響到繼承後的class，就是該使用 <code>@classmethod</code>中的cls參數來呼叫class的場合</li></ul></li><li><p><code>@staticmethod</code>:</p><ul><li><p>我想要寫一個function在class裡面，但是這個function的功能與class無關，所以你會陷入一種</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 寫進class裡面，但是用這個與class無關的function還是要實作一次物件</span><br><span class="line">2. 寫在class外面，但是這樣使用這個class的人就會找不到這個function</span><br></pre></td></tr></table></figure></li><li><p>這時候就是<code>@staticmethod</code>的出場時刻了，不需要實作但是仍然放在class裡面的method</p></li></ul></li><li><p><code>__method</code>:</p><ul><li><p>當我們在一個class當中要從一個method呼叫另外一個method我們會用<code>self.method()</code>但是self其實是指實作後的自己，也就是說self不只是class他自己，也包括被繼承的那些class，當繼承父class的子class也使用了相同名稱的method，原本的父class method就會被覆蓋。那麼要怎麼解決這個方法呢? 講者這邊提出個兩種方法，第一種方法就是在method被呼叫以前先複製一份，這樣一來，父class有自己的一份，繼承的子class也不會蓋過去原class的method，皆大歡喜(? 但是這對你來說是好方法，對其他人來說也是好方法，如果子class也照做一次，這段程式碼又會失效了XD</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def method(self):</span><br><span class="line">    ...something</span><br><span class="line"></span><br><span class="line">_method = method</span><br></pre></td></tr></table></figure><p>「所以為了贏得這個小學一年級的學你戰爭，我們需要在複製以前加上名字，這樣他只要複製到你很醜，他看到的就是某某很醜」，也就是在method前面加上class的名稱避免誤用，而這套流程因為太實用了，所以Python把它加了進去，也就是所謂的<code>__method</code></p><blockquote class="colorquote info"><p>所以其實<code>__method</code>跟privacy一點關係都沒有，反而是他的相反，它可以讓你的子class能夠更自由的去繼承、覆寫</p></blockquote></li></ul></li><li><p><code>@property</code>:<br> 有兩個用途</p><pre><code>1. 是在取得`.屬性`的時候，可以神奇的執行一件事情並取得這個值2. 當為了執行效率使用`__slots__`時，他會破壞原本取得變數的字典，而`@property`正是他的補救方案</code></pre></li></ol><p>結語:<br>    這篇演講真的是非常非常的紮實，學到很多東西以及觀念補正，推薦正在看class的朋友們!</p><p>有沒有曾經看過<code>@classmethod</code>或是<code>@staticmethod</code>的語法但還是搞不清楚應該用在甚麼情境的? 那你應該也來聽聽看<a href="https://www.youtube.com/watch?v=HTLu2DFOdTg&feature=youtu.be" target="_blank" rel="noopener">這個演講</a></p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h1&gt;關於 Python&#39;s Class Development Toolkit 的重點整理&lt;/h1&gt;
-&lt;p&gt;&lt;blockquote class=&quot;colorquote info&quot;&gt;&lt;p&gt;&lt;code&gt;Raymond Hettinger&lt;/code&gt; 一位常常出現在Python程
+        &lt;h1 id=&quot;關於-Python’s-Class-Development-Toolkit-的重點整理&quot;&gt;&lt;a href=&quot;#關於-Python’s-Class-Development-Toolkit-的重點整理&quot; class=&quot;headerlink&quot; title=&quot;關於 Pyt
       
     
     </summary>
@@ -233,56 +264,19 @@
   </entry>
   
   <entry>
-    <title>將社群軟體通知以RSS整合至Discord</title>
-    <link href="https://robinsonweng.github.io/2019/10/06/rss_discord_hook/"/>
-    <id>https://robinsonweng.github.io/2019/10/06/rss_discord_hook/</id>
-    <published>2019-10-06T05:47:33.000Z</published>
-    <updated>2020-03-10T10:04:51.461Z</updated>
-    
-    <content type="html"><![CDATA[<p>曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。</p><h2>工具介紹</h2><ol><li><p><a href="https://docs.rsshub.app/" target="_blank" rel="noopener">RSSHUB</a></p><p>RSShub能幫助你將網站更新內容轉換為RSS通知的神奇網站，如果你技術力足夠，也可以根據官方網站步驟申請自己想要的網站。其中包含:</p><ul><li>Facebook</li><li>Twitter</li><li>Pixiv</li><li>Youtube 等網站</li></ul></li><li><p><a href="https://ifttt.com/" target="_blank" rel="noopener">ifTTT</a></p><p>這個網站主打一個很簡單的邏輯:</p><p><blockquote class="colorquote info"><p>「如果這件事情發生了，那就做這件事情」</p></blockquote></p><p>以不需寫程式，接拼圖的方法來打造自動化王國，從「如果相機拍照就將照片上傳至GoogleDrive」，到「按一個按鈕就讓家中智慧家電開燈(網站有支援的前提)」應有盡有</p></li><li><p>Discord的webhook網址</p></li></ol><h2>使用流程</h2><ul><li>首先在 RSSHUB中找到你想要的網址，假設我想得到猫宮ひなた的推文通知、轉推但不需要回復，根据官網說明的路由:</li></ul><p><img src="https://i.imgur.com/2rOqoyX.png" alt></p><p>我的RSS網址應該長這樣:</p><p><blockquote class="colorquote success"><p>https://rsshub.app/twitter/user/Nekomiya_Hinata/exclude_replies</p></blockquote></p><ul><li>接下來到ifTTT網站，註冊/登入以後，點選右上角的explore</li></ul><p><img src="https://i.imgur.com/DWd08ZO.png" alt></p><ul><li>點選那個很不顯眼的加號</li></ul><p><img src="https://i.imgur.com/QH0UOcl.png" alt></p><ul><li>我們就來到先前提到的 「if this then that」，點下「This」</li></ul><p><img src="https://i.imgur.com/UuqBlSQ.png" alt></p><ul><li>在搜尋框裡面輸入RSS</li></ul><p><img src="https://i.imgur.com/oGjcaBp.png" alt></p><ul><li>點開RSS選擇左邊的觸發條件「每當有新通知時觸發」</li></ul><p><img src="https://i.imgur.com/kdjutFe.png" alt></p><ul><li>輸入剛剛從RSShub拿到的網址後點選「Create Trigger」</li></ul><p><img src="https://i.imgur.com/0xHzaM0.png" alt></p><ul><li>這步跟剛剛一樣點選 「That」，只是這次要搜尋「webhooks」</li></ul><p><img src="https://i.imgur.com/qwbZnrJ.png" alt></p><ul><li>點選「Make a webrequest」以後，接下來就是重頭戲</li></ul><p><img src="https://i.imgur.com/qhm5Zlp.png" alt></p><ol><li><p>URL: 這邊要輸入的是discord當中的webhook網址，可以參考<a href="https://support.discordapp.com/hc/zh-tw/articles/228383668-%E4%BD%BF%E7%94%A8%E7%B6%B2%E7%B5%A1%E9%89%A4%E6%89%8B-Webhooks-" target="_blank" rel="noopener">Discord官方教學</a></p></li><li><p>Method: 由於我們是需要傳送訊息到Discord，所以這邊一律設定為Post</p></li><li><p>Content Type: 這邊選擇application/json</p></li><li><p>Body: 這裡就是我們要傳送至discord的文字，雖然他支持discord的embed message，不過這邊我們先簡單一點，標記一個人並傳送標題與網址</p></li></ol><p>選擇下面的小按鈕「Add ingredient」這邊可以調整你要rss通知中的內容出現在指定的位置</p><p><img src="https://i.imgur.com/78dpqYD.png" alt></p><ol start="5"><li>最後按下action就皆大歡喜了</li></ol><p>P.S 由於RSShub是採取贊助制度，速度不一定可以讓你滿意，可以去尋找其他服務代替</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只
-      
-    
-    </summary>
-    
-    
-      <category term="程式" scheme="https://robinsonweng.github.io/categories/%E7%A8%8B%E5%BC%8F/"/>
-    
-      <category term="教學" scheme="https://robinsonweng.github.io/categories/%E7%A8%8B%E5%BC%8F/%E6%95%99%E5%AD%B8/"/>
-    
-    
-      <category term="IFTTT" scheme="https://robinsonweng.github.io/tags/IFTTT/"/>
-    
-      <category term="RSS" scheme="https://robinsonweng.github.io/tags/RSS/"/>
-    
-      <category term="webhook" scheme="https://robinsonweng.github.io/tags/webhook/"/>
-    
-      <category term="Discord" scheme="https://robinsonweng.github.io/tags/Discord/"/>
-    
-  </entry>
-  
-  <entry>
     <title>新米工程師要怎麼點技能樹?</title>
     <link href="https://robinsonweng.github.io/2019/09/26/skill-tree/"/>
     <id>https://robinsonweng.github.io/2019/09/26/skill-tree/</id>
     <published>2019-09-26T11:32:08.000Z</published>
     <updated>2019-09-26T11:47:42.671Z</updated>
     
-    <content type="html"><![CDATA[<h2>習慣翻徵才啟事的我某一天發現一個很有趣的言論，他說:</h2><p><blockquote class="colorquote warning"><p>技能點要多一點一些，不要侷限於一種語言或是技能</p></blockquote></p><p>但是這難道意味著我要從Python的爬蟲直接跳到寫網頁嗎?當然不是，他們的意思是會一套能接技的技能講白了是希望你有一套拳法，而不是只會正拳在人人皆可google的今天，會正拳早就不是什麼稀罕的事情了舉個例子，你能不能夠構築一個數據分析系統爬蟲 --&gt; 數據清洗 --&gt; 資料倉庫 --&gt; 資料視覺化 --&gt; 機器學習靠己力跑完這個流程並熟練他?</p><p><a href="http://www.finereport.com/tw/data-analysis/rumen-dao-jinjie.html?fbclid=IwAR2Od9WWuIcxAXdi07EvlO0CVKbY2TmcP74icQIwbllihMUnw0OxGFnneco" target="_blank" rel="noopener">ref</a></p>]]></content>
+    <content type="html"><![CDATA[<h2 id="習慣翻徵才啟事的我某一天發現一個很有趣的言論，他說"><a href="#習慣翻徵才啟事的我某一天發現一個很有趣的言論，他說" class="headerlink" title="習慣翻徵才啟事的我某一天發現一個很有趣的言論，他說:"></a>習慣翻徵才啟事的我某一天發現一個很有趣的言論，他說:</h2><blockquote class="colorquote warning"><p>技能點要多一點一些，不要侷限於一種語言或是技能</p></blockquote><p>但是這難道意味著我要從Python的爬蟲直接跳到寫網頁嗎?<br>當然不是，他們的意思是會一套能接技的技能<br>講白了是希望你有一套拳法，而不是只會正拳<br>在人人皆可google的今天，會正拳早就不是什麼稀罕的事情了<br>舉個例子，你能不能夠構築一個數據分析系統<br>爬蟲 –&gt; 數據清洗 –&gt; 資料倉庫 –&gt; 資料視覺化 –&gt; 機器學習<br>靠己力跑完這個流程並熟練他?</p><p><a href="http://www.finereport.com/tw/data-analysis/rumen-dao-jinjie.html?fbclid=IwAR2Od9WWuIcxAXdi07EvlO0CVKbY2TmcP74icQIwbllihMUnw0OxGFnneco" target="_blank" rel="noopener">ref</a></p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h2&gt;習慣翻徵才啟事的我某一天發現一個很有趣的言論，他說:&lt;/h2&gt;
-&lt;p&gt;&lt;blockquote class=&quot;colorquote warning&quot;&gt;&lt;p&gt;技能點要多一點一些，不要侷限於一種語言或是技能&lt;/p&gt;
-&lt;/blockquote&gt;&lt;/p&gt;
-&lt;p&gt;但是這難道意味著我要
+        &lt;h2 id=&quot;習慣翻徵才啟事的我某一天發現一個很有趣的言論，他說&quot;&gt;&lt;a href=&quot;#習慣翻徵才啟事的我某一天發現一個很有趣的言論，他說&quot; class=&quot;headerlink&quot; title=&quot;習慣翻徵才啟事的我某一天發現一個很有趣的言論，他說:&quot;&gt;&lt;/a&gt;習慣翻徵才啟事的我某
       
     
     </summary>
@@ -308,17 +302,14 @@
     <published>2019-09-23T10:31:49.000Z</published>
     <updated>2019-09-23T14:21:39.291Z</updated>
     
-    <content type="html"><![CDATA[<h1>請以解決問題為目的學程式語言</h1><p>網路上時常就會看到:</p><p><blockquote class="colorquote warning"><p>「我某語言學到OO(物件導向)，請問我可以拿來幹嘛」</p></blockquote></p><p>這是一種學語言的壞習慣，為了學而學，除非你有著考大學大考的毅力，以及制訂一份到退休的人生規劃，不然你很容易在名為程式的知識大海當中迷茫</p><p>在軟工發達的現今社會，光是熱門的程式語言就有數十種，連站穩腳跟都辦不到的人就別做夢了</p><p>如果僅僅是要拓展自己的科技樹，可以從這個語言的特色學起，例如Python的應用範圍如下:</p><ol><li>Web程式(Django, Flask, Pyramid)</li><li>作業系統(Anaconda)</li><li>GUI開發(TKinter, PyQt)</li><li>遊戲(pygame)</li><li>數據處理(numpy, scipy, matplotlib)</li><li>機器學習/深度學習(Tensorflow2.0, Pytorch)</li><li>爬蟲(Scrapy, BeautifulSoup)</li></ol><p>如果沒有熱忱與堅持，學程式語言會死得很難看，不過聽說畢業的大學生也不一定會寫程式，會程式語言不知道要朝哪個方向好像也是合情合理(?</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="請以解決問題為目的學程式語言"><a href="#請以解決問題為目的學程式語言" class="headerlink" title="請以解決問題為目的學程式語言"></a>請以解決問題為目的學程式語言</h1><p>網路上時常就會看到:</p><blockquote class="colorquote warning"><p>「我某語言學到OO(物件導向)，請問我可以拿來幹嘛」</p></blockquote><p>這是一種學語言的壞習慣，為了學而學，除非你有著考大學大考的毅力，以及制訂一份到退休的人生規劃，不然你很容易在名為程式的知識大海當中迷茫</p><p>在軟工發達的現今社會，光是熱門的程式語言就有數十種，連站穩腳跟都辦不到的人就別做夢了</p><p>如果僅僅是要拓展自己的科技樹，可以從這個語言的特色學起，例如Python的應用範圍如下:</p><ol><li>Web程式(Django, Flask, Pyramid)</li><li>作業系統(Anaconda)</li><li>GUI開發(TKinter, PyQt)</li><li>遊戲(pygame)</li><li>數據處理(numpy, scipy, matplotlib)</li><li>機器學習/深度學習(Tensorflow2.0, Pytorch)</li><li>爬蟲(Scrapy, BeautifulSoup)</li></ol><p>如果沒有熱忱與堅持，學程式語言會死得很難看，不過聽說畢業的大學生也不一定會寫程式，會程式語言不知道要朝哪個方向好像也是合情合理(?</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h1&gt;請以解決問題為目的學程式語言&lt;/h1&gt;
-&lt;p&gt;網路上時常就會看到:&lt;/p&gt;
-&lt;p&gt;&lt;blockquote class=&quot;colorquote warning&quot;&gt;&lt;p&gt;「我某語言學到OO(物件導向)，請問我可以拿來幹嘛」&lt;/p&gt;
-&lt;/blockquote&gt;&lt;/p&gt;
-&lt;p&gt;這
+        &lt;h1 id=&quot;請以解決問題為目的學程式語言&quot;&gt;&lt;a href=&quot;#請以解決問題為目的學程式語言&quot; class=&quot;headerlink&quot; title=&quot;請以解決問題為目的學程式語言&quot;&gt;&lt;/a&gt;請以解決問題為目的學程式語言&lt;/h1&gt;&lt;p&gt;網路上時常就會看到:&lt;/p&gt;
+&lt;blockq
       
     
     </summary>
@@ -342,14 +333,14 @@
     <published>2019-09-19T14:06:04.000Z</published>
     <updated>2019-09-23T06:17:14.190Z</updated>
     
-    <content type="html"><![CDATA[<p><div><div class="fold_hider"><div class="close hider_title">md內TagPlugin</div></div><div class="fold"><p><a href="https://blog.rmiao.top/hexo-fold-block/" target="_blank" rel="noopener">by</a></p></div></div></p><p>jsFiddle在文章中嵌入 jsFiddle。</p><p><iframe scrolling="no" width="[width]" height="[height]" src="//jsfiddle.net/shorttag/embedded/[tabs]/[skin]" frameborder="0" allowfullscreen></iframe></p><p>Image在文章中插入指定大小的圖片。</p><p><img src="/path/to/image" class="[class names]" title="[width] [height] [title text [alt text]]">Link在文章中插入連結，並在外連連結自動加上 target=&quot;_blank&quot; 屬性。</p><p><a>text url [external] [title]</a>Include Code插入 source/downloads/code 資料夾內的程式檔，資料夾取决于你在配置文件中 code_dir 的配置。</p><p>Youtube在文章中插入 Youtube 影片。</p><p><div class="video-container"><iframe src="//www.youtube.com/embed/video_id" frameborder="0" allowfullscreen></iframe></div>Vimeo在文章中插入 Vimeo 影片。</p><p><div class="video-container"><iframe src="//player.vimeo.com/video/video_id" frameborder="0" allowfullscreen></iframe></div></p><p>引用文章引用其他文章的連結。</p><p></p><p></p><p>引用資產引用文章的資產。</p><p></p><p></p><p></p><h5>color quote</h5><p><blockquote class="colorquote info"><p>Example: info</p></blockquote></p><p><blockquote class="colorquote success"><p>Example: info</p></blockquote></p><p><blockquote class="colorquote warning"><p>Example: info</p></blockquote></p><p><blockquote class="colorquote danger"><p>Example: info</p></blockquote></p>]]></content>
+    <content type="html"><![CDATA[<div><div class="fold_hider"><div class="close hider_title">md內TagPlugin</div></div><div class="fold"><p><a href="https://blog.rmiao.top/hexo-fold-block/" target="_blank" rel="noopener">by</a></p></div></div><p>jsFiddle<br>在文章中嵌入 jsFiddle。</p><iframe scrolling="no" width="[width]" height="[height]" src="//jsfiddle.net/shorttag/embedded/[tabs]/[skin]" frameborder="0" allowfullscreen></iframe><p>Image<br>在文章中插入指定大小的圖片。</p><img src="/path/to/image" class="[class names]" title="[width] [height] [title text [alt text]]"><p>Link<br>在文章中插入連結，並在外連連結自動加上 target=”_blank” 屬性。</p><a>text url [external] [title]</a><p>Include Code<br>插入 source/downloads/code 資料夾內的程式檔，資料夾取决于你在配置文件中 code_dir 的配置。</p><p>Youtube<br>在文章中插入 Youtube 影片。</p><div class="video-container"><iframe src="//www.youtube.com/embed/video_id" frameborder="0" allowfullscreen></iframe></div><p>Vimeo<br>在文章中插入 Vimeo 影片。</p><div class="video-container"><iframe src="//player.vimeo.com/video/video_id" frameborder="0" allowfullscreen></iframe></div><p>引用文章<br>引用其他文章的連結。</p><p>引用資產<br>引用文章的資產。</p><h5 id="color-quote"><a href="#color-quote" class="headerlink" title="color quote"></a>color quote</h5><blockquote class="colorquote info"><p>Example: info</p></blockquote><blockquote class="colorquote success"><p>Example: info</p></blockquote><blockquote class="colorquote warning"><p>Example: info</p></blockquote><blockquote class="colorquote danger"><p>Example: info</p></blockquote>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;&lt;div&gt;&lt;div class=&quot;fold_hider&quot;&gt;&lt;div class=&quot;close hider_title&quot;&gt;md內TagPlugin&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;fold&quot;&gt;
-&lt;p&gt;&lt;a href=&quot;https://blog.rmiao.top
+        &lt;div&gt;&lt;div class=&quot;fold_hider&quot;&gt;&lt;div class=&quot;close hider_title&quot;&gt;md內TagPlugin&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;fold&quot;&gt;
+&lt;p&gt;&lt;a href=&quot;https://blog.rmiao.top/he
       
     
     </summary>
@@ -369,7 +360,7 @@
     <published>2019-09-19T10:37:22.000Z</published>
     <updated>2019-09-19T17:10:47.184Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>最好的學習方法就是盡可能的去教人</p></blockquote><p><a href="https://shelterzone627.wixsite.com/shelter-zone" target="_blank" rel="noopener"><code>Shelter Zone</code></a>是我偶然在網路上找到的一個Discord群組，有一個很漂亮的官方網站，主要討論3D, 2D, 跟寫程式, 因為聊天氣氛好, 於是就決定在這邊偶爾開個課</p><h2>爬蟲基本教學</h2><ul><li><a href="https://hackmd.io/@bzzRZCqwToKWV4FAPzPr4Q/HkUHM1abB" target="_blank" rel="noopener">投影片</a></li><li><a href="http://bit.ly/31aoWsG" target="_blank" rel="noopener">程式範例</a></li><li>直播影片 <div class="video-container"><iframe src="//www.youtube.com/embed/P_sMSCegEgM" frameborder="0" allowfullscreen></iframe></div></li></ul>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>最好的學習方法就是盡可能的去教人</p></blockquote><p><a href="https://shelterzone627.wixsite.com/shelter-zone" target="_blank" rel="noopener"><code>Shelter Zone</code></a>是我偶然在網路上找到的一個Discord群組，有一個很漂亮的官方網站，主要討論3D, 2D, 跟寫程式, 因為聊天氣氛好, 於是就決定在這邊偶爾開個課</p><h2 id="爬蟲基本教學"><a href="#爬蟲基本教學" class="headerlink" title="爬蟲基本教學"></a>爬蟲基本教學</h2><ul><li><a href="https://hackmd.io/@bzzRZCqwToKWV4FAPzPr4Q/HkUHM1abB" target="_blank" rel="noopener">投影片</a></li><li><a href="http://bit.ly/31aoWsG" target="_blank" rel="noopener">程式範例</a></li><li>直播影片 <div class="video-container"><iframe src="//www.youtube.com/embed/P_sMSCegEgM" frameborder="0" allowfullscreen></iframe></div></li></ul>]]></content>
     
     <summary type="html">
     
@@ -400,18 +391,15 @@
     <published>2019-09-19T09:06:30.000Z</published>
     <updated>2019-09-23T14:33:49.992Z</updated>
     
-    <content type="html"><![CDATA[<h2>有兩種解決的方法</h2><ol><li>在資料庫支援的情況下, 以Documention為輔完成任務</li><li>沒有資料庫不支援的情況下, 將Json的每個key拆開變成獨立的表格, 並加上ID建立所謂的關係來連結不同的表格</li></ol><p><figure class="highlight plain"><figcaption><span>data.json</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;id&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;name&quot;: &quot;Jane&quot;,</span><br><span class="line">    &quot;hobby&quot;:&quot;Cooking&quot;,</span><br><span class="line">    &quot;Age&quot;: &quot;10&quot;,</span><br><span class="line">    &quot;Pet&quot;: &#123;</span><br><span class="line">        &quot;name&quot; :&quot;David&quot;,</span><br><span class="line">        &quot;species&quot;: &quot;Dog&quot;,</span><br><span class="line">        &quot;age&quot;: &quot;4&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">    &quot;id&quot;: &quot;2&quot;,</span><br><span class="line">    &quot;name&quot;: &quot;Lucy&quot;,</span><br><span class="line">    &quot;hobby&quot;:&quot;Jogging&quot;,</span><br><span class="line">    &quot;Age&quot;: &quot;18&quot;,</span><br><span class="line">    &quot;Pet&quot;: &#123;</span><br><span class="line">        &quot;name&quot;: &quot;Kitto&quot;,</span><br><span class="line">        &quot;species&quot;: &quot;Cat&quot;,</span><br><span class="line">        &quot;age&quot;: &quot;4&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><blockquote><p>Table example:</p></blockquote><p><code>table: Name</code></p><table><thead><tr><th>ID</th><th>Name</th><th style="text-align:left">Hobby</th><th style="text-align:center">Age</th></tr></thead><tbody><tr><td>1</td><td>Jane</td><td style="text-align:left">Cooking</td><td style="text-align:center">10</td></tr><tr><td>2</td><td>Lucy</td><td style="text-align:left">Jogging</td><td style="text-align:center">18</td></tr></tbody></table><p><code>table: Pet</code></p><table><thead><tr><th>ID</th><th>Name</th><th style="text-align:center">species</th><th>Age</th></tr></thead><tbody><tr><td>1</td><td>David</td><td style="text-align:center">Dog</td><td>4</td></tr><tr><td>2</td><td>Kitto</td><td style="text-align:center">Cat</td><td>4</td></tr></tbody></table>]]></content>
+    <content type="html"><![CDATA[<h2 id="有兩種解決的方法"><a href="#有兩種解決的方法" class="headerlink" title="有兩種解決的方法"></a>有兩種解決的方法</h2><ol><li>在資料庫支援的情況下, 以Documention為輔完成任務</li><li>沒有資料庫不支援的情況下, 將Json的每個key拆開變成獨立的表格, 並加上ID建立所謂的關係來連結不同的表格</li></ol><figure class="highlight plain"><figcaption><span>data.json</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;id&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;name&quot;: &quot;Jane&quot;,</span><br><span class="line">    &quot;hobby&quot;:&quot;Cooking&quot;,</span><br><span class="line">    &quot;Age&quot;: &quot;10&quot;,</span><br><span class="line">    &quot;Pet&quot;: &#123;</span><br><span class="line">        &quot;name&quot; :&quot;David&quot;,</span><br><span class="line">        &quot;species&quot;: &quot;Dog&quot;,</span><br><span class="line">        &quot;age&quot;: &quot;4&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">    &quot;id&quot;: &quot;2&quot;,</span><br><span class="line">    &quot;name&quot;: &quot;Lucy&quot;,</span><br><span class="line">    &quot;hobby&quot;:&quot;Jogging&quot;,</span><br><span class="line">    &quot;Age&quot;: &quot;18&quot;,</span><br><span class="line">    &quot;Pet&quot;: &#123;</span><br><span class="line">        &quot;name&quot;: &quot;Kitto&quot;,</span><br><span class="line">        &quot;species&quot;: &quot;Cat&quot;,</span><br><span class="line">        &quot;age&quot;: &quot;4&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>Table example:</p></blockquote><p><code>table: Name</code></p><table><thead><tr><th>ID</th><th>Name</th><th align="left">Hobby</th><th align="center">Age</th></tr></thead><tbody><tr><td>1</td><td>Jane</td><td align="left">Cooking</td><td align="center">10</td></tr><tr><td>2</td><td>Lucy</td><td align="left">Jogging</td><td align="center">18</td></tr></tbody></table><p><code>table: Pet</code></p><table><thead><tr><th>ID</th><th>Name</th><th align="center">species</th><th>Age</th></tr></thead><tbody><tr><td>1</td><td>David</td><td align="center">Dog</td><td>4</td></tr><tr><td>2</td><td>Kitto</td><td align="center">Cat</td><td>4</td></tr></tbody></table>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h2&gt;有兩種解決的方法&lt;/h2&gt;
-&lt;ol&gt;
+        &lt;h2 id=&quot;有兩種解決的方法&quot;&gt;&lt;a href=&quot;#有兩種解決的方法&quot; class=&quot;headerlink&quot; title=&quot;有兩種解決的方法&quot;&gt;&lt;/a&gt;有兩種解決的方法&lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;在資料庫支援的情況下, 以Documention為輔完成任務&lt;/li&gt;
-&lt;li&gt;沒有資料庫不支援的情況下, 將Json的每個key拆開變成獨立的表格, 並加上ID建立所謂的關係來連結不同的表格&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;f
+&lt;li&gt;
       
     
     </summary>
