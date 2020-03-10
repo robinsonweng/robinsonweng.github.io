@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。工具介紹 RSSHUB  RSShub能幫助你將網站更新內容轉換為RSS通知的神奇網站，如果你技">
+    <meta name="description" content="曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。 工具介紹   RSSHUB RSShub能幫助你將網站更新內容轉換為RSS通知的神奇網站，如果">
 <meta name="keywords" content="Python,classtoolkit">
 <meta property="og:type" content="article">
 <meta property="og:title" content="將社群軟體通知以RSS整合至Discord">
 <meta property="og:url" content="https://robinsonweng.github.io/2019/10/06/rss_discord_hook/index.html">
 <meta property="og:site_name" content="春雨的部落格">
-<meta property="og:description" content="曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。工具介紹 RSSHUB  RSShub能幫助你將網站更新內容轉換為RSS通知的神奇網站，如果你技">
+<meta property="og:description" content="曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。 工具介紹   RSSHUB RSShub能幫助你將網站更新內容轉換為RSS通知的神奇網站，如果">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https://i.imgur.com/2rOqoyX.png">
 <meta property="og:image" content="https://i.imgur.com/DWd08ZO.png">
@@ -24,10 +24,10 @@
 <meta property="og:image" content="https://i.imgur.com/qwbZnrJ.png">
 <meta property="og:image" content="https://i.imgur.com/qhm5Zlp.png">
 <meta property="og:image" content="https://i.imgur.com/78dpqYD.png">
-<meta property="og:updated_time" content="2020-03-10T09:51:06.985Z">
+<meta property="og:updated_time" content="2020-03-10T10:00:45.496Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="將社群軟體通知以RSS整合至Discord">
-<meta name="twitter:description" content="曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。工具介紹 RSSHUB  RSShub能幫助你將網站更新內容轉換為RSS通知的神奇網站，如果你技">
+<meta name="twitter:description" content="曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。 工具介紹   RSSHUB RSShub能幫助你將網站更新內容轉換為RSS通知的神奇網站，如果">
 <meta name="twitter:image" content="https://i.imgur.com/2rOqoyX.png">
     
     
@@ -116,7 +116,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS-reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。"><span class="toc-number">1.</span> <span class="toc-text">曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工具介紹"><span class="toc-number"></span> <span class="toc-text">工具介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用流程"><span class="toc-number"></span> <span class="toc-text">使用流程</span></a>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">1.</span> <span class="toc-text">工具介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">2.</span> <span class="toc-text">使用流程</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -142,7 +142,7 @@
       
         <time datetime="2019-10-06T05:47:33.000Z" itemprop="datePublished">2019-10-06</time>
         
-        (Updated: <time datetime="2020-03-10T09:51:06.985Z" itemprop="dateModified">2020-03-10</time>)
+        (Updated: <time datetime="2020-03-10T10:00:45.496Z" itemprop="dateModified">2020-03-10</time>)
         
       
     </div>
@@ -167,9 +167,12 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h3 id="曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS-reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。"><a href="#曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS-reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。" class="headerlink" title="曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。"></a>曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。</h3><h2 id="工具介紹"><a href="#工具介紹" class="headerlink" title="工具介紹"></a>工具介紹</h2><ol>
-<li><p><a href="https://docs.rsshub.app/" target="_blank" rel="noopener">RSSHUB</a></p>
-<p> RSShub能幫助你將網站更新內容轉換為RSS通知的神奇網站，如果你技術力足夠，也可以根據官方網站步驟申請自己想要的網站。其中包含:</p>
+    <p>曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。</p>
+<h2>工具介紹</h2>
+<ol>
+<li>
+<p><a href="https://docs.rsshub.app/" target="_blank" rel="noopener">RSSHUB</a></p>
+<p>RSShub能幫助你將網站更新內容轉換為RSS通知的神奇網站，如果你技術力足夠，也可以根據官方網站步驟申請自己想要的網站。其中包含:</p>
 <ul>
 <li>Facebook</li>
 <li>Twitter</li>
@@ -177,24 +180,25 @@
 <li>Youtube 等網站</li>
 </ul>
 </li>
-<li><p><a href="https://ifttt.com/" target="_blank" rel="noopener">ifTTT</a></p>
-<p> 這個網站主打一個很簡單的邏輯:</p>
-<blockquote>
-<p>「如果這件事情發生了，那就做這件事情」</p>
-</blockquote>
-<p> 以不需寫程式，接拼圖的方法來打造自動化王國，從「如果相機拍照就將照片上傳至GoogleDrive」，到「按一個按鈕就讓家中智慧家電開燈(網站有支援的前提)」應有盡有</p>
+<li>
+<p><a href="https://ifttt.com/" target="_blank" rel="noopener">ifTTT</a></p>
+<p>這個網站主打一個很簡單的邏輯:</p>
+<p><blockquote class="colorquote info"><p>「如果這件事情發生了，那就做這件事情」</p>
+</blockquote></p>
+<p>以不需寫程式，接拼圖的方法來打造自動化王國，從「如果相機拍照就將照片上傳至GoogleDrive」，到「按一個按鈕就讓家中智慧家電開燈(網站有支援的前提)」應有盡有</p>
 </li>
-<li><p>Discord的webhook網址</p>
+<li>
+<p>Discord的webhook網址</p>
 </li>
 </ol>
-<h2 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h2><ul>
+<h2>使用流程</h2>
+<ul>
 <li>首先在 RSSHUB中找到你想要的網址，假設我想得到猫宮ひなた的推文通知、轉推但不需要回復，根据官網說明的路由:</li>
 </ul>
 <p><img src="https://i.imgur.com/2rOqoyX.png" alt></p>
 <p>我的RSS網址應該長這樣:</p>
-<blockquote>
-<p><a href="https://rsshub.app/twitter/user/Nekomiya_Hinata/exclude_replies" target="_blank" rel="noopener">https://rsshub.app/twitter/user/Nekomiya_Hinata/exclude_replies</a></p>
-</blockquote>
+<p><blockquote class="colorquote success"><p>https://rsshub.app/twitter/user/Nekomiya_Hinata/exclude_replies</p>
+</blockquote></p>
 <ul>
 <li>接下來到ifTTT網站，註冊/登入以後，點選右上角的explore</li>
 </ul>
@@ -228,15 +232,21 @@
 </ul>
 <p><img src="https://i.imgur.com/qhm5Zlp.png" alt></p>
 <ol>
-<li><p>URL: 這邊要輸入的是discord當中的webhook網址，可以參考<a href="https://support.discordapp.com/hc/zh-tw/articles/228383668-%E4%BD%BF%E7%94%A8%E7%B6%B2%E7%B5%A1%E9%89%A4%E6%89%8B-Webhooks-" target="_blank" rel="noopener">Discord官方教學</a></p>
+<li>
+<p>URL: 這邊要輸入的是discord當中的webhook網址，可以參考<a href="https://support.discordapp.com/hc/zh-tw/articles/228383668-%E4%BD%BF%E7%94%A8%E7%B6%B2%E7%B5%A1%E9%89%A4%E6%89%8B-Webhooks-" target="_blank" rel="noopener">Discord官方教學</a></p>
 </li>
-<li><p>Method: 由於我們是需要傳送訊息到Discord，所以這邊一律設定為Post</p>
+<li>
+<p>Method: 由於我們是需要傳送訊息到Discord，所以這邊一律設定為Post</p>
 </li>
-<li><p>Content Type: 這邊選擇application/json</p>
+<li>
+<p>Content Type: 這邊選擇application/json</p>
 </li>
-<li><p>Body: 這邊就是我們要傳送至discord的文字，雖然他支持discord的embed message，不過這邊我們先簡單一點，標記一個人並傳送標題與網址</p>
+<li>
+<p>Body: 這裡就是我們要傳送至discord的文字，雖然他支持discord的embed message，不過這邊我們先簡單一點，標記一個人並傳送標題與網址</p>
 </li>
 </ol>
+<p>選擇下面的小按鈕「Add ingredient」
+這邊可以調整你要rss通知中的內容出現在指定的位置</p>
 <p><img src="https://i.imgur.com/78dpqYD.png" alt></p>
 <ol start="5">
 <li>最後按下action就皆大歡喜了</li>
@@ -269,7 +279,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS-reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。"><span class="toc-number">1.</span> <span class="toc-text">曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工具介紹"><span class="toc-number"></span> <span class="toc-text">工具介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用流程"><span class="toc-number"></span> <span class="toc-text">使用流程</span></a>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">1.</span> <span class="toc-text">工具介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">2.</span> <span class="toc-text">使用流程</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
