@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="md內TagPlugin by   jsFiddle 在文章中嵌入 jsFiddle。  Image 在文章中插入指定大小的圖片。  Link 在文章中插入連結，並在外連連結自動加上 target&#x3D;&quot;_blank&quot; 屬性。 text url [external] [title] Include Code 插入 source&#x2F;downloads&#x2F;code 資料夾內的程式檔，資料夾">
+    <meta name="description" content="md內TagPlugin by    jsFiddle在文章中嵌入 jsFiddle。   Image在文章中插入指定大小的圖片。  Link在文章中插入連結，並在外連連結自動加上 target&#x3D;”_blank” 屬性。 text url [external] [title] Include Code插入 source&#x2F;downloads&#x2F;code 資料夾內的程式檔，資料夾取决于你在配置文件中 c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo syntax">
 <meta property="og:url" content="https://robinsonweng.github.io/2019/09/19/mdsyntax/index.html">
 <meta property="og:site_name" content="春雨的部落格">
-<meta property="og:description" content="md內TagPlugin by   jsFiddle 在文章中嵌入 jsFiddle。  Image 在文章中插入指定大小的圖片。  Link 在文章中插入連結，並在外連連結自動加上 target&#x3D;&quot;_blank&quot; 屬性。 text url [external] [title] Include Code 插入 source&#x2F;downloads&#x2F;code 資料夾內的程式檔，資料夾">
+<meta property="og:description" content="md內TagPlugin by    jsFiddle在文章中嵌入 jsFiddle。   Image在文章中插入指定大小的圖片。  Link在文章中插入連結，並在外連連結自動加上 target&#x3D;”_blank” 屬性。 text url [external] [title] Include Code插入 source&#x2F;downloads&#x2F;code 資料夾內的程式檔，資料夾取决于你在配置文件中 c">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://robinsonweng.github.io/path/to/image">
 <meta property="article:published_time" content="2019-09-19T14:06:04.000Z">
@@ -111,7 +111,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">color quote</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#color-quote"><span class="toc-number">1.</span> <span class="toc-text">color quote</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -162,47 +162,48 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p><div><div class="fold_hider"><div class="close hider_title">md內TagPlugin</div></div><div class="fold">
-<p><a href="https://blog.rmiao.top/hexo-fold-block/" target="_blank" rel="noopener">by</a></p>
+    <div><div class="fold_hider"><div class="close hider_title">md內TagPlugin</div></div><div class="fold">
+<p><a target="_blank" rel="noopener" href="https://blog.rmiao.top/hexo-fold-block/">by</a></p>
 
-</div></div></p>
-<p>jsFiddle
-在文章中嵌入 jsFiddle。</p>
-<p><iframe scrolling="no" width="[width]" height="[height]" src="//jsfiddle.net/shorttag/embedded/[tabs]/[skin]" frameborder="0" allowfullscreen></iframe></p>
-<p>Image
-在文章中插入指定大小的圖片。</p>
-<p><img src="/path/to/image" class="[class names]" title="[width] [height] [title text [alt text]]">
-Link
-在文章中插入連結，並在外連連結自動加上 target=&quot;_blank&quot; 屬性。</p>
-<p><a>text url [external] [title]</a>
-Include Code
-插入 source/downloads/code 資料夾內的程式檔，資料夾取决于你在配置文件中 code_dir 的配置。</p>
-<p>
-Youtube
-在文章中插入 Youtube 影片。</p>
-<p><div class="video-container"><iframe src="//www.youtube.com/embed/video_id" frameborder="0" allowfullscreen></iframe></div>
-Vimeo
-在文章中插入 Vimeo 影片。</p>
-<p><div class="video-container"><iframe src="//player.vimeo.com/video/video_id" frameborder="0" allowfullscreen></iframe></div></p>
-<p>引用文章
-引用其他文章的連結。</p>
-<p></p>
-<p></p>
-<p>引用資產
-引用文章的資產。</p>
-<p></p>
-<p></p>
-<p></p>
-<h5>color quote</h5>
-<p><blockquote class="colorquote info"><p>Example: info</p>
-</blockquote></p>
-<p><blockquote class="colorquote success"><p>Example: info</p>
-</blockquote></p>
-<p><blockquote class="colorquote warning"><p>Example: info</p>
-</blockquote></p>
-<p><blockquote class="colorquote danger"><p>Example: info</p>
-</blockquote></p>
+</div></div>
 
+<p>jsFiddle<br>在文章中嵌入 jsFiddle。</p>
+<iframe scrolling="no" width="[width]" height="[height]" src="https://jsfiddle.net/shorttag/embedded/[tabs]/[skin]" frameborder="0" loading="lazy" allowfullscreen></iframe>
+
+<p>Image<br>在文章中插入指定大小的圖片。</p>
+<img src="/path/to/image" class="[class names]" title="[width] [height] [title text [alt text]]">
+<p>Link<br>在文章中插入連結，並在外連連結自動加上 target=”_blank” 屬性。</p>
+<a href="" title="" target="">text url [external] [title]</a>
+<p>Include Code<br>插入 source/downloads/code 資料夾內的程式檔，資料夾取决于你在配置文件中 code_dir 的配置。</p>
+
+<p>Youtube<br>在文章中插入 Youtube 影片。</p>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/video_id" frameborder="0" loading="lazy" allowfullscreen></iframe></div>
+<p>Vimeo<br>在文章中插入 Vimeo 影片。</p>
+<div class="video-container"><iframe src="https://player.vimeo.com/video/video_id" frameborder="0" loading="lazy" allowfullscreen></iframe></div>
+
+<p>引用文章<br>引用其他文章的連結。</p>
+
+
+<a href="#">Post not found: slug [hexo syntax]</a>
+
+<p>引用資產<br>引用文章的資產。</p>
+
+
+
+
+
+
+<h5 id="color-quote"><a href="#color-quote" class="headerlink" title="color quote"></a>color quote</h5><blockquote class="colorquote info"><p>Example: info</p>
+</blockquote>
+
+<blockquote class="colorquote success"><p>Example: info</p>
+</blockquote>
+
+<blockquote class="colorquote warning"><p>Example: info</p>
+</blockquote>
+
+<blockquote class="colorquote danger"><p>Example: info</p>
+</blockquote>
   </div>
 </article>
 
@@ -229,7 +230,7 @@ Vimeo
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">color quote</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#color-quote"><span class="toc-number">1.</span> <span class="toc-text">color quote</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

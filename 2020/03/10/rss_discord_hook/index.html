@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。 工具介紹   RSSHUB RSShub能幫助你將網站更新內容轉換為RSS通知的神奇網站，如果">
+    <meta name="description" content="曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。 工具介紹 RSSHUB  RSShub能幫助你將網站更新內容轉換為RSS通知的神奇網站，如果你">
 <meta property="og:type" content="article">
 <meta property="og:title" content="將社群軟體通知以RSS整合至Discord">
 <meta property="og:url" content="https://robinsonweng.github.io/2020/03/10/rss_discord_hook/index.html">
 <meta property="og:site_name" content="春雨的部落格">
-<meta property="og:description" content="曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。 工具介紹   RSSHUB RSShub能幫助你將網站更新內容轉換為RSS通知的神奇網站，如果">
+<meta property="og:description" content="曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。 工具介紹 RSSHUB  RSShub能幫助你將網站更新內容轉換為RSS通知的神奇網站，如果你">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://i.imgur.com/2rOqoyX.png">
 <meta property="og:image" content="https://i.imgur.com/DWd08ZO.png">
@@ -123,7 +123,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">工具介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">使用流程</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7%E4%BB%8B%E7%B4%B9"><span class="toc-number">1.</span> <span class="toc-text">工具介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">使用流程</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -175,11 +175,9 @@
 
   <div class="content" itemprop="articleBody">
     <p>曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。</p>
-<h2>工具介紹</h2>
-<ol>
-<li>
-<p><a href="https://docs.rsshub.app/" target="_blank" rel="noopener">RSSHUB</a></p>
-<p>RSShub能幫助你將網站更新內容轉換為RSS通知的神奇網站，如果你技術力足夠，也可以根據官方網站步驟申請自己想要的網站。其中包含:</p>
+<h2 id="工具介紹"><a href="#工具介紹" class="headerlink" title="工具介紹"></a>工具介紹</h2><ol>
+<li><p><a target="_blank" rel="noopener" href="https://docs.rsshub.app/">RSSHUB</a></p>
+<p> RSShub能幫助你將網站更新內容轉換為RSS通知的神奇網站，如果你技術力足夠，也可以根據官方網站步驟申請自己想要的網站。其中包含:</p>
 <ul>
 <li>Facebook</li>
 <li>Twitter</li>
@@ -187,74 +185,67 @@
 <li>Youtube 等網站</li>
 </ul>
 </li>
-<li>
-<p><a href="https://ifttt.com/" target="_blank" rel="noopener">ifTTT</a></p>
-<p>這個網站主打一個很簡單的邏輯:</p>
-<p><blockquote class="colorquote info"><p>「如果這件事情發生了，那就做這件事情」</p>
-</blockquote></p>
-<p>以不需寫程式，接拼圖的方法來打造自動化王國，從「如果相機拍照就將照片上傳至GoogleDrive」，到「按一個按鈕就讓家中智慧家電開燈(網站有支援的前提)」應有盡有</p>
+<li><p><a target="_blank" rel="noopener" href="https://ifttt.com/">ifTTT</a></p>
+<p> 這個網站主打一個很簡單的邏輯:</p>
+ <blockquote class="colorquote info"><p>「如果這件事情發生了，那就做這件事情」</p>
+</blockquote>
+<p> 以不需寫程式，接拼圖的方法來打造自動化王國，從「如果相機拍照就將照片上傳至GoogleDrive」，到「按一個按鈕就讓家中智慧家電開燈(網站有支援的前提)」應有盡有</p>
 </li>
-<li>
-<p>Discord的webhook網址</p>
+<li><p>Discord的webhook網址</p>
 </li>
 </ol>
-<h2>使用流程</h2>
-<ul>
+<h2 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h2><ul>
 <li>首先在 RSSHUB中找到你想要的網址，假設我想得到猫宮ひなた的推文通知、轉推但不需要回復，根据官網說明的路由:</li>
 </ul>
-<p><img src="https://i.imgur.com/2rOqoyX.png" alt></p>
+<p><img src="https://i.imgur.com/2rOqoyX.png"></p>
 <p>我的RSS網址應該長這樣:</p>
-<p><blockquote class="colorquote success"><p>https://rsshub.app/twitter/user/Nekomiya_Hinata/exclude_replies</p>
-</blockquote></p>
+<blockquote class="colorquote success"><p><a target="_blank" rel="noopener" href="https://rsshub.app/twitter/user/Nekomiya_Hinata/exclude_replies">https://rsshub.app/twitter/user/Nekomiya_Hinata/exclude_replies</a></p>
+</blockquote>
+
 <ul>
 <li>接下來到ifTTT網站，註冊/登入以後，點選右上角的explore</li>
 </ul>
-<p><img src="https://i.imgur.com/DWd08ZO.png" alt></p>
+<p><img src="https://i.imgur.com/DWd08ZO.png"></p>
 <ul>
 <li>點選那個很不顯眼的加號</li>
 </ul>
-<p><img src="https://i.imgur.com/QH0UOcl.png" alt></p>
+<p><img src="https://i.imgur.com/QH0UOcl.png"></p>
 <ul>
 <li>我們就來到先前提到的 「if this then that」，點下「This」</li>
 </ul>
-<p><img src="https://i.imgur.com/UuqBlSQ.png" alt></p>
+<p><img src="https://i.imgur.com/UuqBlSQ.png"></p>
 <ul>
 <li>在搜尋框裡面輸入RSS</li>
 </ul>
-<p><img src="https://i.imgur.com/oGjcaBp.png" alt></p>
+<p><img src="https://i.imgur.com/oGjcaBp.png"></p>
 <ul>
 <li>點開RSS選擇左邊的觸發條件「每當有新通知時觸發」</li>
 </ul>
-<p><img src="https://i.imgur.com/kdjutFe.png" alt></p>
+<p><img src="https://i.imgur.com/kdjutFe.png"></p>
 <ul>
 <li>輸入剛剛從RSShub拿到的網址後點選「Create Trigger」</li>
 </ul>
-<p><img src="https://i.imgur.com/0xHzaM0.png" alt></p>
+<p><img src="https://i.imgur.com/0xHzaM0.png"></p>
 <ul>
 <li>這步跟剛剛一樣點選 「That」，只是這次要搜尋「webhooks」</li>
 </ul>
-<p><img src="https://i.imgur.com/qwbZnrJ.png" alt></p>
+<p><img src="https://i.imgur.com/qwbZnrJ.png"></p>
 <ul>
 <li>點選「Make a webrequest」以後，接下來就是重頭戲</li>
 </ul>
-<p><img src="https://i.imgur.com/qhm5Zlp.png" alt></p>
+<p><img src="https://i.imgur.com/qhm5Zlp.png"></p>
 <ol>
-<li>
-<p>URL: 這邊要輸入的是discord當中的webhook網址，可以參考<a href="https://support.discordapp.com/hc/zh-tw/articles/228383668-%E4%BD%BF%E7%94%A8%E7%B6%B2%E7%B5%A1%E9%89%A4%E6%89%8B-Webhooks-" target="_blank" rel="noopener">Discord官方教學</a></p>
+<li><p>URL: 這邊要輸入的是discord當中的webhook網址，可以參考<a target="_blank" rel="noopener" href="https://support.discordapp.com/hc/zh-tw/articles/228383668-%E4%BD%BF%E7%94%A8%E7%B6%B2%E7%B5%A1%E9%89%A4%E6%89%8B-Webhooks-">Discord官方教學</a></p>
 </li>
-<li>
-<p>Method: 由於我們是需要傳送訊息到Discord，所以這邊一律設定為Post</p>
+<li><p>Method: 由於我們是需要傳送訊息到Discord，所以這邊一律設定為Post</p>
 </li>
-<li>
-<p>Content Type: 這邊選擇application/json</p>
+<li><p>Content Type: 這邊選擇application/json</p>
 </li>
-<li>
-<p>Body: 這裡就是我們要傳送至discord的文字，雖然他支持discord的embed message，不過這邊我們先簡單一點，標記一個人並傳送標題與網址</p>
+<li><p>Body: 這裡就是我們要傳送至discord的文字，雖然他支持discord的embed message，不過這邊我們先簡單一點，標記一個人並傳送標題與網址</p>
 </li>
 </ol>
-<p>選擇下面的小按鈕「Add ingredient」
-這邊可以調整你要rss通知中的內容出現在指定的位置</p>
-<p><img src="https://i.imgur.com/78dpqYD.png" alt></p>
+<p>選擇下面的小按鈕「Add ingredient」<br>這邊可以調整你要rss通知中的內容出現在指定的位置</p>
+<p><img src="https://i.imgur.com/78dpqYD.png"></p>
 <ol start="5">
 <li>最後按下action就皆大歡喜了</li>
 </ol>
@@ -286,7 +277,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">工具介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">使用流程</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7%E4%BB%8B%E7%B4%B9"><span class="toc-number">1.</span> <span class="toc-text">工具介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">使用流程</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

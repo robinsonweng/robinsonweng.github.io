@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="關於 Python&#39;s Class Development Toolkit 的重點整理 Raymond Hettinger 一位常常出現在Python程式語言演講的大佬，曾經聽過他的Transforming Code into Beautiful, Idiomatic Python 聽過一次就愛上了他的演講風格，乾淨、簡潔、速度適中且幽默十足    __init__ is not a constr">
+    <meta name="description" content="關於 Python’s Class Development Toolkit 的重點整理Raymond Hettinger 一位常常出現在Python程式語言演講的大佬，曾經聽過他的Transforming Code into Beautiful, Idiomatic Python 聽過一次就愛上了他的演講風格，乾淨、簡潔、速度適中且幽默十足    __init__ is not a constru">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python&#39;s Class Development Toolkit">
 <meta property="og:url" content="https://robinsonweng.github.io/2019/10/06/python's-Class-Development-Toolkit/index.html">
 <meta property="og:site_name" content="春雨的部落格">
-<meta property="og:description" content="關於 Python&#39;s Class Development Toolkit 的重點整理 Raymond Hettinger 一位常常出現在Python程式語言演講的大佬，曾經聽過他的Transforming Code into Beautiful, Idiomatic Python 聽過一次就愛上了他的演講風格，乾淨、簡潔、速度適中且幽默十足    __init__ is not a constr">
+<meta property="og:description" content="關於 Python’s Class Development Toolkit 的重點整理Raymond Hettinger 一位常常出現在Python程式語言演講的大佬，曾經聽過他的Transforming Code into Beautiful, Idiomatic Python 聽過一次就愛上了他的演講風格，乾淨、簡潔、速度適中且幽默十足    __init__ is not a constru">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2019-10-06T05:47:33.000Z">
 <meta property="article:modified_time" content="2020-03-16T04:45:09.463Z">
@@ -110,7 +110,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">關於 Python&#39;s Class Development Toolkit 的重點整理</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%9C%E6%96%BC-Python%E2%80%99s-Class-Development-Toolkit-%E7%9A%84%E9%87%8D%E9%BB%9E%E6%95%B4%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">關於 Python’s Class Development Toolkit 的重點整理</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -161,54 +161,43 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h1>關於 Python's Class Development Toolkit 的重點整理</h1>
-<p><blockquote class="colorquote info"><p><code>Raymond Hettinger</code> 一位常常出現在Python程式語言演講的大佬，曾經聽過他的<code>Transforming Code into Beautiful, Idiomatic Python</code> 聽過一次就愛上了他的演講風格，乾淨、簡潔、速度適中且幽默十足</p>
-</blockquote></p>
+    <h1 id="關於-Python’s-Class-Development-Toolkit-的重點整理"><a href="#關於-Python’s-Class-Development-Toolkit-的重點整理" class="headerlink" title="關於 Python’s Class Development Toolkit 的重點整理"></a>關於 Python’s Class Development Toolkit 的重點整理</h1><blockquote class="colorquote info"><p><code>Raymond Hettinger</code> 一位常常出現在Python程式語言演講的大佬，曾經聽過他的<code>Transforming Code into Beautiful, Idiomatic Python</code> 聽過一次就愛上了他的演講風格，乾淨、簡潔、速度適中且幽默十足</p>
+</blockquote>
+
 <ol>
-<li>
-<p><code>__init__</code> is not a constructor:</p>
+<li><p><code>__init__</code> is not a constructor:</p>
 <ul>
 <li>我曾經在寫Python也有這個疑問，為甚麼Python的建構子是叫做<code>__init__</code>而不是<code>__constructor__</code>?而實際上確實不是，self是本身class的實作，也就是說在<code>__init__</code>宣告以前，class已經建構好了，他是一個<code>initializer</code>，任務是將影片中的Radius存入字典當中</li>
 </ul>
 </li>
-<li>
-<p><code>@classmethod</code>:</p>
+<li><p><code>@classmethod</code>:</p>
 <ul>
 <li>如果我想要只呼叫一個method就可以達成:計算新的Radius同時更新到Class裡面，你可以在method中直接呼叫Class本身，但是這個舉動會導致繼承以後的method被影響，所以為了呼叫原class更新參數的當下又不會影響到繼承後的class，就是該使用 <code>@classmethod</code>中的cls參數來呼叫class的場合</li>
 </ul>
 </li>
-<li>
-<p><code>@staticmethod</code>:</p>
+<li><p><code>@staticmethod</code>:</p>
 <ul>
-<li>
-<p>我想要寫一個function在class裡面，但是這個function的功能與class無關，所以你會陷入一種
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 寫進class裡面，但是用這個與class無關的function還是要實作一次物件</span><br><span class="line">2. 寫在class外面，但是這樣使用這個class的人就會找不到這個function</span><br></pre></td></tr></table></figure></p>
-</li>
-<li>
-<p>這時候就是<code>@staticmethod</code>的出場時刻了，不需要實作但是仍然放在class裡面的method</p>
+<li><p>我想要寫一個function在class裡面，但是這個function的功能與class無關，所以你會陷入一種</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 寫進class裡面，但是用這個與class無關的function還是要實作一次物件</span><br><span class="line">2. 寫在class外面，但是這樣使用這個class的人就會找不到這個function</span><br></pre></td></tr></table></figure></li>
+<li><p>這時候就是<code>@staticmethod</code>的出場時刻了，不需要實作但是仍然放在class裡面的method</p>
 </li>
 </ul>
 </li>
-<li>
-<p><code>__method</code>:</p>
+<li><p><code>__method</code>:</p>
 <ul>
-<li>當我們在一個class當中要從一個method呼叫另外一個method我們會用<code>self.method()</code>但是self其實是指實作後的自己，也就是說self不只是class他自己，也包括被繼承的那些class，當繼承父class的子class也使用了相同名稱的method，原本的父class method就會被覆蓋。那麼要怎麼解決這個方法呢? 講者這邊提出個兩種方法，第一種方法就是在method被呼叫以前先複製一份，這樣一來，父class有自己的一份，繼承的子class也不會蓋過去原class的method，皆大歡喜(? 但是這對你來說是好方法，對其他人來說也是好方法，如果子class也照做一次，這段程式碼又會失效了XD
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def method(self):</span><br><span class="line">    ...something</span><br><span class="line"></span><br><span class="line">_method = method</span><br></pre></td></tr></table></figure></li>
+<li>當我們在一個class當中要從一個method呼叫另外一個method我們會用<code>self.method()</code>但是self其實是指實作後的自己，也就是說self不只是class他自己，也包括被繼承的那些class，當繼承父class的子class也使用了相同名稱的method，原本的父class method就會被覆蓋。那麼要怎麼解決這個方法呢? 講者這邊提出個兩種方法，第一種方法就是在method被呼叫以前先複製一份，這樣一來，父class有自己的一份，繼承的子class也不會蓋過去原class的method，皆大歡喜(? 但是這對你來說是好方法，對其他人來說也是好方法，如果子class也照做一次，這段程式碼又會失效了XD<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def method(self):</span><br><span class="line">    ...something</span><br><span class="line"></span><br><span class="line">_method = method</span><br></pre></td></tr></table></figure></li>
 </ul>
-<p>「所以為了贏得這個小學一年級的學你戰爭，我們需要在複製以前加上名字，這樣他只要複製到你很醜，他看到的就是某某很醜」，也就是在method前面加上class的名稱避免誤用，而這套流程因為太實用了，所以Python把它加了進去，也就是所謂的<code>__method</code>
-<blockquote class="colorquote info"><p>所以其實<code>__method</code>跟privacy一點關係都沒有，反而是他的相反，它可以讓你的子class能夠更自由的去繼承、覆寫</p>
-</blockquote></p>
-</li>
-<li>
-<p><code>@property</code>:
-有兩個用途
-1. 是在取得<code>.屬性</code>的時候，可以神奇的執行一件事情並取得這個值
-2. 當為了執行效率使用<code>__slots__</code>時，他會破壞原本取得變數的字典，而<code>@property</code>正是他的補救方案</p>
+<p> 「所以為了贏得這個小學一年級的學你戰爭，我們需要在複製以前加上名字，這樣他只要複製到你很醜，他看到的就是某某很醜」，也就是在method前面加上class的名稱避免誤用，而這套流程因為太實用了，所以Python把它加了進去，也就是所謂的<code>__method</code></p>
+ <blockquote class="colorquote info"><p>所以其實<code>__method</code>跟privacy一點關係都沒有，反而是他的相反，它可以讓你的子class能夠更自由的去繼承、覆寫</p>
+</blockquote></li>
+<li><p><code>@property</code>:<br> 有兩個用途</p>
+<pre><code> 1. 是在取得`.屬性`的時候，可以神奇的執行一件事情並取得這個值
+ 2. 當為了執行效率使用`__slots__`時，他會破壞原本取得變數的字典，而`@property`正是他的補救方案
+</code></pre>
 </li>
 </ol>
-<p>結語:
-這篇演講真的是非常非常的紮實，學到很多東西以及觀念補正，推薦正在看class的朋友們!</p>
-<p>有沒有曾經看過<code>@classmethod</code>或是<code>@staticmethod</code>的語法但還是搞不清楚應該用在甚麼情境的? 那你應該也來聽聽看<a href="https://www.youtube.com/watch?v=HTLu2DFOdTg&amp;feature=youtu.be" target="_blank" rel="noopener">這個演講</a></p>
+<p>結語:<br>    這篇演講真的是非常非常的紮實，學到很多東西以及觀念補正，推薦正在看class的朋友們!</p>
+<p>有沒有曾經看過<code>@classmethod</code>或是<code>@staticmethod</code>的語法但還是搞不清楚應該用在甚麼情境的? 那你應該也來聽聽看<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=HTLu2DFOdTg&feature=youtu.be">這個演講</a></p>
 
   </div>
 </article>
@@ -236,7 +225,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">關於 Python&#39;s Class Development Toolkit 的重點整理</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%9C%E6%96%BC-Python%E2%80%99s-Class-Development-Toolkit-%E7%9A%84%E9%87%8D%E9%BB%9E%E6%95%B4%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">關於 Python’s Class Development Toolkit 的重點整理</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
