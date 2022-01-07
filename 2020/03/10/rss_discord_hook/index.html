@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。 工具介紹   RSSHUB RSShub能幫助你將網站更新內容轉換為RSS通知的神奇網站，如果">
+<meta property="og:type" content="article">
+<meta property="og:title" content="將社群軟體通知以RSS整合至Discord">
+<meta property="og:url" content="https://robinsonweng.github.io/2020/03/10/rss_discord_hook/index.html">
+<meta property="og:site_name" content="春雨的部落格">
+<meta property="og:description" content="曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。 工具介紹   RSSHUB RSShub能幫助你將網站更新內容轉換為RSS通知的神奇網站，如果">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/2rOqoyX.png">
+<meta property="og:image" content="https://i.imgur.com/DWd08ZO.png">
+<meta property="og:image" content="https://i.imgur.com/QH0UOcl.png">
+<meta property="og:image" content="https://i.imgur.com/UuqBlSQ.png">
+<meta property="og:image" content="https://i.imgur.com/oGjcaBp.png">
+<meta property="og:image" content="https://i.imgur.com/kdjutFe.png">
+<meta property="og:image" content="https://i.imgur.com/0xHzaM0.png">
+<meta property="og:image" content="https://i.imgur.com/qwbZnrJ.png">
+<meta property="og:image" content="https://i.imgur.com/qhm5Zlp.png">
+<meta property="og:image" content="https://i.imgur.com/78dpqYD.png">
+<meta property="article:published_time" content="2020-03-10T10:15:33.000Z">
+<meta property="article:modified_time" content="2020-03-16T04:45:09.464Z">
+<meta property="article:author" content="robinson">
+<meta property="article:tag" content="IFTTT">
+<meta property="article:tag" content="RSS">
+<meta property="article:tag" content="webhook">
+<meta property="article:tag" content="Discord">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/2rOqoyX.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>將社群軟體通知以RSS整合至Discord</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/categories/">分類</a></li>
+         
+          <li><a href="/projects">專案</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2022/01/08/comment-myself/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2019/10/25/gitkexperience/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">回到頁首</span>
+      <span id="i-share" class="info" style="display:none;">分享</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://robinsonweng.github.io/2020/03/10/rss_discord_hook/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://robinsonweng.github.io/2020/03/10/rss_discord_hook/&text=將社群軟體通知以RSS整合至Discord"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://robinsonweng.github.io/2020/03/10/rss_discord_hook/&title=將社群軟體通知以RSS整合至Discord"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://robinsonweng.github.io/2020/03/10/rss_discord_hook/&is_video=false&description=將社群軟體通知以RSS整合至Discord"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=將社群軟體通知以RSS整合至Discord&body=Check out this article: https://robinsonweng.github.io/2020/03/10/rss_discord_hook/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://robinsonweng.github.io/2020/03/10/rss_discord_hook/&title=將社群軟體通知以RSS整合至Discord"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://robinsonweng.github.io/2020/03/10/rss_discord_hook/&title=將社群軟體通知以RSS整合至Discord"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://robinsonweng.github.io/2020/03/10/rss_discord_hook/&title=將社群軟體通知以RSS整合至Discord"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://robinsonweng.github.io/2020/03/10/rss_discord_hook/&title=將社群軟體通知以RSS整合至Discord"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://robinsonweng.github.io/2020/03/10/rss_discord_hook/&name=將社群軟體通知以RSS整合至Discord&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">工具介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">使用流程</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        將社群軟體通知以RSS整合至Discord
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">春雨</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-03-10T10:15:33.000Z" itemprop="datePublished">2020-03-10</time>
+        
+        (Updated: <time datetime="2020-03-16T04:45:09.464Z" itemprop="dateModified">2020-03-16</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E7%A8%8B%E5%BC%8F/">程式</a> › <a class="category-link" href="/categories/%E7%A8%8B%E5%BC%8F/%E6%95%99%E5%AD%B8/">教學</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Discord/" rel="tag">Discord</a>, <a class="tag-link-link" href="/tags/IFTTT/" rel="tag">IFTTT</a>, <a class="tag-link-link" href="/tags/RSS/" rel="tag">RSS</a>, <a class="tag-link-link" href="/tags/webhook/" rel="tag">webhook</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>曾經因為臉書演算法導致漏失掉重要訊息，於是我決定將臉書、推特、與P站所有的通知都整合進RSS reader，後來得知可以透過ifTTT將rss以webhook的方式在discord上面傳送通知，就變成了只要有RSS就可以掛在discord裡面，部落格、學校通知、繪師更新，只要有RSS，所有通知一覽無遺。</p>
+<h2>工具介紹</h2>
+<ol>
+<li>
+<p><a href="https://docs.rsshub.app/" target="_blank" rel="noopener">RSSHUB</a></p>
+<p>RSShub能幫助你將網站更新內容轉換為RSS通知的神奇網站，如果你技術力足夠，也可以根據官方網站步驟申請自己想要的網站。其中包含:</p>
+<ul>
+<li>Facebook</li>
+<li>Twitter</li>
+<li>Pixiv</li>
+<li>Youtube 等網站</li>
+</ul>
+</li>
+<li>
+<p><a href="https://ifttt.com/" target="_blank" rel="noopener">ifTTT</a></p>
+<p>這個網站主打一個很簡單的邏輯:</p>
+<p><blockquote class="colorquote info"><p>「如果這件事情發生了，那就做這件事情」</p>
+</blockquote></p>
+<p>以不需寫程式，接拼圖的方法來打造自動化王國，從「如果相機拍照就將照片上傳至GoogleDrive」，到「按一個按鈕就讓家中智慧家電開燈(網站有支援的前提)」應有盡有</p>
+</li>
+<li>
+<p>Discord的webhook網址</p>
+</li>
+</ol>
+<h2>使用流程</h2>
+<ul>
+<li>首先在 RSSHUB中找到你想要的網址，假設我想得到猫宮ひなた的推文通知、轉推但不需要回復，根据官網說明的路由:</li>
+</ul>
+<p><img src="https://i.imgur.com/2rOqoyX.png" alt></p>
+<p>我的RSS網址應該長這樣:</p>
+<p><blockquote class="colorquote success"><p>https://rsshub.app/twitter/user/Nekomiya_Hinata/exclude_replies</p>
+</blockquote></p>
+<ul>
+<li>接下來到ifTTT網站，註冊/登入以後，點選右上角的explore</li>
+</ul>
+<p><img src="https://i.imgur.com/DWd08ZO.png" alt></p>
+<ul>
+<li>點選那個很不顯眼的加號</li>
+</ul>
+<p><img src="https://i.imgur.com/QH0UOcl.png" alt></p>
+<ul>
+<li>我們就來到先前提到的 「if this then that」，點下「This」</li>
+</ul>
+<p><img src="https://i.imgur.com/UuqBlSQ.png" alt></p>
+<ul>
+<li>在搜尋框裡面輸入RSS</li>
+</ul>
+<p><img src="https://i.imgur.com/oGjcaBp.png" alt></p>
+<ul>
+<li>點開RSS選擇左邊的觸發條件「每當有新通知時觸發」</li>
+</ul>
+<p><img src="https://i.imgur.com/kdjutFe.png" alt></p>
+<ul>
+<li>輸入剛剛從RSShub拿到的網址後點選「Create Trigger」</li>
+</ul>
+<p><img src="https://i.imgur.com/0xHzaM0.png" alt></p>
+<ul>
+<li>這步跟剛剛一樣點選 「That」，只是這次要搜尋「webhooks」</li>
+</ul>
+<p><img src="https://i.imgur.com/qwbZnrJ.png" alt></p>
+<ul>
+<li>點選「Make a webrequest」以後，接下來就是重頭戲</li>
+</ul>
+<p><img src="https://i.imgur.com/qhm5Zlp.png" alt></p>
+<ol>
+<li>
+<p>URL: 這邊要輸入的是discord當中的webhook網址，可以參考<a href="https://support.discordapp.com/hc/zh-tw/articles/228383668-%E4%BD%BF%E7%94%A8%E7%B6%B2%E7%B5%A1%E9%89%A4%E6%89%8B-Webhooks-" target="_blank" rel="noopener">Discord官方教學</a></p>
+</li>
+<li>
+<p>Method: 由於我們是需要傳送訊息到Discord，所以這邊一律設定為Post</p>
+</li>
+<li>
+<p>Content Type: 這邊選擇application/json</p>
+</li>
+<li>
+<p>Body: 這裡就是我們要傳送至discord的文字，雖然他支持discord的embed message，不過這邊我們先簡單一點，標記一個人並傳送標題與網址</p>
+</li>
+</ol>
+<p>選擇下面的小按鈕「Add ingredient」
+這邊可以調整你要rss通知中的內容出現在指定的位置</p>
+<p><img src="https://i.imgur.com/78dpqYD.png" alt></p>
+<ol start="5">
+<li>最後按下action就皆大歡喜了</li>
+</ol>
+<p>P.S 由於RSShub是採取贊助制度，速度不一定可以讓你滿意，可以去尋找其他服務代替</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/categories/">分類</a></li>
+         
+          <li><a href="/projects">專案</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">工具介紹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">使用流程</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://robinsonweng.github.io/2020/03/10/rss_discord_hook/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://robinsonweng.github.io/2020/03/10/rss_discord_hook/&text=將社群軟體通知以RSS整合至Discord"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://robinsonweng.github.io/2020/03/10/rss_discord_hook/&title=將社群軟體通知以RSS整合至Discord"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://robinsonweng.github.io/2020/03/10/rss_discord_hook/&is_video=false&description=將社群軟體通知以RSS整合至Discord"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=將社群軟體通知以RSS整合至Discord&body=Check out this article: https://robinsonweng.github.io/2020/03/10/rss_discord_hook/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://robinsonweng.github.io/2020/03/10/rss_discord_hook/&title=將社群軟體通知以RSS整合至Discord"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://robinsonweng.github.io/2020/03/10/rss_discord_hook/&title=將社群軟體通知以RSS整合至Discord"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://robinsonweng.github.io/2020/03/10/rss_discord_hook/&title=將社群軟體通知以RSS整合至Discord"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://robinsonweng.github.io/2020/03/10/rss_discord_hook/&title=將社群軟體通知以RSS整合至Discord"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://robinsonweng.github.io/2020/03/10/rss_discord_hook/&name=將社群軟體通知以RSS整合至Discord&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 選單</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 文章目錄</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 頁首</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 robinson
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/categories/">分類</a></li>
+         
+          <li><a href="/projects">專案</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight .code pre").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-148363298-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+</html>
