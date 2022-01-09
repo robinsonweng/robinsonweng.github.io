@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="1. asyncio只不過是python coroutine的一種實現方法掌握寫coroutine的好處與壞處，實作的時機，雷點以及隱憂，如何排錯，遠遠比用甚麼炫泡函式庫無腦加上async&#x2F;await還要重要上好幾倍(對說的就是我) 2. 任何事情都有代價雖然async常常標榜不需要管理討厭的鎖，效能提升，但實際上都不是這麼一回事 不需要管理討厭的鎖是，async的確不需要管討厭的鎖了，但作為代價">
+    <meta name="description" content="1. asyncio只不過是python coroutine的一種實現方法掌握寫coroutine的好處與壞處，實作的時機，雷點以及隱憂，如何排錯，遠遠比用甚麼炫泡函式庫無腦加上async&#x2F;await還要重要上好幾倍(對說的就是我) 2. 任何事情都有代價雖然async常常標榜不需要管理討厭的鎖，效能提升，但有很多東西是他們沒有提到，卻是寫出好coroutine的關鍵 不需要管理討厭的鎖是，asy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用python async以前你需要注意的事情">
 <meta property="og:url" content="https://robinsonweng.github.io/2022/01/08/asynctips/index.html">
 <meta property="og:site_name" content="春雨的部落格">
-<meta property="og:description" content="1. asyncio只不過是python coroutine的一種實現方法掌握寫coroutine的好處與壞處，實作的時機，雷點以及隱憂，如何排錯，遠遠比用甚麼炫泡函式庫無腦加上async&#x2F;await還要重要上好幾倍(對說的就是我) 2. 任何事情都有代價雖然async常常標榜不需要管理討厭的鎖，效能提升，但實際上都不是這麼一回事 不需要管理討厭的鎖是，async的確不需要管討厭的鎖了，但作為代價">
+<meta property="og:description" content="1. asyncio只不過是python coroutine的一種實現方法掌握寫coroutine的好處與壞處，實作的時機，雷點以及隱憂，如何排錯，遠遠比用甚麼炫泡函式庫無腦加上async&#x2F;await還要重要上好幾倍(對說的就是我) 2. 任何事情都有代價雖然async常常標榜不需要管理討厭的鎖，效能提升，但有很多東西是他們沒有提到，卻是寫出好coroutine的關鍵 不需要管理討厭的鎖是，asy">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-01-07T22:30:05.000Z">
-<meta property="article:modified_time" content="2022-01-08T15:03:10.128Z">
+<meta property="article:modified_time" content="2022-01-09T15:21:37.253Z">
 <meta property="article:author" content="robinson">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="async">
@@ -134,7 +134,7 @@
       
         <time datetime="2022-01-07T22:30:05.000Z" itemprop="datePublished">2022-01-08</time>
         
-        (Updated: <time datetime="2022-01-08T15:03:10.128Z" itemprop="dateModified">2022-01-09</time>)
+        (Updated: <time datetime="2022-01-09T15:21:37.253Z" itemprop="dateModified">2022-01-10</time>)
         
       
     </div>
@@ -160,19 +160,20 @@
 
   <div class="content" itemprop="articleBody">
     <h2 id="1-asyncio只不過是python-coroutine的一種實現方法"><a href="#1-asyncio只不過是python-coroutine的一種實現方法" class="headerlink" title="1. asyncio只不過是python coroutine的一種實現方法"></a>1. asyncio只不過是python coroutine的一種實現方法</h2><p>掌握寫coroutine的好處與壞處，實作的時機，雷點以及隱憂，如何排錯，遠遠比用甚麼炫泡函式庫無腦加上async/await還要重要上好幾倍(對說的就是我)</p>
-<h2 id="2-任何事情都有代價"><a href="#2-任何事情都有代價" class="headerlink" title="2. 任何事情都有代價"></a>2. 任何事情都有代價</h2><p>雖然async常常標榜不需要管理討厭的鎖，效能提升，但實際上都不是這麼一回事</p>
-<h3 id="不需要管理討厭的鎖"><a href="#不需要管理討厭的鎖" class="headerlink" title="不需要管理討厭的鎖"></a>不需要管理討厭的鎖</h3><p>是，async的確不需要管討厭的鎖了，但作為代價，async的context switch 並不會像thread那樣有固定規律，並且由於async的實現方式只是由main thread管控context switch，沒有額外的限制就會出現像是 <strong><a target="_blank" rel="noopener" href="https://vorpus.org/blog/some-thoughts-on-asynchronous-api-design-in-a-post-asyncawait-world/#id10">back-pressure</a></strong> 的問題。總之，一定會有問題，不然找工程師付錢幹嘛。這種「我只要用async就可以不用去學thread, process, lock…」的思想在程式社群當中實在是一種很奇怪的現象</p>
+<h2 id="2-任何事情都有代價"><a href="#2-任何事情都有代價" class="headerlink" title="2. 任何事情都有代價"></a>2. 任何事情都有代價</h2><p>雖然async常常標榜不需要管理討厭的鎖，效能提升，但有很多東西是他們沒有提到，卻是寫出好coroutine的關鍵</p>
+<h3 id="不需要管理討厭的鎖"><a href="#不需要管理討厭的鎖" class="headerlink" title="不需要管理討厭的鎖"></a>不需要管理討厭的鎖</h3><p>是，async的確不需要管討厭的鎖了，但作為代價，async的context switch 並不會像thread那樣有固定規律，並且由於async的實現方式只是由main thread管控context switch，沒有額外的限制就會出現像是 <strong><a target="_blank" rel="noopener" href="https://vorpus.org/blog/some-thoughts-on-asynchronous-api-design-in-a-post-asyncawait-world/#id10">back-pressure</a></strong> 的問題。總之，一定會有問題，不然找工程師付錢幹嘛。這種「我只要用async就可以不用去理解thread, process, lock…」的思想在程式社群當中蔓延是一種很奇怪的現象</p>
 <h3 id="效能提升"><a href="#效能提升" class="headerlink" title="效能提升"></a>效能提升</h3><p>前面的惡夢還沒結束，社群又多了一個奇怪的傳言「async會提升效能」這一論點，而這對我來說就是將程式語言本身作為解決問題的工具的癥結點。這點在 <strong><a href="https://robinsonweng.github.io/2022/01/08/comment-myself/">評論以前的文章</a></strong> 當中曾經有提到過:</p>
 <blockquote class="colorquote info"><p>程式語言不是解決問題的工具，他是用來做出解決問題的模型的工具，解決問題與否最終還是得取決於工程師本身</p>
 </blockquote>
-<p>如果用榔頭把釘子釘在錯的位置，椅子自然是不堪一擊。同理，asyncio本身並不會因為無緣無故加入專案就會使程式變快，而是在經過評估，在正確使用的前提之下才會得到較多的好處，較少的壞處，就我所知，主要有以下三個使用情境</p>
+<p>如果用榔頭把釘子釘在錯的位置，椅子自然是不堪一擊。同理，專案並不會因為加入了corutine或是asyncio就會變快，而是在經過評估，在正確使用的前提之下才會得到較多的好處，較少的壞處，就我所知，主要有以下幾個使用情境</p>
 <ol>
-<li>高流量、高壓力環境下</li>
 <li>任務多為I/O類型，並且大部分時間在wait</li>
-<li>不能有任務吃需要大量cpu計算</li>
+<li>不該有任務吃需要大量cpu計算</li>
+<li>有一定程度的流量或是執行次數</li>
 </ol>
 <p>並且影響效能的也不只與async/sync有關，以網頁為例，在django/flask上寫了async code，並不代表他在gunicorn/uwsgi上執行的效率會一樣，也不代表就可以用效率差的方式去query database。總之，事情絕對沒有單單加上asnyc/await關鍵字這麼簡單</p>
 <h2 id="後記"><a href="#後記" class="headerlink" title="後記"></a>後記</h2><p>我很高興重新審視我對coroutine的看法讓我有新的發現，但整理完這些資料讓我想到新的問題: 「asyncio會影響到TCP/IP的握手效率嗎?」</p>
+<p>2022-1-9 update:<br>答案是不會，以django為例，在web app收到request的時候，他已經是第四次握手(傳輸資料階段)了</p>
 
   </div>
 </article>

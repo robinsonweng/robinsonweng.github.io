@@ -14,10 +14,9 @@
 <meta property="og:description" content="關於 Python’s Class Development Toolkit 的重點整理Raymond Hettinger 一位常常出現在Python程式語言演講的大佬，曾經聽過他的Transforming Code into Beautiful, Idiomatic Python 聽過一次就愛上了他的演講風格，乾淨、簡潔、速度適中且幽默十足    __init__ is not a constru">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2019-10-06T05:47:33.000Z">
-<meta property="article:modified_time" content="2020-03-16T04:45:09.463Z">
+<meta property="article:modified_time" content="2022-01-09T03:02:27.199Z">
 <meta property="article:author" content="robinson">
 <meta property="article:tag" content="Python">
-<meta property="article:tag" content="classtoolkit">
 <meta name="twitter:card" content="summary">
     
     
@@ -136,7 +135,7 @@
       
         <time datetime="2019-10-06T05:47:33.000Z" itemprop="datePublished">2019-10-06</time>
         
-        (Updated: <time datetime="2020-03-16T04:45:09.463Z" itemprop="dateModified">2020-03-16</time>)
+        (Updated: <time datetime="2022-01-09T03:02:27.199Z" itemprop="dateModified">2022-01-09</time>)
         
       
     </div>
@@ -152,7 +151,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link-link" href="/tags/Python/" rel="tag">Python</a>, <a class="tag-link-link" href="/tags/classtoolkit/" rel="tag">classtoolkit</a>
+        <a class="tag-link-link" href="/tags/Python/" rel="tag">Python</a>
     </div>
 
 
@@ -167,7 +166,7 @@
 <ol>
 <li><p><code>__init__</code> is not a constructor:</p>
 <ul>
-<li>我曾經在寫Python也有這個疑問，為甚麼Python的建構子是叫做<code>__init__</code>而不是<code>__constructor__</code>?而實際上確實不是，self是本身class的實作，也就是說在<code>__init__</code>宣告以前，class已經建構好了，他是一個<code>initializer</code>，任務是將影片中的Radius存入字典當中</li>
+<li>我曾經在寫Python也有這個疑問，為甚麼Python的建構子是叫做<code>__init__</code>而不是<code>__constructor__</code>?而實際上確實不是，self是本身class的實作，也就是說在<code>__init__</code>宣告以前，class已經建構好了，他是一個<code>initializer</code>，任務是將影片中的Radius存入字典當中<br>2022-1-9 update:<br>如果真的要說python的建構子，那可能是 <code>__new__</code>，他是真的在class建構以前就開始運行了，所以如果有段程式碼想要在 <code>__init__</code> 以前運行，可以選擇 <code>__new__</code></li>
 </ul>
 </li>
 <li><p><code>@classmethod</code>:</p>
