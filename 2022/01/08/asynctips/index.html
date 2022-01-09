@@ -13,12 +13,14 @@
 <meta property="og:site_name" content="春雨的部落格">
 <meta property="og:description" content="1. asyncio只不過是python coroutine的一種實現方法掌握寫coroutine的好處與壞處，實作的時機，雷點以及隱憂，如何排錯，遠遠比用甚麼炫泡函式庫無腦加上async&#x2F;await還要重要上好幾倍(對說的就是我) 2. 任何事情都有代價雖然async常常標榜不需要管理討厭的鎖、效能提升，但有很多東西是他們沒有提到，卻是寫出好coroutine的關鍵 不需要管理討厭的鎖是，asy">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/vU11HSS.jpg">
 <meta property="article:published_time" content="2022-01-07T22:30:05.000Z">
-<meta property="article:modified_time" content="2022-01-09T15:36:11.629Z">
+<meta property="article:modified_time" content="2022-01-09T15:46:42.035Z">
 <meta property="article:author" content="robinson">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="async">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/vU11HSS.jpg">
     
     
         
@@ -134,7 +136,7 @@
       
         <time datetime="2022-01-07T22:30:05.000Z" itemprop="datePublished">2022-01-08</time>
         
-        (Updated: <time datetime="2022-01-09T15:36:11.629Z" itemprop="dateModified">2022-01-10</time>)
+        (Updated: <time datetime="2022-01-09T15:46:42.035Z" itemprop="dateModified">2022-01-10</time>)
         
       
     </div>
@@ -171,7 +173,11 @@
 <li>不該有任務吃需要大量cpu計算</li>
 <li>有一定程度的流量或是執行次數</li>
 </ol>
-<p>並且影響效能的也不只與async/sync有關，以網頁為例，在django/flask上寫了async code，並不代表他在gunicorn/uwsgi上執行的效率會一樣，也不代表就可以用效率差的方式去query database。總之，事情絕對沒有單單加上asnyc/await關鍵字這麼簡單</p>
+<p>並且影響效能的也不只與async/sync有關，以網頁為例，在django/flask上寫了async code，並不代表他在gunicorn/uwsgi上執行的效率會一樣，也不代表就可以用效率差的方式去query database。而且很多框架在benchmark的時候並沒有詳細交代參數與環境變因，數字看起來很棒其實也沒啥用</p>
+<p><img src="https://i.imgur.com/vU11HSS.jpg"></p>
+<p><span style="color: gray; display: block; text-align: center"><em><a target="_blank" rel="noopener" href="https://lumen.golaravel.com/">source</a></em></span></p>
+<hr></hr>
+
 <h2 id="後記"><a href="#後記" class="headerlink" title="後記"></a>後記</h2><p>我很高興重新審視我對coroutine的看法讓我有新的發現，但整理完這些資料讓我想到新的問題: 「asyncio會影響到TCP/IP的握手效率嗎?」</p>
 <p>2022-1-9 update:<br>答案是不會，以django為例，在web app收到request的時候，他已經是第四次握手(傳輸資料階段)了</p>
 
