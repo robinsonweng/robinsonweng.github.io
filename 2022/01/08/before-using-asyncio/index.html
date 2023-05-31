@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="1. asyncio只不過是python coroutine的一種實現方法掌握寫coroutine的好處與壞處，實作的時機，雷點以及隱憂，如何排錯，遠遠比用甚麼炫泡函式庫無腦加上async&#x2F;await還要重要上好幾倍(對說的就是我)，除了asyncio，gevent，trio都可以去多看看人家的文檔，是怎麼實作出來的，跟其他模組差在哪邊 2. 任何事情都有代價雖然async常常標榜不需要管理討厭的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用asyncio以前，你需要注意的事情">
+<meta property="og:url" content="https://robinsonweng.github.io/2022/01/08/before-using-asyncio/index.html">
+<meta property="og:site_name" content="春雨的部落格">
+<meta property="og:description" content="1. asyncio只不過是python coroutine的一種實現方法掌握寫coroutine的好處與壞處，實作的時機，雷點以及隱憂，如何排錯，遠遠比用甚麼炫泡函式庫無腦加上async&#x2F;await還要重要上好幾倍(對說的就是我)，除了asyncio，gevent，trio都可以去多看看人家的文檔，是怎麼實作出來的，跟其他模組差在哪邊 2. 任何事情都有代價雖然async常常標榜不需要管理討厭的">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/vU11HSS.jpeg">
+<meta property="article:published_time" content="2022-01-08T05:08:47.000Z">
+<meta property="article:modified_time" content="2022-11-29T09:19:40.391Z">
+<meta property="article:author" content="robinson">
+<meta property="article:tag" content="corutine">
+<meta property="article:tag" content="asyncio">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/vU11HSS.jpeg">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>用asyncio以前，你需要注意的事情</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects">專案</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/categories/">分類</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2022/07/31/python-refcount/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2022/01/08/restful-service-best-practice-13/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">回到頁首</span>
+      <span id="i-share" class="info" style="display:none;">分享</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://robinsonweng.github.io/2022/01/08/before-using-asyncio/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://robinsonweng.github.io/2022/01/08/before-using-asyncio/&text=用asyncio以前，你需要注意的事情" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://robinsonweng.github.io/2022/01/08/before-using-asyncio/&title=用asyncio以前，你需要注意的事情" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://robinsonweng.github.io/2022/01/08/before-using-asyncio/&is_video=false&description=用asyncio以前，你需要注意的事情" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=用asyncio以前，你需要注意的事情&body=Check out this article: https://robinsonweng.github.io/2022/01/08/before-using-asyncio/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://robinsonweng.github.io/2022/01/08/before-using-asyncio/&title=用asyncio以前，你需要注意的事情" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://robinsonweng.github.io/2022/01/08/before-using-asyncio/&title=用asyncio以前，你需要注意的事情" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://robinsonweng.github.io/2022/01/08/before-using-asyncio/&title=用asyncio以前，你需要注意的事情" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://robinsonweng.github.io/2022/01/08/before-using-asyncio/&title=用asyncio以前，你需要注意的事情" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://robinsonweng.github.io/2022/01/08/before-using-asyncio/&name=用asyncio以前，你需要注意的事情&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-asyncio只不過是python-coroutine的一種實現方法"><span class="toc-number">1.</span> <span class="toc-text">1. asyncio只不過是python coroutine的一種實現方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-任何事情都有代價"><span class="toc-number">2.</span> <span class="toc-text">2. 任何事情都有代價</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#後記"><span class="toc-number">3.</span> <span class="toc-text">後記</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        用asyncio以前，你需要注意的事情
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">春雨</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-01-08T05:08:47.000Z" itemprop="datePublished">2022-01-08</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E7%A8%8B%E5%BC%8F/">程式</a> › <a class="category-link" href="/categories/%E7%A8%8B%E5%BC%8F/Coroutine/">Coroutine</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/asyncio/" rel="tag">asyncio</a>, <a class="tag-link" href="/tags/corutine/" rel="tag">corutine</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="1-asyncio只不過是python-coroutine的一種實現方法"><a href="#1-asyncio只不過是python-coroutine的一種實現方法" class="headerlink" title="1. asyncio只不過是python coroutine的一種實現方法"></a>1. asyncio只不過是python coroutine的一種實現方法</h2><p>掌握寫coroutine的好處與壞處，實作的時機，雷點以及隱憂，如何排錯，遠遠比用甚麼炫泡函式庫無腦加上async/await還要重要上好幾倍(對說的就是我)，除了asyncio，gevent，trio都可以去多看看人家的文檔，是怎麼實作出來的，跟其他模組差在哪邊</p>
+<h2 id="2-任何事情都有代價"><a href="#2-任何事情都有代價" class="headerlink" title="2. 任何事情都有代價"></a>2. 任何事情都有代價</h2><p>雖然async常常標榜不需要管理討厭的鎖、效能提升，但有很多東西是他們沒有提到，卻是寫出好coroutine的關鍵</p>
+<p>不需要管理討厭的鎖<br>是，async的確不需要管討厭的鎖了，但作為代價，async的context switch 並不會像thread那樣有固定規律，並且由於async的實現方式只是由main thread管控context switch，沒有額外的限制就會出現像是 back-pressure 的問題。沒有固定規律要debug跟解決bug都是個難題。不要用了asyncio幻想自己「我只要用async就可以不用去理解thread, process, lock…」，只會在後面付出代價而已。</p>
+<p>效能提升<br>前面的惡夢還沒結束，社群又多了一個奇怪的傳言「async會提升效能」這一論點，而這對我來說就是將程式語言本身作為解決問題的工具的癥結點。這點在 評論以前的文章 當中曾經有提到過:</p>
+<blockquote class="colorquote info"><p>程式語言不是解決問題的工具，他是用來做出解決問題的模型的工具，解決問題與否最終還是得取決於工程師本身</p>
+</blockquote>
+
+<p>如果用榔頭把釘子釘在錯的位置，椅子自然是不堪一擊。同理，專案並不會因為加入了coroutine或是asyncio就會變快，而是在經過評估，在正確使用的前提之下才會得到較多的好處，較少的壞處，就我所知，主要有以下幾個使用情境:</p>
+<ul>
+<li>任務多為I/O類型，並且大部分時間在wait</li>
+<li>不該有任務吃需要大量cpu計算</li>
+<li>有一定程度的流量或是執行次數</li>
+</ul>
+<p>並且影響效能的也不只與async/sync有關，以網頁為例，在django/flask上寫了async code，並不代表他在gunicorn/uwsgi上執行的效率會一樣，也不代表就可以用效率差的方式去query database。而且很多框架在benchmark的時候並沒有詳細交代參數與環境變因，數字看起來很棒其實也沒啥用</p>
+<p><img src="https://i.imgur.com/vU11HSS.jpeg" alt=""></p>
+<p><a href="https://lumen.golaravel.com/" target="_blank" rel="noopener">source</a></p>
+<h2 id="後記"><a href="#後記" class="headerlink" title="後記"></a>後記</h2><p>重新審視我對coroutine的看法讓我有新的發現，但整理完這些資料讓我想到新的問題: 「asyncio會影響到TCP/IP的握手效率嗎?」</p>
+<p>2022-01-09 update:<br>答案是不會，以django為例，在web app收到request的時候，他已經是第四次握手(傳輸資料階段)了</p>
+<p>2022-01-24 update:<br>有熱心路人提醒，coro是否會提升Http握手效能還會取決於Http的版本，例如 Http/1.1支援 keep alive， 而 Http/1.0不支援，所以在Http/1.0上使用coro的資源會比Http/1.1還多。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects">專案</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/categories/">分類</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-asyncio只不過是python-coroutine的一種實現方法"><span class="toc-number">1.</span> <span class="toc-text">1. asyncio只不過是python coroutine的一種實現方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-任何事情都有代價"><span class="toc-number">2.</span> <span class="toc-text">2. 任何事情都有代價</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#後記"><span class="toc-number">3.</span> <span class="toc-text">後記</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://robinsonweng.github.io/2022/01/08/before-using-asyncio/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://robinsonweng.github.io/2022/01/08/before-using-asyncio/&text=用asyncio以前，你需要注意的事情" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://robinsonweng.github.io/2022/01/08/before-using-asyncio/&title=用asyncio以前，你需要注意的事情" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://robinsonweng.github.io/2022/01/08/before-using-asyncio/&is_video=false&description=用asyncio以前，你需要注意的事情" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=用asyncio以前，你需要注意的事情&body=Check out this article: https://robinsonweng.github.io/2022/01/08/before-using-asyncio/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://robinsonweng.github.io/2022/01/08/before-using-asyncio/&title=用asyncio以前，你需要注意的事情" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://robinsonweng.github.io/2022/01/08/before-using-asyncio/&title=用asyncio以前，你需要注意的事情" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://robinsonweng.github.io/2022/01/08/before-using-asyncio/&title=用asyncio以前，你需要注意的事情" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://robinsonweng.github.io/2022/01/08/before-using-asyncio/&title=用asyncio以前，你需要注意的事情" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://robinsonweng.github.io/2022/01/08/before-using-asyncio/&name=用asyncio以前，你需要注意的事情&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 選單</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 文章目錄</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 頁首</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 robinson
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects">專案</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/categories/">分類</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight .code pre").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-148363298-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+</html>

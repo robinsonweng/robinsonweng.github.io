@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="RESTful Service Best Practices (2013)https:&#x2F;&#x2F;www.redhat.com&#x2F;en&#x2F;topics&#x2F;api&#x2F;what-is-a-rest-apihttps:&#x2F;&#x2F;www.redhat.com&#x2F;en&#x2F;topics&#x2F;integration&#x2F;whats-the-difference-between-soap-resthttps:&#x2F;&#x2F;www.ics.uci.edu&#x2F;~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RESTful Service Best practice 2013">
+<meta property="og:url" content="https://robinsonweng.github.io/2022/01/08/restful-service-best-practice-13/index.html">
+<meta property="og:site_name" content="春雨的部落格">
+<meta property="og:description" content="RESTful Service Best Practices (2013)https:&#x2F;&#x2F;www.redhat.com&#x2F;en&#x2F;topics&#x2F;api&#x2F;what-is-a-rest-apihttps:&#x2F;&#x2F;www.redhat.com&#x2F;en&#x2F;topics&#x2F;integration&#x2F;whats-the-difference-between-soap-resthttps:&#x2F;&#x2F;www.ics.uci.edu&#x2F;~">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2022-01-08T05:08:47.000Z">
+<meta property="article:modified_time" content="2022-11-29T09:51:00.936Z">
+<meta property="article:author" content="robinson">
+<meta property="article:tag" content="RESTful">
+<meta property="article:tag" content="http">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>RESTful Service Best practice 2013</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects">專案</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/categories/">分類</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2022/01/08/before-using-asyncio/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2022/01/08/comment-myself/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">回到頁首</span>
+      <span id="i-share" class="info" style="display:none;">分享</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://robinsonweng.github.io/2022/01/08/restful-service-best-practice-13/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://robinsonweng.github.io/2022/01/08/restful-service-best-practice-13/&text=RESTful Service Best practice 2013" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://robinsonweng.github.io/2022/01/08/restful-service-best-practice-13/&title=RESTful Service Best practice 2013" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://robinsonweng.github.io/2022/01/08/restful-service-best-practice-13/&is_video=false&description=RESTful Service Best practice 2013" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=RESTful Service Best practice 2013&body=Check out this article: https://robinsonweng.github.io/2022/01/08/restful-service-best-practice-13/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://robinsonweng.github.io/2022/01/08/restful-service-best-practice-13/&title=RESTful Service Best practice 2013" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://robinsonweng.github.io/2022/01/08/restful-service-best-practice-13/&title=RESTful Service Best practice 2013" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://robinsonweng.github.io/2022/01/08/restful-service-best-practice-13/&title=RESTful Service Best practice 2013" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://robinsonweng.github.io/2022/01/08/restful-service-best-practice-13/&title=RESTful Service Best practice 2013" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://robinsonweng.github.io/2022/01/08/restful-service-best-practice-13/&name=RESTful Service Best practice 2013&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#RESTful-Service-Best-Practices-2013"><span class="toc-number">1.</span> <span class="toc-text">RESTful Service Best Practices (2013)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Overview"><span class="toc-number">1.1.</span> <span class="toc-text">Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Http-Methods"><span class="toc-number">1.2.</span> <span class="toc-text">Http Methods</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Uniform-Interface"><span class="toc-number">1.3.</span> <span class="toc-text">Uniform Interface</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Resource-Based"><span class="toc-number">1.3.1.</span> <span class="toc-text">Resource Based</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Manipulation-of-Resources-Through-Representations"><span class="toc-number">1.3.2.</span> <span class="toc-text">Manipulation of Resources Through Representations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Self-descriptive-Messages"><span class="toc-number">1.3.3.</span> <span class="toc-text">Self-descriptive Messages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HATEOAS"><span class="toc-number">1.3.4.</span> <span class="toc-text">HATEOAS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stateless"><span class="toc-number">1.4.</span> <span class="toc-text">Stateless</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cacheable"><span class="toc-number">1.5.</span> <span class="toc-text">Cacheable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#REST-Quick-Tips-速記重點"><span class="toc-number">1.6.</span> <span class="toc-text">REST Quick Tips(速記重點)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#透過-HTTP-動詞來進行動作"><span class="toc-number">1.6.1.</span> <span class="toc-text">透過 HTTP 動詞來進行動作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#敏感的資源名稱"><span class="toc-number">1.6.2.</span> <span class="toc-text">敏感的資源名稱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XML-and-JSON"><span class="toc-number">1.6.3.</span> <span class="toc-text">XML and JSON</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-Fine-Grained-Resources"><span class="toc-number">1.6.4.</span> <span class="toc-text">Create Fine Grained Resources</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Consider-Connectedness"><span class="toc-number">1.6.5.</span> <span class="toc-text">Consider Connectedness</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定義"><span class="toc-number">1.7.</span> <span class="toc-text">定義</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Idempotence"><span class="toc-number">1.7.1.</span> <span class="toc-text">Idempotence</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Safety"><span class="toc-number">1.7.2.</span> <span class="toc-text">Safety</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Http-動詞"><span class="toc-number">1.8.</span> <span class="toc-text">Http 動詞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GET"><span class="toc-number">1.8.1.</span> <span class="toc-text">GET</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PUT"><span class="toc-number">1.8.2.</span> <span class="toc-text">PUT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#POST"><span class="toc-number">1.8.3.</span> <span class="toc-text">POST</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PUT-vs-POST-for-Creation"><span class="toc-number">1.8.4.</span> <span class="toc-text">PUT vs POST for Creation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DELETE"><span class="toc-number">1.8.5.</span> <span class="toc-text">DELETE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#總結"><span class="toc-number">1.8.6.</span> <span class="toc-text">總結</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Resource-Naming"><span class="toc-number">1.9.</span> <span class="toc-text">Resource Naming</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Use-Case"><span class="toc-number">1.9.1.</span> <span class="toc-text">Use Case</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Resource-Naming-Anti-Patterns"><span class="toc-number">1.9.2.</span> <span class="toc-text">Resource Naming Anti Patterns</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Query-in-RESTful-API"><span class="toc-number">1.9.2.1.</span> <span class="toc-text">Query in RESTful API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Verb-in-uri"><span class="toc-number">1.9.2.2.</span> <span class="toc-text">Verb in uri</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pluralization"><span class="toc-number">1.9.3.</span> <span class="toc-text">Pluralization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Wrapped-Responses"><span class="toc-number">1.9.4.</span> <span class="toc-text">Wrapped Responses</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Querying-Filtering-and-Pagination"><span class="toc-number">1.10.</span> <span class="toc-text">Querying, Filtering and Pagination</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Limiting-Results"><span class="toc-number">1.10.1.</span> <span class="toc-text">Limiting Results</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Limiting-via-the-Range-Header"><span class="toc-number">1.10.1.1.</span> <span class="toc-text">Limiting via the Range Header</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Supporting-CORS"><span class="toc-number">1.11.</span> <span class="toc-text">Supporting CORS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Handling-Cross-Domain-Issues"><span class="toc-number">1.11.1.</span> <span class="toc-text">Handling Cross-Domain Issues</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Service-Versioning"><span class="toc-number">1.12.</span> <span class="toc-text">Service Versioning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什麼時候要開始一個新的-API-版本"><span class="toc-number">1.12.1.</span> <span class="toc-text">什麼時候要開始一個新的 API 版本?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些不會弄壞-API-的更新"><span class="toc-number">1.12.2.</span> <span class="toc-text">一些不會弄壞 API 的更新</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deprecated"><span class="toc-number">1.12.3.</span> <span class="toc-text">Deprecated</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Date-Time-Handling"><span class="toc-number">1.13.</span> <span class="toc-text">Date&#x2F;Time Handling</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在-Body-Content-的時間序列"><span class="toc-number">1.13.1.</span> <span class="toc-text">在 Body Content 的時間序列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在-Headers-的時間序列"><span class="toc-number">1.13.2.</span> <span class="toc-text">在 Headers 的時間序列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全類服務"><span class="toc-number">1.14.</span> <span class="toc-text">安全類服務</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Authentication-驗證"><span class="toc-number">1.14.1.</span> <span class="toc-text">Authentication(驗證)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Authorization-授權"><span class="toc-number">1.14.2.</span> <span class="toc-text">Authorization(授權)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Application-Secutity"><span class="toc-number">1.14.3.</span> <span class="toc-text">Application Secutity</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快取和系統延展性"><span class="toc-number">1.15.</span> <span class="toc-text">快取和系統延展性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Etag-Header"><span class="toc-number">1.15.1.</span> <span class="toc-text">Etag Header</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        RESTful Service Best practice 2013
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">春雨</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-01-08T05:08:47.000Z" itemprop="datePublished">2022-01-08</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Web/">Web</a> › <a class="category-link" href="/categories/Web/%E8%A6%8F%E7%AF%84/">規範</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/RESTful/" rel="tag">RESTful</a>, <a class="tag-link" href="/tags/http/" rel="tag">http</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="RESTful-Service-Best-Practices-2013"><a href="#RESTful-Service-Best-Practices-2013" class="headerlink" title="RESTful Service Best Practices (2013)"></a>RESTful Service Best Practices (2013)</h1><p><a href="https://www.redhat.com/en/topics/api/what-is-a-rest-api" target="_blank" rel="noopener">https://www.redhat.com/en/topics/api/what-is-a-rest-api</a><br><a href="https://www.redhat.com/en/topics/integration/whats-the-difference-between-soap-rest" target="_blank" rel="noopener">https://www.redhat.com/en/topics/integration/whats-the-difference-between-soap-rest</a><br><a href="https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm" target="_blank" rel="noopener">https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm</a><br><a href="https://zh.wikipedia.org/zh-tw/%E8%A1%A8%E7%8E%B0%E5%B1%82%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2" target="_blank" rel="noopener">https://zh.wikipedia.org/zh-tw/%E8%A1%A8%E7%8E%B0%E5%B1%82%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2</a></p>
+<p><a href="https://restfulapi.net/" target="_blank" rel="noopener">https://restfulapi.net/</a></p>
+<p><a href="https://ihower.tw/blog/archives/1542" target="_blank" rel="noopener">https://ihower.tw/blog/archives/1542</a></p>
+<p><a href="https://www.restapitutorial.com/" target="_blank" rel="noopener">https://www.restapitutorial.com/</a></p>
+<p><a href="https://raw.githubusercontent.com/tfredrich/RestApiTutorial.com/master/media/RESTful%20Best%20Practices-v1_2.pdf" target="_blank" rel="noopener">原文連接</a></p>
+<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>Restful 的六大規範為</p>
+<ul>
+<li>Uniform Interface</li>
+<li>Stateless</li>
+<li>Cacheable</li>
+<li>Client-Server</li>
+<li>Layered System</li>
+<li>Code on Demand</li>
+</ul>
+<p>目前著重在前三點上面</p>
+<h2 id="Http-Methods"><a href="#Http-Methods" class="headerlink" title="Http Methods"></a>Http Methods</h2><p>主要與 restful 相關的 http method有</p>
+<ul>
+<li>GET</li>
+<li>POST</li>
+<li>PUT</li>
+<li>DELETE</li>
+</ul>
+<p>:::info<br>沒有直接相關的 method:</p>
+<ul>
+<li>OPTION</li>
+<li>HEAD<br>:::</li>
+</ul>
+<h2 id="Uniform-Interface"><a href="#Uniform-Interface" class="headerlink" title="Uniform Interface"></a>Uniform Interface</h2><p>統一界面規範了使用者與伺服器之間的溝通界面. 它簡化以及減少了系統架構的耦合問題, 令每個部份都能夠各自獨立運行. 以下四個規範的統一界面為</p>
+<ul>
+<li><p>identifying resources</p>
+</li>
+<li><p>manipulation through representations</p>
+</li>
+<li><p>self describing messages</p>
+</li>
+<li><p>HATEOAS</p>
+<ul>
+<li><p>一種能與使用者互動的規範</p>
+<p>:::info<br>取自維基百科:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 請求</span><br><span class="line">GET /accounts/12345 HTTP/1.1</span><br><span class="line">Host: bank.example.com</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 回應</span><br><span class="line">HTTP/1.1 200 OK</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"account"</span>: &#123;</span><br><span class="line">        <span class="attr">"account_number"</span>: <span class="number">12345</span>,</span><br><span class="line">        <span class="attr">"balance"</span>: &#123;</span><br><span class="line">            <span class="attr">"currency"</span>: <span class="string">"usd"</span>,</span><br><span class="line">            <span class="attr">"value"</span>: <span class="number">100.00</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"links"</span>: &#123;</span><br><span class="line">            <span class="attr">"deposits"</span>: <span class="string">"/accounts/12345/deposits"</span>,</span><br><span class="line">            <span class="attr">"withdrawals"</span>: <span class="string">"/accounts/12345/withdrawals"</span>,</span><br><span class="line">            <span class="attr">"transfers"</span>: <span class="string">"/accounts/12345/transfers"</span>,</span><br><span class="line">            <span class="attr">"close-requests"</span>: <span class="string">"/accounts/12345/close-requests"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>:::</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Resource-Based"><a href="#Resource-Based" class="headerlink" title="Resource Based"></a>Resource Based</h3><p>每個資源透過uri去做辨認, 但資源本身與資源表示在概念上是分開的, 例如我們不會回傳整個資料庫, 卻會回傳類似概念的 json</p>
+<h3 id="Manipulation-of-Resources-Through-Representations"><a href="#Manipulation-of-Resources-Through-Representations" class="headerlink" title="Manipulation of Resources Through Representations"></a>Manipulation of Resources Through Representations</h3><p>當用戶端取得了資源表示方式, 包含任何附加的metadata, 它(表示方式)都應該要有足夠的資訊去修改或刪除伺服器上的資源, 前提是使用者有這個權限</p>
+<h3 id="Self-descriptive-Messages"><a href="#Self-descriptive-Messages" class="headerlink" title="Self-descriptive Messages"></a>Self-descriptive Messages</h3><p>每個情求都需要包含足夠的訊息來解釋如何消化這則訊息, 舉例: 哪個媒體該用哪種解析器(mime.type) 回應也會顯性的標示他們是否可快取</p>
+<h3 id="HATEOAS"><a href="#HATEOAS" class="headerlink" title="HATEOAS"></a>HATEOAS</h3><p>很像互動式的文檔, 假設使用者請求了某段網址的集合, 回應其集合網址</p>
+<h2 id="Stateless"><a href="#Stateless" class="headerlink" title="Stateless"></a>Stateless</h2><p>無狀態, 意指所有請求都應該是獨立的操作, 一個請求內就應該包含了所有的資訊, 身份認證, 參數, header, body, 當下請求狀態, 再交給伺服器去辨認<br>在 REST 規範下, 使用者應該要負責提供所有的資訊去滿足這個需求, 伺服器不需要去維護使用者的 session, 如果使用者需要多個回應那就需要送出多個請求(伺服器不會主動聯繫使用者), 由於我們不需要去維護使用者的狀態, 提供了伺服器很大的擴展性. 並且 load balancers 也免去了考慮 session affinity 的問題<br>有時候點開上一頁, 網頁提醒你說這個頁面不會儲存你的狀態, 其中一個原因就是它會違反stateless的規範.<br>但也是會一些例外會打破這個規則, 如 three-legged OAuth, api call rate limiting, etc. 但請進可能達到這個目的</p>
+<h2 id="Cacheable"><a href="#Cacheable" class="headerlink" title="Cacheable"></a>Cacheable</h2><p>顯性或隱性的定義回應是否能夠快取</p>
+<h2 id="REST-Quick-Tips-速記重點"><a href="#REST-Quick-Tips-速記重點" class="headerlink" title="REST Quick Tips(速記重點)"></a>REST Quick Tips(速記重點)</h2><h3 id="透過-HTTP-動詞來進行動作"><a href="#透過-HTTP-動詞來進行動作" class="headerlink" title="透過 HTTP 動詞來進行動作"></a>透過 HTTP 動詞來進行動作</h3><p>任何 API 接收者都有能力傳送, GET, POST, PUT, and DELETE 這些動詞, 他們很大程度上釐清了 API 當下的動作為何. 並且 GET request <strong>不能</strong> 更改任何資源. 測量或是追蹤可以更新資料, 但不能是 uri 能夠指定的資料</p>
+<h3 id="敏感的資源名稱"><a href="#敏感的資源名稱" class="headerlink" title="敏感的資源名稱"></a>敏感的資源名稱</h3><p>使用敏感的資源名稱或路徑<br>e.g.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; type 以及 id 都是非必要的, 這樣違反 restful api 的規範</span><br><span class="line">&#x2F;api?type&#x3D;posts&amp;id&#x3D;23</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 這樣 type 以及 id 在網址中就是必要的, 符合 restful api 的規範</span><br><span class="line">&#x2F;api&#x2F;posts&#x2F;23</span><br></pre></td></tr></table></figure>
+
+<h3 id="XML-and-JSON"><a href="#XML-and-JSON" class="headerlink" title="XML and JSON"></a>XML and JSON</h3><h3 id="Create-Fine-Grained-Resources"><a href="#Create-Fine-Grained-Resources" class="headerlink" title="Create Fine Grained Resources"></a>Create Fine Grained Resources</h3><p>先從細小的, 容易定義的 CRUD API 開始</p>
+<h3 id="Consider-Connectedness"><a href="#Consider-Connectedness" class="headerlink" title="Consider Connectedness"></a>Consider Connectedness</h3><p>連貫性, 如果分頁類的功能有 first, last, next, and prev 連接,會很有幫助</p>
+<h2 id="定義"><a href="#定義" class="headerlink" title="定義"></a>定義</h2><h3 id="Idempotence"><a href="#Idempotence" class="headerlink" title="Idempotence"></a>Idempotence</h3><p>連續執行同一串網址, 結果(資料)是否有改變</p>
+<table>
+<thead>
+<tr>
+<th>http method</th>
+<th>is  Idempotence</th>
+<th>備註</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET</td>
+<td>True</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>OPTIONS</td>
+<td>True</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td>True</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>TRACE</td>
+<td>True</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>True</td>
+<td>有例外</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>True</td>
+<td>有例外</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>False</td>
+<td>Text</td>
+</tr>
+</tbody></table>
+<!--
+post put delete state
+-->
+
+
+<h3 id="Safety"><a href="#Safety" class="headerlink" title="Safety"></a>Safety</h3><p>:::info<br>這裡的 safe 指的是 thread safe 中的 safe<br>:::</p>
+<p>以下 http method 不能改變伺服器的狀態</p>
+<ul>
+<li>HEAD</li>
+<li>GET</li>
+<li>OPTIONS</li>
+<li>TRACE</li>
+</ul>
+<h2 id="Http-動詞"><a href="#Http-動詞" class="headerlink" title="Http 動詞"></a>Http 動詞</h2><h3 id="GET"><a href="#GET" class="headerlink" title="GET"></a>GET</h3><p>在 GET 用於讀取伺服器資料庫且不更改的狀況下, 他是 safe 的. 不要透過 GET method 去更改任何伺服器資源</p>
+<h3 id="PUT"><a href="#PUT" class="headerlink" title="PUT"></a>PUT</h3><p>PUT 大多用於更新資料, PUTing to a known resource URI.<br>但 PUT 也可以用於創建資源, 假設使用者有決定好的資源 id 以及路徑, 就會使用 PUT 而不是 POST</p>
+<h3 id="POST"><a href="#POST" class="headerlink" title="POST"></a>POST</h3><p>Post 最常用的情境就是創建一個新的資源. 特別是用在從屬資源上, 也就是說, 創建一個新的資源, Post 到這個父類別然後伺服器負責關聯一個新資源在這個父類別之下, 並隨之分配一個 ID(新資源uri), etc.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#x2F;&#x2F; 創建一個資源 uri, customers&#x2F;12345</span><br><span class="line">POST http:&#x2F;&#x2F;www.example.com&#x2F;customers</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 創建一個資源 uri, customers&#x2F;12345&#x2F;orders&#x2F;45678</span><br><span class="line">POST http:&#x2F;&#x2F;www.example.com&#x2F;customers&#x2F;12345&#x2F;orders</span><br></pre></td></tr></table></figure>
+
+<p>POST 既不安全也不 idempotent. 它就是設計用來做 non-idempotent 的資源請求.<br>使用者請求兩個相同資訊的 POST request的話, 大多數情況是回傳相同的資源</p>
+<h3 id="PUT-vs-POST-for-Creation"><a href="#PUT-vs-POST-for-Creation" class="headerlink" title="PUT vs POST for Creation"></a>PUT vs POST for Creation</h3><p>總而言之, 請優先選擇 POST 作為資源的創建. 除此之外, 如果使用者知道更新資源的完整 URI, 用 PUT; 如果使用者選擇創建新的資源, 或者在創建資源前不知道該資源的 URI, 使用 POST</p>
+<h3 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h3><p>DELETE是用於刪除該資源的 method</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DELETE &#x2F;customers&#x2F;12345</span><br><span class="line">DELETE &#x2F;customers&#x2F;12345&#x2F;orders</span><br><span class="line">DELETE</span><br></pre></td></tr></table></figure>
+<p>當 DELETE 成功時, 它回會回傳一個 200(ok) 和一個 response body. 他有可能是當下被刪除資源的資訊或是表示法(大多會消耗很多頻寬資源), 或一個包裝好的回覆(見下方表格). 或者回傳 204 No Content 並完全沒有 response body 會是比較推薦的回覆</p>
+<p>在 HTTP 的規格上來說, DELETE 是 idempotent. 如果你 DELETE 一個資源, 它被刪除, 你重複呼叫 DELETE 只會得到相同的結果, 它被刪除. 如果將 DELETE 用於 decrements counter 的話, 那這個 DELETE 就不再是 idempotent. 就像之前提到的那樣, 用量統計和測量可能已經更新, 但如果服務是 non-idempotent, 我們可能還需要考量資源/資料是否有更改. 總而言之, 推薦在non-idempotent 資源的請求 使用 POST</p>
+<h3 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h3><table>
+<thead>
+<tr>
+<th>HTTP Verb</th>
+<th>/customers</th>
+<th>/customers/{id}</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET</td>
+<td>200(ok) list of customers. Use pagination if needed</td>
+<td>200(ok) single customer</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>404 Not Found, 除非你想要更新整段資源</td>
+<td>200 or 204. 404 if id not found.</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>201, ‘Location’ header with link to /customers/{id} containing new ID</td>
+<td>404</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>404, 除非你想要刪掉整段資源</td>
+<td>202. 404 if id not found</td>
+</tr>
+</tbody></table>
+<h2 id="Resource-Naming"><a href="#Resource-Naming" class="headerlink" title="Resource Naming"></a>Resource Naming</h2><p>為了更有效的利用 http method, 創建一個資源命名是一個易懂, 好操作的 API 是最重要也最具討論性的概念. 好的命名會讓 API 有很直觀的操作方式.<br>在決定要為資源命名時, 不要使用動詞或行為而使用名詞去命名他們. 也就是說, 一個 RESTful URI 應該要代表一個資源為一個物體而不是一個行為. 名詞有特質而動詞沒有, 如:</p>
+<ul>
+<li>系統內的使用者</li>
+<li>學生註冊的課程</li>
+<li>使用者的貼文動態</li>
+<li>使用者的追蹤清單</li>
+<li>一篇關於騎馬的文章</li>
+</ul>
+<p>在一套服務裡面, 每個資源至少都要有一個 URI 去做辨認. URI 最好合理並能夠表達資源. URI 最好有:</p>
+<ul>
+<li>可預測性</li>
+<li>階層式結構</li>
+</ul>
+<p>來實現可讀性以及可用性, 也就是說如果資料之間是有連續, 階層式的結構關係, 能夠幫助我們規範好的 RESTful API</p>
+<h3 id="Use-Case"><a href="#Use-Case" class="headerlink" title="Use Case"></a>Use Case</h3><p>插入一個新的 customer:</p>
+<figure class="highlight plain"><figcaption><span>/customers```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">透過 customer id 去讀取一個 customer:</span><br><span class="line">&#96;&#96;&#96;GET &#x2F;customers&#x2F;33245</span><br></pre></td></tr></table></figure>
+<p>相同的 URI 也可以用在 PUT 和 DELETE</p>
+<p>創建一個新的 products:</p>
+<figure class="highlight plain"><figcaption><span>/products```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">讀取&#x2F;更新&#x2F;刪除 products id 66432</span><br><span class="line">&#96;&#96;&#96;GET|PUT|DELETE products&#x2F;66432</span><br></pre></td></tr></table></figure>
+
+<p>如果 customer 要創建一個新的訂單的話呢?<br>一個可能的選項為:</p>
+<figure class="highlight plain"><figcaption><span>/orders```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">這樣或許能創建訂單, 但 訂單與 customer 的關係被排除在了這段 URI 當中</span><br><span class="line"></span><br><span class="line">一個比較清楚的 URI 為:</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;POST &#x2F;customers&#x2F;33245&#x2F;orders</span><br></pre></td></tr></table></figure>
+<p>這樣不論是使用者或是伺服器都能很清楚的知道我們要為 customers #33245 創建一個訂單</p>
+<p>那麼這段 URI 應該要得到什麼回應？</p>
+<figure class="highlight plain"><figcaption><span>/customers/33245/orders```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">有可能是 customers 創建的所有訂單</span><br><span class="line">:::info</span><br><span class="line">最好不要在一組集合(如上述)實現 PUT 或是 DELETE 的功能</span><br><span class="line">:::</span><br><span class="line"></span><br><span class="line">如果檢視所有訂單並不需要 customer 的過濾, 也可以直接發出這樣的請求:</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;GET &#x2F;orders&#x2F;8769</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Resource-Naming-Anti-Patterns"><a href="#Resource-Naming-Anti-Patterns" class="headerlink" title="Resource Naming Anti Patterns"></a>Resource Naming Anti Patterns</h3><h4 id="Query-in-RESTful-API"><a href="#Query-in-RESTful-API" class="headerlink" title="Query in RESTful API"></a>Query in RESTful API</h4><p>一個剛接觸 RESTful API 的使用者最常搞混的概念:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;servies?op&#x3D;update_customer&amp;id&#x3D;12345&amp;format&#x3D;json</span><br></pre></td></tr></table></figure>
+<p>vs</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;servies&#x2F;customer&#x2F;12345?format&#x3D;json</span><br></pre></td></tr></table></figure>
+<p>差在哪邊? 其實很簡單, 因為 http query 在 URI 裡面不是必要的, 這樣並沒有很清楚的表達我們請求這個資源到底 <strong>必須</strong> 知道傳送哪些資訊.<br>簡單來說, 前者是 optional, 後者是 requirement.</p>
+<h4 id="Verb-in-uri"><a href="#Verb-in-uri" class="headerlink" title="Verb in uri"></a>Verb in uri</h4><p>另外一個常見的錯誤是下面這個 uri</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;update_customer&#x2F;12345</span><br></pre></td></tr></table></figure>
+<p>以及他的邪惡雙胞胎</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;customers&#x2F;12345&#x2F;update</span><br></pre></td></tr></table></figure>
+<p>你會在很多服務看見很多這類設計, 但最好的設計是透過 http method 表示 API 的動作, 在 URI 表示資源的名詞以及特徵, 這個反直覺的設計不但看起來痛苦, 甚至是危險的, 使用者分不清楚究竟決定伺服器行為到底是在 http method 還是在 uri 內, 例如以下 uri:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PUT &#x2F;customers&#x2F;12345&#x2F;update</span><br></pre></td></tr></table></figure>
+<p>究竟更新 customers 12345 的因素是因為透過 PUT 這個 http method 呢? 還是 uri 當中的 update route? 這類設計是非常容易讓使用者搞混</p>
+<h3 id="Pluralization"><a href="#Pluralization" class="headerlink" title="Pluralization"></a>Pluralization</h3><p>我們來談談關於名詞的複數以及個數, 請見以下 uri:</p>
+<p>GET /<strong>customer</strong>/33245</p>
+<p>vs</p>
+<p>GET /<strong>customers</strong>/33245</p>
+<p>兩種作法都有其合理的論點, 但比較能被人接受的作法是用複數來形容資源, 理由是 customers 是 customer id 的集合, 而 33445 則是表示 customers 的其中一個資源</p>
+<h3 id="Wrapped-Responses"><a href="#Wrapped-Responses" class="headerlink" title="Wrapped Responses"></a>Wrapped Responses</h3><p>服務有機會在同一個 request 回傳 header 和 body. 在許多的 js 框架當中, http status code 並沒有回傳到 end-dev 手上, 大多是為了防止 client 基於 status code 去中斷.<br>當下最標準的 json response 需要滿足以下特質</p>
+<ul>
+<li><p>code</p>
+<ul>
+<li>http status code as an interger </li>
+</ul>
+</li>
+<li><p>status</p>
+<ul>
+<li><p>有三個型態, success, fail, or error. “fail” 用於 HTTP status 回傳值在 500-599之間, “error” 用於 400-499之間, 以及 “success” 是給剩餘的範圍 (1XX, 2XX, 3XX)<br>  :::info<br>  註: 在 http status code 的規範中(rfc 7231), 以上範圍的數值個別意義為:</p>
+<ul>
+<li><p>1XX:</p>
+<ul>
+<li>Informational Responses</li>
+</ul>
+</li>
+<li><p>2XX:</p>
+<ul>
+<li>Success</li>
+</ul>
+</li>
+<li><p>3XX:</p>
+<ul>
+<li>Redirect</li>
+</ul>
+</li>
+<li><p>4XX:</p>
+<ul>
+<li>Client side error</li>
+</ul>
+</li>
+<li><p>5XX:</p>
+<ul>
+<li>Server side error</li>
+</ul>
+<p>參考資料:<br><a href="https://www.rfc-editor.org/rfc/rfc7231#section-6.5.1" target="_blank" rel="noopener">rfc7231</a><br><a href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Status" target="_blank" rel="noopener">MDN 好讀版</a><br>:::</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>message</p>
+</li>
+<li><p>data</p>
+</li>
+</ul>
+<p>一個回傳成功的 json 會如同以下範例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;    </span><br><span class="line">    &quot;code&quot;:200,</span><br><span class="line">    &quot;status&quot;:&quot;success&quot;,</span><br><span class="line">    &quot;data&quot;: &#123;</span><br><span class="line">        &quot;lacksTOS&quot;:false,</span><br><span class="line">        &quot;invalidCredentials&quot;:false,</span><br><span class="line">        &quot;authToken&quot;:&quot;4ee683baa2a3332c3c86026d&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一個回傳失敗的 json 會如同以下範例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;code&quot;:401,</span><br><span class="line">    &quot;status&quot;:&quot;error&quot;,</span><br><span class="line">    &quot;message&quot;:&quot;token is invalid&quot;,</span><br><span class="line">    &quot;data&quot;:&quot;UnauthorizedException&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Querying-Filtering-and-Pagination"><a href="#Querying-Filtering-and-Pagination" class="headerlink" title="Querying, Filtering and Pagination"></a>Querying, Filtering and Pagination</h2><p>以頻寬的角度來說, 將大量的資料切分為數個部份是很重要的, 這對於 UI 來說也很重要, 因為 UI 最多也只能顯示一小部份的資料. 在資料不停成長的情境之下, 預設回傳的資料量是ㄧ件相當關鍵的事情. 以向 Twitter API 請求使用者的動態為例, 如果沒有指定, 系統預設回傳 20 篇貼文, 即便在有指定的前提之下最大依然只能回傳 200 篇.<br>除了限制回傳的數量以外, 我們也需要考慮要如何 分頁/滾動 整組資料集, 回傳部份資料集並能夠<br>在大量的資料集當中 “上一頁”, “下一頁”.<br>目前主要有兩組方法來限制分頁的查詢.</p>
+<ol>
+<li>索引的格式要嘛是 page-oriented 或是 item-oriented, 指定一個 id 或是一頁物物品</li>
+<li>指定一個範圍</li>
+</ol>
+<p>也就是說 “以每 20 個物體為一頁, 給我第五頁” 或是 “給我第 100 個物品到第 120 個物品”<br>推薦伺服器上兩者都能實現, 有些 js 工具甚至使用 http header 中的 <code>Range</code> 作為分頁的索引</p>
+<p>:::info<br>參考:<br><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range" target="_blank" rel="noopener">MDN Headers: Range</a><br>:::</p>
+<h3 id="Limiting-Results"><a href="#Limiting-Results" class="headerlink" title="Limiting Results"></a>Limiting Results</h3><p>就像上面提到的那樣, 我們希望伺服器最好能夠實現 query 的分頁法(offset 和 limit), 以及 http header 的 <code>Range</code> 方法. 要注意的是 query 以及 header 分頁都在同一個請求的前提之下, query 分頁法要能夠覆蓋 header 分頁法.</p>
+<p>要實做兩個有時無法取得相同資料的功能在同一個功能裡面會不會令人很混淆? 我們其實是希望 query 分頁是給一般使用者使用, 而 <code>Range</code> 分頁是讓基於 http 規範的函式庫來操作</p>
+<h4 id="Limiting-via-the-Range-Header"><a href="#Limiting-via-the-Range-Header" class="headerlink" title="Limiting via the Range Header"></a>Limiting via the Range Header</h4><p>使用者端透過 header <code>Range</code> 請求分頁的格式為:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Range: items&#x3D;0-24</span><br></pre></td></tr></table></figure>
+
+<h2 id="Supporting-CORS"><a href="#Supporting-CORS" class="headerlink" title="Supporting CORS"></a>Supporting CORS</h2><h3 id="Handling-Cross-Domain-Issues"><a href="#Handling-Cross-Domain-Issues" class="headerlink" title="Handling Cross-Domain Issues"></a>Handling Cross-Domain Issues</h3><h2 id="Service-Versioning"><a href="#Service-Versioning" class="headerlink" title="Service Versioning"></a>Service Versioning</h2><h3 id="什麼時候要開始一個新的-API-版本"><a href="#什麼時候要開始一個新的-API-版本" class="headerlink" title="什麼時候要開始一個新的 API 版本?"></a>什麼時候要開始一個新的 API 版本?</h3><ul>
+<li>更改一個特徵的名稱, 如: 從 “name” -&gt; “firstName”</li>
+<li>移除一個特徵</li>
+<li>改變特徵的資料型態, 如: 從 int -&gt; str, str -&gt; bool</li>
+<li>驗證的方式改變</li>
+<li>In Atom style link</li>
+<li>一個必要的新資源被新增在了原本的工作流程內</li>
+<li>資源概念改變; 資源的概念或意義或資源的狀態與以前相比有差異, 如<ul>
+<li>舊的 content-type: text/html 原本會回傳一組連接, 新的變成會回傳一個 web browser form 作為使用者輸入</li>
+</ul>
+</li>
+<li>一個 API populating “endTime” <code>/users/{id}/exams/{id}</code> 原本是學生當下註冊考試的時間, 現在的意思為排定的考試結束時間</li>
+<li>新增一個新的區域</li>
+</ul>
+<h3 id="一些不會弄壞-API-的更新"><a href="#一些不會弄壞-API-的更新" class="headerlink" title="一些不會弄壞 API 的更新"></a>一些不會弄壞 API 的更新</h3><ul>
+<li>新的特徵被加入到 json</li>
+<li>新的連接被加入到其他資源中</li>
+<li>支援新的 content-type 類型</li>
+<li>新的 content-language 格式<h3 id="Deprecated"><a href="#Deprecated" class="headerlink" title="Deprecated"></a>Deprecated</h3>如果版本過期, 在 header 加入 <code>Deprecated: True</code></li>
+</ul>
+<h2 id="Date-Time-Handling"><a href="#Date-Time-Handling" class="headerlink" title="Date/Time Handling"></a>Date/Time Handling</h2><p>時間戳記需要被服務以 UTC 或是 GMT 格式的方式儲存, 消化, 快取 etc</p>
+<h3 id="在-Body-Content-的時間序列"><a href="#在-Body-Content-的時間序列" class="headerlink" title="在 Body Content 的時間序列"></a>在 Body Content 的時間序列</h3><p>有一個最簡單&amp;通用的方式來解決這個問題————永遠都用一樣的格式, 包含時間的片段也一樣. ISO 8601 時間點格式是一個好的解決方法(yyyy-MM-dd’T’HH:mm:ss.SSS’Z’). 推薦所有的 request &amp; response 以及 body content 都使用此標準</p>
+<p>如果你剛好在開發 Java 相關的系統, <code>DateAdapterJ</code> 函式庫可以幫助你輕鬆解析和創建 ISO 8601 規格的日期和時間系統和 HTTP 1.1 (RFC 1123)格式的 header</p>
+<p>至於用於基於瀏覽器的 UI, ECMAScript 5 規格包含如何用 JavaScript 解析和創建 ISO 8601 格式的日期. 這個規格是可以符合大多主流瀏覽器的. </p>
+<h3 id="在-Headers-的時間序列"><a href="#在-Headers-的時間序列" class="headerlink" title="在 Headers 的時間序列"></a>在 Headers 的時間序列</h3><h2 id="安全類服務"><a href="#安全類服務" class="headerlink" title="安全類服務"></a>安全類服務</h2><p>所有驗證類服務皆需要透過 SSL 傳輸, 包含 JWT, Basic auth, OAuth2 等<br>:::info<br>註: 安全類的內容有點過期, 如果要最新的驗證/授權機制請至 <a href="https://oauth.net/2/" target="_blank" rel="noopener">OAuth2</a><br>:::</p>
+<h3 id="Authentication-驗證"><a href="#Authentication-驗證" class="headerlink" title="Authentication(驗證)"></a>Authentication(驗證)</h3><p>當下最好的作法是透過 OAuth 作為驗證機制</p>
+<h3 id="Authorization-授權"><a href="#Authorization-授權" class="headerlink" title="Authorization(授權)"></a>Authorization(授權)</h3><p>服務的授權並沒有與驗證有很大的差別, 他的問題是基於: “這個規範有權限取得這個資源嗎?” 基於規格, 資源 和權限的三重奏, 我們是能夠有一個授權服務來符合這個概念. 我們可以透過這些抽象化<br>的概念來為每個授權規範建構一個可以快取的通行控制清單(ACL)</p>
+<h3 id="Application-Secutity"><a href="#Application-Secutity" class="headerlink" title="Application Secutity"></a>Application Secutity</h3><p>開發一個安全的網頁應用同樣適用於 RESTful 服務</p>
+<ul>
+<li>在伺服器端驗證所有使用者輸入. 接受 “已知的” 好輸入, 拒絕壞輸入</li>
+<li>能防止 SQL 和 NoSQL 注入攻擊</li>
+<li>用已知的第三方函式庫來編解碼資料, 例如微軟的 Anti-XSS 或是 OWASP 的 AntiSammy</li>
+<li>限制請求/回覆區域的訊息大小</li>
+<li>服務應該要只顯示泛化的錯誤訊息(不要回傳詳細的程式錯誤訊息)</li>
+<li>考慮商業邏輯攻擊法, 例如攻擊者可以跳過多重驗證的過程並不需要輸入信用卡資訊來送出購買請求嗎？</li>
+<li>紀錄可疑的動作</li>
+</ul>
+<p>RESTful 額外的安全考量:</p>
+<ul>
+<li>驗證畸形的 JSON 資料</li>
+<li>動詞應該要只能夠被使用在允許的 http method, 例如:<ul>
+<li>GET request 不能刪除任何實體. DELETE 才能</li>
+<li>要注意 race conditions</li>
+</ul>
+</li>
+</ul>
+<p>API Gateways 可以用在 API 的監控, 節流, 和通行控制上. 以下功能可以透過 Gateway 或是 RESTful 服務實現</p>
+<ul>
+<li>監控 API 的使用量和檢查有沒有異常的流量</li>
+<li>節流 API 用量來限制可疑的使用者透過 API 來進行 DDOS 和黑名單可疑 IP</li>
+<li>儲存 API 金鑰在加密過的金鑰庫</li>
+</ul>
+<h2 id="快取和系統延展性"><a href="#快取和系統延展性" class="headerlink" title="快取和系統延展性"></a>快取和系統延展性</h2><p>快取透過在系統增加一層來消除遠端呼叫取得的資料來給予系統延展性. 服務透過設定 headers 來賦予 response 能夠快取的能力. 在 HTTP 1.0 與 HTTP 1.1 的快取 header 是不一樣的, 所以伺服器需要支援兩者. 以下表格是 GET request 能夠支援快取的最少 header, 以及一些解釋和合適的值</p>
+<table>
+<thead>
+<tr>
+<th>HTTP Header</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Date</td>
+<td>Date and time the response was returned (in RFC1123 format).</td>
+<td>Date: Sun, 06 Nov 1994 08:49:37 GMT</td>
+</tr>
+<tr>
+<td>Cache-Control</td>
+<td>The maximum number of seconds (max age) a response can be cached. However, if caching is not supported for the response, then no-cache is the value.</td>
+<td>Cache-Control: 360 Cache-Control: no-cache</td>
+</tr>
+<tr>
+<td>Expires</td>
+<td>If max age is given, contains the timestamp (in RFC1123 format) for when the response expires, which is the value of Date (e.g. now) plus max age. If caching is not supported for the response, this header is not present.</td>
+<td>Expires: Sun, 06 Nov 1994 08:49:37 GMT</td>
+</tr>
+<tr>
+<td>Pragma</td>
+<td>When Cache-Control is ‘no-cache’ this header is also set to ‘no-cache’. Otherwise, it is not present.</td>
+<td>Pragma: no-cache</td>
+</tr>
+<tr>
+<td>Last-Modified</td>
+<td>The timestamp that the resource itself was modified last (in RFC1123 format).</td>
+<td>Last-Modified: Sun, 06 Nov 1994 08:49:37 GMT</td>
+</tr>
+</tbody></table>
+<p>一個簡化的版本是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Cache-Control: 86400</span><br><span class="line">Date: Wed, 29 Feb 2012 23:01:10 GMT</span><br><span class="line">Last-Modified: Mon, 28 Feb 2011 13:10:14 GMT</span><br><span class="line">Expires: Thu, 01 Mar 2012 23:01:10 GMT</span><br></pre></td></tr></table></figure>
+<p>以下是如果快取被關閉的情況下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Cache-Control: no-cache</span><br><span class="line">Pragma: no-cache</span><br></pre></td></tr></table></figure>
+<h3 id="Etag-Header"><a href="#Etag-Header" class="headerlink" title="Etag Header"></a>Etag Header</h3><p><a href="https://zh.wikipedia.org/zh-tw/HTTP_ETag" target="_blank" rel="noopener">https://zh.wikipedia.org/zh-tw/HTTP_ETag</a><br>由於使用 Etag 可能會觸法, 我就沒有翻譯了, 取自維基百科:</p>
+<blockquote>
+<p>由於HTTP cookie被越來越多的注重隱私保護的用戶刪除，可以將ETag用來追蹤唯一用戶。2011年7月，Ashkan Soltani和加州大學伯克利分校的一組研究者，包括Hulu.com將ETag用於追蹤用途。Hulu和KISSmetrics在2011年7月29日停止了這樣的追蹤，而KISSmetrics和超過20位其用戶面臨關於「無法刪除」的cookie的集體訴訟，其中包括了ETag的使用。 因為ETag由瀏覽器保存，並且在訪問統一資源時隨之後請求返回，一個追蹤伺服器可以輕鬆地重複設定任何從瀏覽器收到的ETag，以保持ETag不變，類似於持久cookie。額外的緩存頭部也能增強ETag的持久性。根據實現，ETag可以通過清除瀏覽器緩存清除。 </p>
+</blockquote>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects">專案</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/categories/">分類</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#RESTful-Service-Best-Practices-2013"><span class="toc-number">1.</span> <span class="toc-text">RESTful Service Best Practices (2013)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Overview"><span class="toc-number">1.1.</span> <span class="toc-text">Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Http-Methods"><span class="toc-number">1.2.</span> <span class="toc-text">Http Methods</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Uniform-Interface"><span class="toc-number">1.3.</span> <span class="toc-text">Uniform Interface</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Resource-Based"><span class="toc-number">1.3.1.</span> <span class="toc-text">Resource Based</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Manipulation-of-Resources-Through-Representations"><span class="toc-number">1.3.2.</span> <span class="toc-text">Manipulation of Resources Through Representations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Self-descriptive-Messages"><span class="toc-number">1.3.3.</span> <span class="toc-text">Self-descriptive Messages</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HATEOAS"><span class="toc-number">1.3.4.</span> <span class="toc-text">HATEOAS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stateless"><span class="toc-number">1.4.</span> <span class="toc-text">Stateless</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cacheable"><span class="toc-number">1.5.</span> <span class="toc-text">Cacheable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#REST-Quick-Tips-速記重點"><span class="toc-number">1.6.</span> <span class="toc-text">REST Quick Tips(速記重點)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#透過-HTTP-動詞來進行動作"><span class="toc-number">1.6.1.</span> <span class="toc-text">透過 HTTP 動詞來進行動作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#敏感的資源名稱"><span class="toc-number">1.6.2.</span> <span class="toc-text">敏感的資源名稱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XML-and-JSON"><span class="toc-number">1.6.3.</span> <span class="toc-text">XML and JSON</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-Fine-Grained-Resources"><span class="toc-number">1.6.4.</span> <span class="toc-text">Create Fine Grained Resources</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Consider-Connectedness"><span class="toc-number">1.6.5.</span> <span class="toc-text">Consider Connectedness</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定義"><span class="toc-number">1.7.</span> <span class="toc-text">定義</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Idempotence"><span class="toc-number">1.7.1.</span> <span class="toc-text">Idempotence</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Safety"><span class="toc-number">1.7.2.</span> <span class="toc-text">Safety</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Http-動詞"><span class="toc-number">1.8.</span> <span class="toc-text">Http 動詞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GET"><span class="toc-number">1.8.1.</span> <span class="toc-text">GET</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PUT"><span class="toc-number">1.8.2.</span> <span class="toc-text">PUT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#POST"><span class="toc-number">1.8.3.</span> <span class="toc-text">POST</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PUT-vs-POST-for-Creation"><span class="toc-number">1.8.4.</span> <span class="toc-text">PUT vs POST for Creation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DELETE"><span class="toc-number">1.8.5.</span> <span class="toc-text">DELETE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#總結"><span class="toc-number">1.8.6.</span> <span class="toc-text">總結</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Resource-Naming"><span class="toc-number">1.9.</span> <span class="toc-text">Resource Naming</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Use-Case"><span class="toc-number">1.9.1.</span> <span class="toc-text">Use Case</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Resource-Naming-Anti-Patterns"><span class="toc-number">1.9.2.</span> <span class="toc-text">Resource Naming Anti Patterns</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Query-in-RESTful-API"><span class="toc-number">1.9.2.1.</span> <span class="toc-text">Query in RESTful API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Verb-in-uri"><span class="toc-number">1.9.2.2.</span> <span class="toc-text">Verb in uri</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pluralization"><span class="toc-number">1.9.3.</span> <span class="toc-text">Pluralization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Wrapped-Responses"><span class="toc-number">1.9.4.</span> <span class="toc-text">Wrapped Responses</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Querying-Filtering-and-Pagination"><span class="toc-number">1.10.</span> <span class="toc-text">Querying, Filtering and Pagination</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Limiting-Results"><span class="toc-number">1.10.1.</span> <span class="toc-text">Limiting Results</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Limiting-via-the-Range-Header"><span class="toc-number">1.10.1.1.</span> <span class="toc-text">Limiting via the Range Header</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Supporting-CORS"><span class="toc-number">1.11.</span> <span class="toc-text">Supporting CORS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Handling-Cross-Domain-Issues"><span class="toc-number">1.11.1.</span> <span class="toc-text">Handling Cross-Domain Issues</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Service-Versioning"><span class="toc-number">1.12.</span> <span class="toc-text">Service Versioning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什麼時候要開始一個新的-API-版本"><span class="toc-number">1.12.1.</span> <span class="toc-text">什麼時候要開始一個新的 API 版本?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些不會弄壞-API-的更新"><span class="toc-number">1.12.2.</span> <span class="toc-text">一些不會弄壞 API 的更新</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deprecated"><span class="toc-number">1.12.3.</span> <span class="toc-text">Deprecated</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Date-Time-Handling"><span class="toc-number">1.13.</span> <span class="toc-text">Date&#x2F;Time Handling</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在-Body-Content-的時間序列"><span class="toc-number">1.13.1.</span> <span class="toc-text">在 Body Content 的時間序列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在-Headers-的時間序列"><span class="toc-number">1.13.2.</span> <span class="toc-text">在 Headers 的時間序列</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安全類服務"><span class="toc-number">1.14.</span> <span class="toc-text">安全類服務</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Authentication-驗證"><span class="toc-number">1.14.1.</span> <span class="toc-text">Authentication(驗證)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Authorization-授權"><span class="toc-number">1.14.2.</span> <span class="toc-text">Authorization(授權)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Application-Secutity"><span class="toc-number">1.14.3.</span> <span class="toc-text">Application Secutity</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快取和系統延展性"><span class="toc-number">1.15.</span> <span class="toc-text">快取和系統延展性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Etag-Header"><span class="toc-number">1.15.1.</span> <span class="toc-text">Etag Header</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://robinsonweng.github.io/2022/01/08/restful-service-best-practice-13/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://robinsonweng.github.io/2022/01/08/restful-service-best-practice-13/&text=RESTful Service Best practice 2013" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://robinsonweng.github.io/2022/01/08/restful-service-best-practice-13/&title=RESTful Service Best practice 2013" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://robinsonweng.github.io/2022/01/08/restful-service-best-practice-13/&is_video=false&description=RESTful Service Best practice 2013" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=RESTful Service Best practice 2013&body=Check out this article: https://robinsonweng.github.io/2022/01/08/restful-service-best-practice-13/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://robinsonweng.github.io/2022/01/08/restful-service-best-practice-13/&title=RESTful Service Best practice 2013" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://robinsonweng.github.io/2022/01/08/restful-service-best-practice-13/&title=RESTful Service Best practice 2013" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://robinsonweng.github.io/2022/01/08/restful-service-best-practice-13/&title=RESTful Service Best practice 2013" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://robinsonweng.github.io/2022/01/08/restful-service-best-practice-13/&title=RESTful Service Best practice 2013" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://robinsonweng.github.io/2022/01/08/restful-service-best-practice-13/&name=RESTful Service Best practice 2013&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 選單</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 文章目錄</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 頁首</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 robinson
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects">專案</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/categories/">分類</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight .code pre").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-148363298-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+</html>
