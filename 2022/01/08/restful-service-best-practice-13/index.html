@@ -14,10 +14,9 @@
 <meta property="og:description" content="RESTful Service Best Practices (2013)https:&#x2F;&#x2F;www.redhat.com&#x2F;en&#x2F;topics&#x2F;api&#x2F;what-is-a-rest-apihttps:&#x2F;&#x2F;www.redhat.com&#x2F;en&#x2F;topics&#x2F;integration&#x2F;whats-the-difference-between-soap-resthttps:&#x2F;&#x2F;www.ics.uci.edu&#x2F;~">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2022-01-08T05:08:47.000Z">
-<meta property="article:modified_time" content="2022-11-29T09:51:00.936Z">
+<meta property="article:modified_time" content="2023-06-15T09:04:31.256Z">
 <meta property="article:author" content="robinson">
 <meta property="article:tag" content="RESTful">
-<meta property="article:tag" content="http">
 <meta name="twitter:card" content="summary">
     
     
@@ -145,14 +144,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/Web/">Web</a> › <a class="category-link" href="/categories/Web/%E8%A6%8F%E7%AF%84/">規範</a>
+        <a class="category-link" href="/categories/RESTful/">RESTful</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/RESTful/" rel="tag">RESTful</a>, <a class="tag-link" href="/tags/http/" rel="tag">http</a>
+        <a class="tag-link" href="/tags/RESTful/" rel="tag">RESTful</a>
     </div>
 
 
@@ -200,9 +199,9 @@
 <ul>
 <li><p>一種能與使用者互動的規範</p>
 <p>:::info<br>取自維基百科:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 請求</span><br><span class="line">GET /accounts/12345 HTTP/1.1</span><br><span class="line">Host: bank.example.com</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 請求</span></span><br><span class="line">GET /accounts/12345 HTTP/1.1</span><br><span class="line">Host: bank.example.com</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 回應</span><br><span class="line">HTTP/1.1 200 OK</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"account"</span>: &#123;</span><br><span class="line">        <span class="attr">"account_number"</span>: <span class="number">12345</span>,</span><br><span class="line">        <span class="attr">"balance"</span>: &#123;</span><br><span class="line">            <span class="attr">"currency"</span>: <span class="string">"usd"</span>,</span><br><span class="line">            <span class="attr">"value"</span>: <span class="number">100.00</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"links"</span>: &#123;</span><br><span class="line">            <span class="attr">"deposits"</span>: <span class="string">"/accounts/12345/deposits"</span>,</span><br><span class="line">            <span class="attr">"withdrawals"</span>: <span class="string">"/accounts/12345/withdrawals"</span>,</span><br><span class="line">            <span class="attr">"transfers"</span>: <span class="string">"/accounts/12345/transfers"</span>,</span><br><span class="line">            <span class="attr">"close-requests"</span>: <span class="string">"/accounts/12345/close-requests"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 回應</span></span><br><span class="line">HTTP/1.1 200 OK</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"account"</span>: &#123;</span><br><span class="line">        <span class="attr">"account_number"</span>: <span class="number">12345</span>,</span><br><span class="line">        <span class="attr">"balance"</span>: &#123;</span><br><span class="line">            <span class="attr">"currency"</span>: <span class="string">"usd"</span>,</span><br><span class="line">            <span class="attr">"value"</span>: <span class="number">100.00</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"links"</span>: &#123;</span><br><span class="line">            <span class="attr">"deposits"</span>: <span class="string">"/accounts/12345/deposits"</span>,</span><br><span class="line">            <span class="attr">"withdrawals"</span>: <span class="string">"/accounts/12345/withdrawals"</span>,</span><br><span class="line">            <span class="attr">"transfers"</span>: <span class="string">"/accounts/12345/transfers"</span>,</span><br><span class="line">            <span class="attr">"close-requests"</span>: <span class="string">"/accounts/12345/close-requests"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>:::</p>
 </li>
 </ul>
@@ -586,7 +585,7 @@ post put delete state
         
         <footer id="footer">
   <div class="footer-left">
-    Copyright &copy; 2022 robinson
+    Copyright &copy; 2023 robinson
   </div>
   <div class="footer-right">
     <nav>
