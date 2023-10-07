@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="原本是想要寫一個 DNS 的, 後來我朋友跟我推薦他學校的網路程式作業, 裡面就包含了 DNS, 所以想說乾脆就先從簡單的作業開始 framework除了 std libary 以外啥都沒用, 一來是因為只是要用於作業, 練習如何看規格文件, 練習寫 rust 等等, 二來是減少專題的複雜程度, 三來為了避免以前在學程式語言的錯誤: 用了功能太過複雜的框架, 導致學不到東西, 浪費很多時間, 結果">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Implment irc server in rust part 1">
+<meta property="og:url" content="https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/index.html">
+<meta property="og:site_name" content="春雨的部落格">
+<meta property="og:description" content="原本是想要寫一個 DNS 的, 後來我朋友跟我推薦他學校的網路程式作業, 裡面就包含了 DNS, 所以想說乾脆就先從簡單的作業開始 framework除了 std libary 以外啥都沒用, 一來是因為只是要用於作業, 練習如何看規格文件, 練習寫 rust 等等, 二來是減少專題的複雜程度, 三來為了避免以前在學程式語言的錯誤: 用了功能太過複雜的框架, 導致學不到東西, 浪費很多時間, 結果">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2023-10-07T06:45:51.000Z">
+<meta property="article:modified_time" content="2023-10-07T07:59:52.072Z">
+<meta property="article:author" content="robinson">
+<meta property="article:tag" content="rust">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Implment irc server in rust part 1</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects">專案</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/categories/">分類</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2023/05/31/why-you-should-try-enum/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">回到頁首</span>
+      <span id="i-share" class="info" style="display:none;">分享</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/&text=Implment irc server in rust part 1" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/&title=Implment irc server in rust part 1" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/&is_video=false&description=Implment irc server in rust part 1" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Implment irc server in rust part 1&body=Check out this article: https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/&title=Implment irc server in rust part 1" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/&title=Implment irc server in rust part 1" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/&title=Implment irc server in rust part 1" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/&title=Implment irc server in rust part 1" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/&name=Implment irc server in rust part 1&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#framework"><span class="toc-number">1.</span> <span class="toc-text">framework</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RFC-1459-amp-homework-spec"><span class="toc-number">2.</span> <span class="toc-text">RFC 1459 &amp; homework spec</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rust"><span class="toc-number">3.</span> <span class="toc-text">Rust</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Implment irc server in rust part 1
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">春雨</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-10-07T06:45:51.000Z" itemprop="datePublished">2023-10-07</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%9C%AA%E5%88%86%E9%A1%9E/">未分類</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/rust/" rel="tag">rust</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>原本是想要寫一個 DNS 的, 後來我朋友跟我推薦他學校的網路程式作業, 裡面就包含了 DNS, 所以想說乾脆就先從簡單的作業開始</p>
+<h2 id="framework"><a href="#framework" class="headerlink" title="framework"></a>framework</h2><p>除了 std libary 以外啥都沒用, 一來是因為只是要用於作業, 練習如何看規格文件, 練習寫 rust 等等, 二來是減少專題的複雜程度, 三來為了避免以前在學程式語言的錯誤: 用了功能太過複雜的框架, 導致學不到東西, 浪費很多時間, 結果一場空, 既沒有學到技術, 也沒有學到基礎。這樣寫了也快兩週了, 不得不說這個決策是正確的, 畢竟一開始也不會遇到什麼 corutine, async 的問題, 而且也不需要一開始寫就要一口氣搞懂 lifetime, trait, generic 等沒接觸過的概念, 也就不會上 stackoverflow 找答案 trail and error 就為了讓程式碼能跑, 讓我可以心神安寧的寫程式。</p>
+<h2 id="RFC-1459-amp-homework-spec"><a href="#RFC-1459-amp-homework-spec" class="headerlink" title="RFC 1459 &amp; homework spec"></a>RFC 1459 &amp; homework spec</h2><p>幾個我覺得很酷的地方:</p>
+<ol>
+<li>語法這種東西居然有 <a href="https://www.freecodecamp.org/news/what-are-bnf-and-ebnf/" target="_blank" rel="noopener">pesudo code</a> 可以表示, 而且還不錯用, 後續如果要拿來寫 cli, 這個東東會非常非常好用。</li>
+<li>RFC 還是看得很不習慣, 很多東西都要細找</li>
+<li>Wireshark 我的神, 之前一直懶得裝, 後來受不了去撈包下來看, 至少不會一直想東想西了</li>
+<li>IRC 的規範不知道是我不適應 RFC, 還是很久沒更新了, 我到最後都沒搞清楚要怎麼知道哪些回覆要用哪種 prefix, 無可奈何之下只好用撈封包的方式來參考別人的作法。</li>
+</ol>
+<h2 id="Rust"><a href="#Rust" class="headerlink" title="Rust"></a>Rust</h2><ol>
+<li>眾所皆知, rust 沒有完整的 OOP 支援, 我猜要寫可能還是可以自己實做一些功能出來, 畢竟有沒有支援 OOP 語法和能不能寫 OOP 完全是<a href="https://hackmd.io/@sysprog/c-oop" target="_blank" rel="noopener">兩回事</a>。 一路用 <a href="https://www.youtube.com/watch?v=hxGOiiR9ZKg&ab_channel=CodeAesthetic" target="_blank" rel="noopener">Composition</a> 的方式寫下來, 倒也沒有什麼不習慣的地方, 讓我蠻驚訝的, 不如說逃離 python 的魔掌我自己其實還挺爽的</li>
+<li>rust 的生態系寫起來是真的舒服, <code>cargo watch</code> 等插件讓寫程式過程絲滑無比</li>
+<li>rust 的 module 用起來比 go 的舒服太多了, 個人偏見</li>
+<li>之前看過一個建議新手寫 rust 的<a href="https://youtu.be/2hXNd6x9sZs?si=POoo3vx7464yVOGH&t=555" target="_blank" rel="noopener">方法</a>就是, 全部將內容用最沒效率但是最好寫的方法來做, 例如一言不合就把 String Clone 或是 Struct 直接 Copy, 所有的 string literal 想都不想就直接放進 heap (String) 等, 這個建議不得不說很適合只有用過動態型態或是有 GC 的語言的工程師, 一來是寫起來程式不會有那麼多錯, 不會一堆關於 reference 和 lifetime 的問題, 降低超級多學習曲線, 而且也可以讓自己認知到之前的程式語言或是寫法的有多 <del>蠢</del> 差, 而且如果你 GC 癮犯了, 也可以去玩玩看 rust 提供的 <a href="https://doc.rust-lang.org/book/ch15-04-rc.html" target="_blank" rel="noopener">reference counter</a>。</li>
+<li>rust 的測試寫起來很舒服, 有種本來就鼓勵你寫測試的感覺(雖然不知道到底有沒有效)</li>
+<li>rust 的 Compilter 是我大哥, 至少現在是</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects">專案</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/categories/">分類</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#framework"><span class="toc-number">1.</span> <span class="toc-text">framework</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RFC-1459-amp-homework-spec"><span class="toc-number">2.</span> <span class="toc-text">RFC 1459 &amp; homework spec</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rust"><span class="toc-number">3.</span> <span class="toc-text">Rust</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/&text=Implment irc server in rust part 1" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/&title=Implment irc server in rust part 1" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/&is_video=false&description=Implment irc server in rust part 1" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Implment irc server in rust part 1&body=Check out this article: https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/&title=Implment irc server in rust part 1" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/&title=Implment irc server in rust part 1" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/&title=Implment irc server in rust part 1" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/&title=Implment irc server in rust part 1" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/&name=Implment irc server in rust part 1&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 選單</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 文章目錄</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 頁首</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2023 robinson
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects">專案</a></li>
+         
+          <li><a href="/categories/">categories</a></li>
+         
+          <li><a href="/categories/">分類</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight .code pre").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-148363298-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+</html>

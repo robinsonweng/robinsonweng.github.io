@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/</loc>
+    
+    <lastmod>2023-10-07T07:59:52.072Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/</loc>
     
     <lastmod>2023-06-15T09:06:46.986Z</lastmod>
