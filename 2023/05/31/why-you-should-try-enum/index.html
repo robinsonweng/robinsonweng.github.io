@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="為什麼你該試試看 Enum一個幾乎每個工程師都會遇過的問題: 123456789weekday_list &#x3D; [&quot;monday&quot;, &quot;tuesday&quot;, &quot;wednesday&quot;, &quot;thursday&quot;,  &quot;friday&quot;]def is_weekday(weekday: str) -&gt; bool:  return weekday in weekday_listis_weekday(&quot;123&quot;">
+    <meta name="description" content="為什麼你該試試看 Enum一個幾乎每個工程師都會遇過的問題: 123456789weekday_list &#x3D; [&quot;monday&quot;, &quot;tuesday&quot;, &quot;wednesday&quot;, &quot;thursday&quot;,  &quot;friday&quot;]def is_weekday(weekday: str) -&gt; boo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="為什麼你該試試看 Enum">
 <meta property="og:url" content="https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/index.html">
 <meta property="og:site_name" content="春雨的部落格">
-<meta property="og:description" content="為什麼你該試試看 Enum一個幾乎每個工程師都會遇過的問題: 123456789weekday_list &#x3D; [&quot;monday&quot;, &quot;tuesday&quot;, &quot;wednesday&quot;, &quot;thursday&quot;,  &quot;friday&quot;]def is_weekday(weekday: str) -&gt; bool:  return weekday in weekday_listis_weekday(&quot;123&quot;">
+<meta property="og:description" content="為什麼你該試試看 Enum一個幾乎每個工程師都會遇過的問題: 123456789weekday_list &#x3D; [&quot;monday&quot;, &quot;tuesday&quot;, &quot;wednesday&quot;, &quot;thursday&quot;,  &quot;friday&quot;]def is_weekday(weekday: str) -&gt; boo">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2023-05-31T09:26:59.000Z">
 <meta property="article:modified_time" content="2023-06-15T09:06:46.986Z">
@@ -51,7 +51,7 @@
     <!-- rss -->
     
     
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 5.0.0"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -69,9 +69,9 @@
          
           <li><a href="/archives/">文章</a></li>
          
-          <li><a href="/projects">專案</a></li>
-         
           <li><a href="/categories/">分類</a></li>
+         
+          <li><a href="/projects">專案</a></li>
         
       </ul>
     </span>
@@ -95,21 +95,21 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&text=為什麼你該試試看 Enum" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&title=為什麼你該試試看 Enum" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&is_video=false&description=為什麼你該試試看 Enum" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&text=為什麼你該試試看 Enum"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&title=為什麼你該試試看 Enum"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&is_video=false&description=為什麼你該試試看 Enum"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="mailto:?subject=為什麼你該試試看 Enum&body=Check out this article: https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&title=為什麼你該試試看 Enum" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&title=為什麼你該試試看 Enum" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&title=為什麼你該試試看 Enum" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&title=為什麼你該試試看 Enum" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&name=為什麼你該試試看 Enum&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&title=為什麼你該試試看 Enum"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&title=為什麼你該試試看 Enum"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&title=為什麼你該試試看 Enum"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&title=為什麼你該試試看 Enum"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&name=為什麼你該試試看 Enum&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#為什麼你該試試看-Enum"><span class="toc-number">1.</span> <span class="toc-text">為什麼你該試試看 Enum</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC%E4%BD%A0%E8%A9%B2%E8%A9%A6%E8%A9%A6%E7%9C%8B-Enum"><span class="toc-number">1.</span> <span class="toc-text">為什麼你該試試看 Enum</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -149,7 +149,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Python/" rel="tag">Python</a>
+        <a class="tag-link-link" href="/tags/Python/" rel="tag">Python</a>
     </div>
 
 
@@ -159,7 +159,7 @@
 
   <div class="content" itemprop="articleBody">
     <h2 id="為什麼你該試試看-Enum"><a href="#為什麼你該試試看-Enum" class="headerlink" title="為什麼你該試試看 Enum"></a>為什麼你該試試看 Enum</h2><p>一個幾乎每個工程師都會遇過的問題:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">weekday_list = [<span class="string">"monday"</span>, <span class="string">"tuesday"</span>, <span class="string">"wednesday"</span>, <span class="string">"thursday"</span>,  <span class="string">"friday"</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_weekday</span><span class="params">(weekday: str)</span> -&gt; bool:</span></span><br><span class="line">  <span class="keyword">return</span> weekday <span class="keyword">in</span> weekday_list</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">is_weekday(<span class="string">"123"</span>) <span class="comment"># False</span></span><br><span class="line">is_weekday(<span class="string">"mondy"</span>) <span class="comment"># False, but no error</span></span><br><span class="line">is_weekday(<span class="string">"monday"</span>) <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">weekday_list = [<span class="string">&quot;monday&quot;</span>, <span class="string">&quot;tuesday&quot;</span>, <span class="string">&quot;wednesday&quot;</span>, <span class="string">&quot;thursday&quot;</span>,  <span class="string">&quot;friday&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">is_weekday</span>(<span class="params">weekday: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">  <span class="keyword">return</span> weekday <span class="keyword">in</span> weekday_list</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">is_weekday(<span class="string">&quot;123&quot;</span>) <span class="comment"># False</span></span><br><span class="line">is_weekday(<span class="string">&quot;mondy&quot;</span>) <span class="comment"># False, but no error</span></span><br><span class="line">is_weekday(<span class="string">&quot;monday&quot;</span>) <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
 
 <p>這個寫法可以讓我們透過 <code>in</code> 關鍵字來檢查我們輸入的字串是否屬於 <code>weekday</code>, 但沒有辦法解決其他幾個問題:</p>
 <ol>
@@ -169,10 +169,10 @@
 <li>有一堆 string literal 要維護</li>
 </ol>
 <p>這時候 Enum 超人就出現了:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> enum <span class="keyword">import</span> Enum</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Weekday</span><span class="params">(Enum)</span>:</span></span><br><span class="line">    Monday = <span class="string">"monday"</span></span><br><span class="line">    Tuesday = <span class="string">"tuesday"</span></span><br><span class="line">    Wendnesday = <span class="string">"wendsday"</span></span><br><span class="line">    Thursday = <span class="string">"thursday"</span></span><br><span class="line">    Friday = <span class="string">"friday"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_weekday</span><span class="params">(weekday: Weekday)</span> -&gt; bool:</span></span><br><span class="line">    <span class="keyword">return</span> isinstance(weekday, Weekday)</span><br><span class="line"></span><br><span class="line">is_weekday(Weekday.Monday) <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> enum <span class="keyword">import</span> Enum</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Weekday</span>(<span class="title class_ inherited__">Enum</span>):</span><br><span class="line">    Monday = <span class="string">&quot;monday&quot;</span></span><br><span class="line">    Tuesday = <span class="string">&quot;tuesday&quot;</span></span><br><span class="line">    Wendnesday = <span class="string">&quot;wendsday&quot;</span></span><br><span class="line">    Thursday = <span class="string">&quot;thursday&quot;</span></span><br><span class="line">    Friday = <span class="string">&quot;friday&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">is_weekday</span>(<span class="params">weekday: Weekday</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">isinstance</span>(weekday, Weekday)</span><br><span class="line"></span><br><span class="line">is_weekday(Weekday.Monday) <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
 
 <p>由於 Enum 的 attribute 是 Enum 的 instance, 所以我們可以透過 <code>isinstance</code> 來檢查輸入值的格式是否為我們的 <code>Weekday</code> 成員內。 而且因為我們的選項被限制住了, 所以不能輸入這些選項以外的值(問題 2), 由於我們是透過 Enum 的成員來選擇值, 也不需要維護一堆零散的字串(問題 4, 問題 3), 而剩下 問題 1, 我們可以透過實做 dunder method 賦予 Enum 這個特性</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> enum <span class="keyword">import</span> EnumMeta</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EnumContains</span><span class="params">(EnumMeta)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__contains__</span><span class="params">(self: type, member: object)</span> -&gt; bool:</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            self(member)</span><br><span class="line">        <span class="keyword">except</span> ValueError:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EnumExample</span><span class="params">(Enum, metaclass=EnumContains)</span>:</span></span><br><span class="line">    Monday = <span class="string">"monday"</span></span><br><span class="line">    Tuesday = <span class="string">"tuesday"</span></span><br><span class="line">    Wendnesday = <span class="string">"wendsday"</span></span><br><span class="line">    Thursday = <span class="string">"thursday"</span></span><br><span class="line">    Friday = <span class="string">"friday"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="string">"friday"</span> <span class="keyword">in</span> EnumExample:</span><br><span class="line">    print(<span class="string">"friday is a valid member of enum!"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> enum <span class="keyword">import</span> EnumMeta</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">EnumContains</span>(<span class="title class_ inherited__">EnumMeta</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__contains__</span>(<span class="params">self: <span class="built_in">type</span>, member: <span class="built_in">object</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            self(member)</span><br><span class="line">        <span class="keyword">except</span> ValueError:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">EnumExample</span>(Enum, metaclass=EnumContains):</span><br><span class="line">    Monday = <span class="string">&quot;monday&quot;</span></span><br><span class="line">    Tuesday = <span class="string">&quot;tuesday&quot;</span></span><br><span class="line">    Wendnesday = <span class="string">&quot;wendsday&quot;</span></span><br><span class="line">    Thursday = <span class="string">&quot;thursday&quot;</span></span><br><span class="line">    Friday = <span class="string">&quot;friday&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="string">&quot;friday&quot;</span> <span class="keyword">in</span> EnumExample:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;friday is a valid member of enum!&quot;</span>)</span><br></pre></td></tr></table></figure>
 
 <p>很讚, 對吧。但還是得碎碎念一下, 這些資料型態的用法都是在 Python 以外的語言學到的, 總感覺哪邊不對…</p>
 
@@ -194,29 +194,29 @@
          
           <li><a href="/archives/">文章</a></li>
          
-          <li><a href="/projects">專案</a></li>
-         
           <li><a href="/categories/">分類</a></li>
+         
+          <li><a href="/projects">專案</a></li>
         
       </ul>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#為什麼你該試試看-Enum"><span class="toc-number">1.</span> <span class="toc-text">為什麼你該試試看 Enum</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC%E4%BD%A0%E8%A9%B2%E8%A9%A6%E8%A9%A6%E7%9C%8B-Enum"><span class="toc-number">1.</span> <span class="toc-text">為什麼你該試試看 Enum</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&text=為什麼你該試試看 Enum" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&title=為什麼你該試試看 Enum" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&is_video=false&description=為什麼你該試試看 Enum" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&text=為什麼你該試試看 Enum"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&title=為什麼你該試試看 Enum"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&is_video=false&description=為什麼你該試試看 Enum"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="mailto:?subject=為什麼你該試試看 Enum&body=Check out this article: https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&title=為什麼你該試試看 Enum" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&title=為什麼你該試試看 Enum" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&title=為什麼你該試試看 Enum" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&title=為什麼你該試試看 Enum" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&name=為什麼你該試試看 Enum&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&title=為什麼你該試試看 Enum"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&title=為什麼你該試試看 Enum"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&title=為什麼你該試試看 Enum"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&title=為什麼你該試試看 Enum"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://robinsonweng.github.io/2023/05/31/why-you-should-try-enum/&name=為什麼你該試試看 Enum&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -247,9 +247,9 @@
          
           <li><a href="/archives/">文章</a></li>
          
-          <li><a href="/projects">專案</a></li>
-         
           <li><a href="/categories/">分類</a></li>
+         
+          <li><a href="/projects">專案</a></li>
         
       </ul>
     </nav>
