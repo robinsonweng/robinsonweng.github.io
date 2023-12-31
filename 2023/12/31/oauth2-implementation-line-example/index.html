@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="串接 oauth2 和 jwt, 以 line 為例先上圖:   ref: https:&#x2F;&#x2F;twitter.com&#x2F;bytebytego&#x2F;status&#x2F;1725770574402928644  Authorization Code vs Implicit CodeAuthorization Code前端和 authorize server 先取得授權, 取得 authorize code, 接著前">
+<meta property="og:type" content="article">
+<meta property="og:title" content="oauth2-implementation-line-example">
+<meta property="og:url" content="https://robinsonweng.github.io/2023/12/31/oauth2-implementation-line-example/index.html">
+<meta property="og:site_name" content="春雨的部落格">
+<meta property="og:description" content="串接 oauth2 和 jwt, 以 line 為例先上圖:   ref: https:&#x2F;&#x2F;twitter.com&#x2F;bytebytego&#x2F;status&#x2F;1725770574402928644  Authorization Code vs Implicit CodeAuthorization Code前端和 authorize server 先取得授權, 取得 authorize code, 接著前">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://pbs.twimg.com/media/F_MrKxwasAAc7Vw?format=jpg&name=large">
+<meta property="og:image" content="https://i.imgur.com/UnAI8cS.png">
+<meta property="article:published_time" content="2023-12-31T07:12:32.000Z">
+<meta property="article:modified_time" content="2023-12-31T07:44:34.453Z">
+<meta property="article:author" content="robinson">
+<meta property="article:tag" content="春雨的部落格">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pbs.twimg.com/media/F_MrKxwasAAc7Vw?format=jpg&name=large">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>oauth2-implementation-line-example</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/categories/">分類</a></li>
+         
+          <li><a href="/projects">專案</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2023/12/31/intro-for-csrf/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">回到頁首</span>
+      <span id="i-share" class="info" style="display:none;">分享</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://robinsonweng.github.io/2023/12/31/oauth2-implementation-line-example/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://robinsonweng.github.io/2023/12/31/oauth2-implementation-line-example/&text=oauth2-implementation-line-example"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://robinsonweng.github.io/2023/12/31/oauth2-implementation-line-example/&title=oauth2-implementation-line-example"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://robinsonweng.github.io/2023/12/31/oauth2-implementation-line-example/&is_video=false&description=oauth2-implementation-line-example"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=oauth2-implementation-line-example&body=Check out this article: https://robinsonweng.github.io/2023/12/31/oauth2-implementation-line-example/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://robinsonweng.github.io/2023/12/31/oauth2-implementation-line-example/&title=oauth2-implementation-line-example"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://robinsonweng.github.io/2023/12/31/oauth2-implementation-line-example/&title=oauth2-implementation-line-example"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://robinsonweng.github.io/2023/12/31/oauth2-implementation-line-example/&title=oauth2-implementation-line-example"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://robinsonweng.github.io/2023/12/31/oauth2-implementation-line-example/&title=oauth2-implementation-line-example"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://robinsonweng.github.io/2023/12/31/oauth2-implementation-line-example/&name=oauth2-implementation-line-example&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%B2%E6%8E%A5-oauth2-%E5%92%8C-jwt-%E4%BB%A5-line-%E7%82%BA%E4%BE%8B"><span class="toc-number">1.</span> <span class="toc-text">串接 oauth2 和 jwt, 以 line 為例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Authorization-Code-vs-Implicit-Code"><span class="toc-number">1.1.</span> <span class="toc-text">Authorization Code vs Implicit Code</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Authorization-Code"><span class="toc-number">1.1.1.</span> <span class="toc-text">Authorization Code</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Implicit-Code"><span class="toc-number">1.1.2.</span> <span class="toc-text">Implicit Code</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JWT-validation"><span class="toc-number">1.2.</span> <span class="toc-text">JWT validation</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        oauth2-implementation-line-example
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">春雨</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-12-31T07:12:32.000Z" itemprop="datePublished">2023-12-31</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%9C%AA%E5%88%86%E9%A1%9E/">未分類</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="串接-oauth2-和-jwt-以-line-為例"><a href="#串接-oauth2-和-jwt-以-line-為例" class="headerlink" title="串接 oauth2 和 jwt, 以 line 為例"></a>串接 oauth2 和 jwt, 以 line 為例</h1><p>先上圖:</p>
+<p><img src="https://pbs.twimg.com/media/F_MrKxwasAAc7Vw?format=jpg&name=large" alt=""></p>
+<blockquote>
+<p>ref: <a target="_blank" rel="noopener" href="https://twitter.com/bytebytego/status/1725770574402928644">https://twitter.com/bytebytego/status/1725770574402928644</a></p>
+</blockquote>
+<h2 id="Authorization-Code-vs-Implicit-Code"><a href="#Authorization-Code-vs-Implicit-Code" class="headerlink" title="Authorization Code vs Implicit Code"></a>Authorization Code vs Implicit Code</h2><h3 id="Authorization-Code"><a href="#Authorization-Code" class="headerlink" title="Authorization Code"></a>Authorization Code</h3><p>前端和 authorize server 先取得授權, 取得 authorize code, 接著前端將 authorize code 送至後端, 後端不直接使用, 而是將 authorize code 送向後端, 後端接著將 authrozie code 向 authorzie server 驗證, 如果驗證通過, 則會回傳一個 access token, 後端再將這個 access token 向後端請求資料, line login api 的作法就是這種, 不過由於前端沒有實際上取得 access token, 如果後端的 access token 過期, 就請前端再登入一次, 後端只儲存 token 以及在 authorize 時拿去 auththorize server 驗證,<br>之所以這個流程會比後面提到的 Implicit code 更安全一點是因為:</p>
+<ol>
+<li>它還能再套一層 <a target="_blank" rel="noopener" href="https://oauth.net/2/pkce/">PKCE</a></li>
+<li>access token 由後端管理, 減少使用者被駭(安裝不安全的插件, 被挾持)導致 token 洩漏</li>
+</ol>
+<h3 id="Implicit-Code"><a href="#Implicit-Code" class="headerlink" title="Implicit Code"></a>Implicit Code</h3><p>一個比較不那麼安全的作法, 也是 line liff 的登入方式, 在前端向 authorize server 授權後, 直接由前端保管 access token, 每次請求都會附上一個 access token, 後端再驗證這個 access token 是否為 authorize server 所發放的, 缺點就是 access token 由前端管理</p>
+<h2 id="JWT-validation"><a href="#JWT-validation" class="headerlink" title="JWT validation"></a>JWT validation</h2><p>在我們取得 access token, 以 line 為例, JWT 時, 一個最簡單的作法就是直接請 authorize server <a target="_blank" rel="noopener" href="https://developers.line.biz/en/reference/line-login/#verify-access-token">驗證</a>我們的 token, 不過每次都要問一次 line, 難免有效能上的問題, 這裡我們可以利用非對稱加密(ES256)的特性來做到半離線的驗證法, 如下圖</p>
+<p><img src="https://i.imgur.com/UnAI8cS.png" alt=""></p>
+<p>ref: <a target="_blank" rel="noopener" href="https://blog.miniasp.com/post/2023/04/09/How-to-validate-LINE-Login-issued-ES256-ID-Token">https://blog.miniasp.com/post/2023/04/09/How-to-validate-LINE-Login-issued-ES256-ID-Token</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/categories/">分類</a></li>
+         
+          <li><a href="/projects">專案</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%B2%E6%8E%A5-oauth2-%E5%92%8C-jwt-%E4%BB%A5-line-%E7%82%BA%E4%BE%8B"><span class="toc-number">1.</span> <span class="toc-text">串接 oauth2 和 jwt, 以 line 為例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Authorization-Code-vs-Implicit-Code"><span class="toc-number">1.1.</span> <span class="toc-text">Authorization Code vs Implicit Code</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Authorization-Code"><span class="toc-number">1.1.1.</span> <span class="toc-text">Authorization Code</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Implicit-Code"><span class="toc-number">1.1.2.</span> <span class="toc-text">Implicit Code</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JWT-validation"><span class="toc-number">1.2.</span> <span class="toc-text">JWT validation</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://robinsonweng.github.io/2023/12/31/oauth2-implementation-line-example/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://robinsonweng.github.io/2023/12/31/oauth2-implementation-line-example/&text=oauth2-implementation-line-example"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://robinsonweng.github.io/2023/12/31/oauth2-implementation-line-example/&title=oauth2-implementation-line-example"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://robinsonweng.github.io/2023/12/31/oauth2-implementation-line-example/&is_video=false&description=oauth2-implementation-line-example"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=oauth2-implementation-line-example&body=Check out this article: https://robinsonweng.github.io/2023/12/31/oauth2-implementation-line-example/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://robinsonweng.github.io/2023/12/31/oauth2-implementation-line-example/&title=oauth2-implementation-line-example"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://robinsonweng.github.io/2023/12/31/oauth2-implementation-line-example/&title=oauth2-implementation-line-example"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://robinsonweng.github.io/2023/12/31/oauth2-implementation-line-example/&title=oauth2-implementation-line-example"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://robinsonweng.github.io/2023/12/31/oauth2-implementation-line-example/&title=oauth2-implementation-line-example"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://robinsonweng.github.io/2023/12/31/oauth2-implementation-line-example/&name=oauth2-implementation-line-example&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 選單</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 文章目錄</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 頁首</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2023 robinson
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/categories/">分類</a></li>
+         
+          <li><a href="/projects">專案</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight .code pre").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-148363298-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+</html>
