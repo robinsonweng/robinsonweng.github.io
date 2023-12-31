@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://robinsonweng.github.io/2023/12/31/intro-for-csrf/</loc>
+    
+    <lastmod>2023-12-31T03:42:57.628Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://robinsonweng.github.io/2023/10/07/rust-irc-part-1/</loc>
     
     <lastmod>2023-10-07T08:52:11.849Z</lastmod>

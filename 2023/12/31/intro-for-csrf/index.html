@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="What is CSRF, again?假設一個網站的儲值的 URL 如下, 並且透過 cookie, session 等登入機制: 12345678&lt;!-- website host: example.com --&gt;&lt;form action&#x3D;&quot;https:&#x2F;&#x2F;example.com&#x2F;depositAdd&quot; method">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSRF 簡介">
+<meta property="og:url" content="https://robinsonweng.github.io/2023/12/31/intro-for-csrf/index.html">
+<meta property="og:site_name" content="春雨的部落格">
+<meta property="og:description" content="What is CSRF, again?假設一個網站的儲值的 URL 如下, 並且透過 cookie, session 等登入機制: 12345678&lt;!-- website host: example.com --&gt;&lt;form action&#x3D;&quot;https:&#x2F;&#x2F;example.com&#x2F;depositAdd&quot; method">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2023-12-31T03:38:36.000Z">
+<meta property="article:modified_time" content="2023-12-31T03:42:57.628Z">
+<meta property="article:author" content="robinson">
+<meta property="article:tag" content="CSRF">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>CSRF 簡介</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects">專案</a></li>
+         
+          <li><a href="/categories/">分類</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2023/10/07/rust-irc-part-1/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">回到頁首</span>
+      <span id="i-share" class="info" style="display:none;">分享</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://robinsonweng.github.io/2023/12/31/intro-for-csrf/" target="_blank" rel="noopener"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://robinsonweng.github.io/2023/12/31/intro-for-csrf/&text=CSRF 簡介" target="_blank" rel="noopener"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://robinsonweng.github.io/2023/12/31/intro-for-csrf/&title=CSRF 簡介" target="_blank" rel="noopener"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://robinsonweng.github.io/2023/12/31/intro-for-csrf/&is_video=false&description=CSRF 簡介" target="_blank" rel="noopener"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CSRF 簡介&body=Check out this article: https://robinsonweng.github.io/2023/12/31/intro-for-csrf/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://robinsonweng.github.io/2023/12/31/intro-for-csrf/&title=CSRF 簡介" target="_blank" rel="noopener"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://robinsonweng.github.io/2023/12/31/intro-for-csrf/&title=CSRF 簡介" target="_blank" rel="noopener"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://robinsonweng.github.io/2023/12/31/intro-for-csrf/&title=CSRF 簡介" target="_blank" rel="noopener"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://robinsonweng.github.io/2023/12/31/intro-for-csrf/&title=CSRF 簡介" target="_blank" rel="noopener"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://robinsonweng.github.io/2023/12/31/intro-for-csrf/&name=CSRF 簡介&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-CSRF-again"><span class="toc-number">1.</span> <span class="toc-text">What is CSRF, again?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie-protection-from-browser"><span class="toc-number">2.</span> <span class="toc-text">Cookie protection from browser</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#httpOnly"><span class="toc-number">2.1.</span> <span class="toc-text">httpOnly</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Secure"><span class="toc-number">2.2.</span> <span class="toc-text">Secure</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SameSite"><span class="toc-number">2.3.</span> <span class="toc-text">SameSite</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Strict"><span class="toc-number">2.3.1.</span> <span class="toc-text">Strict</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Lax-default"><span class="toc-number">2.3.2.</span> <span class="toc-text">Lax(default)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#None"><span class="toc-number">2.3.3.</span> <span class="toc-text">None</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#幾個防護手段"><span class="toc-number">3.</span> <span class="toc-text">幾個防護手段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">4.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#參考資料"><span class="toc-number">5.</span> <span class="toc-text">參考資料</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        CSRF 簡介
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">春雨</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-12-31T03:38:36.000Z" itemprop="datePublished">2023-12-31</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Security/">Security</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/CSRF/" rel="tag">CSRF</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="What-is-CSRF-again"><a href="#What-is-CSRF-again" class="headerlink" title="What is CSRF, again?"></a>What is CSRF, again?</h2><p>假設一個網站的儲值的 URL 如下, 並且透過 cookie, session 等登入機制:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- website host: example.com --&gt;</span><br><span class="line">&lt;form action&#x3D;&quot;https:&#x2F;&#x2F;example.com&#x2F;depositAdd&quot; method&#x3D;&quot;post&quot;&gt;</span><br><span class="line">    &lt;label for&#x3D;&quot;name&quot;&gt;Name:&lt;&#x2F;label&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot;&gt;&lt;br&gt;&lt;br&gt;</span><br><span class="line">    &lt;label for&#x3D;&quot;amount&quot;&gt;Amount:&lt;&#x2F;label&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;amount&quot; name&#x3D;&quot;amount&quot;&gt;&lt;br&gt;&lt;br&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;submit&quot; value&#x3D;&quot;Submit&quot;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br></pre></td></tr></table></figure>
+
+<p>那麼, 在網站沒有指定 cookie 只能對他們指定的網域生效時, 駭客可以架設一個釣魚網站, 並嵌入類似的程式碼</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- website host: exomple.com --&gt;</span><br><span class="line">&lt;form action&#x3D;&quot;https:&#x2F;&#x2F;example.com&#x2F;depositAdd?amount&#x3D;1000&amp;name&#x3D;Andrew&quot; method&#x3D;&quot;post&quot;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br></pre></td></tr></table></figure>
+
+<p>由於伺服器沒有設定允許 host 網頁的 allow list, 所以不論是來自 <code>exmaple.com</code> 或者是來自 <code>exomple.com</code> 的請求(ajax, api)都會接受, 並且 cookie 沒有設定 <code>samesite</code>, 所以任何 host 都能使用在 <code>exmaple.com</code> 設定的 cookie</p>
+<h2 id="Cookie-protection-from-browser"><a href="#Cookie-protection-from-browser" class="headerlink" title="Cookie protection from browser"></a>Cookie protection from browser</h2><p>我們先來清點一下瀏覽器提供對 cookie 的保護, 他們分別是:</p>
+<ul>
+<li>HttpOnly</li>
+<li>Secure</li>
+<li>SameSite</li>
+</ul>
+<h3 id="httpOnly"><a href="#httpOnly" class="headerlink" title="httpOnly"></a>httpOnly</h3><p>無法被 javascript api <code>Document.cookie</code> 存取, 是僅限瀏覽器和 server 之間溝通的 cookie</p>
+<h3 id="Secure"><a href="#Secure" class="headerlink" title="Secure"></a>Secure</h3><p>如果瀏覽器和伺服器之間溝通的協定不是 <code>https</code>, 那麼瀏覽器無法讓伺服器設定這個 cookie, 也不允許沒有 <code>https</code> 的伺服器來存取這個 cookie</p>
+<h3 id="SameSite"><a href="#SameSite" class="headerlink" title="SameSite"></a>SameSite</h3><p>SameSite 讓 server 決定 browser 要以什麼樣的政策和不同網域的伺服器分享 cookie. 一共有以下三個選項:</p>
+<ul>
+<li>Strict</li>
+<li>Lax</li>
+<li>None</li>
+</ul>
+<h4 id="Strict"><a href="#Strict" class="headerlink" title="Strict"></a>Strict</h4><p>僅允許同個 Origin 才能存取 cookie</p>
+<h4 id="Lax-default"><a href="#Lax-default" class="headerlink" title="Lax(default)"></a>Lax(default)</h4><p>和 Strict 相似, 差別差在如果使用者從別的網站被導向到 origin, browser 同樣也會分享此 cookie, 例如外部連接, 除此之外 Lax 禁止了比較不安全的 POST</p>
+<h4 id="None"><a href="#None" class="headerlink" title="None"></a>None</h4><p>一律允許, 但是是在 <code>Secure</code> 開啟的前提之下</p>
+<h2 id="幾個防護手段"><a href="#幾個防護手段" class="headerlink" title="幾個防護手段"></a>幾個防護手段</h2><p>OWASP 對於 CSRF 有幾個點是值得提出來的, 以 django 的 csrf token 為例子, 他其實是一種 STP(Synchronizer Token Pattern), 以下取自<a href="https://en.wikipedia.org/wiki/Cross-site_request_forgery#Synchronizer_token_pattern" target="_blank" rel="noopener">維基百科</a></p>
+<blockquote>
+<p>STP 是一個每次使用者呼叫一個請求, 網頁的應用程式就會產生一個 unique token 並嵌入在 html 裡面, 並且 token 會在 server 端驗證. Token 會用任何能確保隨機並確保無法被預測 &amp; 唯一的方式進行生成(e.g. 使用 hash chain 或是隨機種子). 使攻擊者無法猜測這些 token 繞過這些驗證</p>
+</blockquote>
+<p>以 django 的 csrf_token 為例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type&#x3D;&quot;hidden&quot; name&#x3D;&quot;csrfmiddlewaretoken&quot; value&#x3D;&quot;KbyUmhTLMpYj7CD2di7JKP1P3qmLlkPt&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>因為 STP 只依賴 html, 所以他有很好的相容性, 但會會在後端伺服器產生一些複雜性, 因為要逐個請求進行確認, 並且 token 是隨機且不可預測的, 並且也會在使用者使用上產生一些問題, 例如原本的訪問順序為頁面 1, 2, 3, 但當使用者使用回到上一頁之類的功能, 就有可能使 token 失去原本的同步</p>
+</blockquote>
+<p>而 OWASP 對於 <a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#synchronizer-token-pattern" target="_blank" rel="noopener">STP</a> 有幾個建議的做法:</p>
+<p>CSRF Token 的生成:</p>
+<ul>
+<li>CSRF Token 應該要在伺服器端產生</li>
+<li>CSRF token 可以自選每個 session 刷新或是每個請求產生</li>
+<li>伺服器應該要比對來自使用者的 token 是否存在和合理<ul>
+<li>請求內是否存在 token</li>
+<li>請求的 token 和 session 的 token 不符</li>
+</ul>
+</li>
+</ul>
+<p>CSRF tokens 應要有以下特性:</p>
+<ul>
+<li>Unique per user session<ul>
+<li>並沒有限制一定要 per request</li>
+</ul>
+</li>
+<li>Secret, 足夠隱密</li>
+<li>無法被預測, 例如利用 <a href="https://zh.wikipedia.org/zh-tw//dev/random" target="_blank" rel="noopener">/dev/random or /dev/urandom</a></li>
+<li>攻擊者無法重新生成一個完全一樣的 token</li>
+<li>CSRF token 不應該透過 cookie 傳送</li>
+<li>GET request 不但使用了 CSRF 沒有比較安全, 還有可能會在多個地方洩漏, 例如瀏覽紀錄</li>
+</ul>
+<p>以及還有一個小細節:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action&#x3D;&quot;&#x2F;transfer.do&quot; method&#x3D;&quot;post&quot;&gt;</span><br><span class="line">&lt;input type&#x3D;&quot;hidden&quot; name&#x3D;&quot;CSRFToken&quot; value&#x3D;&quot;OWY4NmQwODE4ODRjN2Q2NTlhMmZlYWEwYzU1YWQwMTVhM2JmNGYxYjJiMGI4MjJjZDE1ZDZMGYwMGEwOA&#x3D;&#x3D;&quot;&gt;</span><br><span class="line">[...]</span><br><span class="line">&lt;&#x2F;form&gt;</span><br></pre></td></tr></table></figure>
+
+<p>透過 javascript 將 token 設在客製化的 header 會比放在 form 裡面的隱藏欄位安全一點, 因為有客製化的 header 的請求會自動適用於同源政策</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>如果要我寫一個 tl;dr, 那就是: 如果是 Server-Side-Render, 直接使用 session, 是最快最省事, 而且有一定的安全性的方案。前後端分離一樣可以用 session, 但因為 csrf token 不能在前端產出來, 變成後端還是要有一個登入頁面的前端, 而且 api 的 domain name 通常會有很多個 host(SameSite), 相較之下不但比較不安全, 執行也很麻煩</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><p><a href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Cookies" target="_blank" rel="noopener">https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Cookies</a><br><a href="https://owasp.org/www-project-secure-headers/" target="_blank" rel="noopener">https://owasp.org/www-project-secure-headers/</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects">專案</a></li>
+         
+          <li><a href="/categories/">分類</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-CSRF-again"><span class="toc-number">1.</span> <span class="toc-text">What is CSRF, again?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie-protection-from-browser"><span class="toc-number">2.</span> <span class="toc-text">Cookie protection from browser</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#httpOnly"><span class="toc-number">2.1.</span> <span class="toc-text">httpOnly</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Secure"><span class="toc-number">2.2.</span> <span class="toc-text">Secure</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SameSite"><span class="toc-number">2.3.</span> <span class="toc-text">SameSite</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Strict"><span class="toc-number">2.3.1.</span> <span class="toc-text">Strict</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Lax-default"><span class="toc-number">2.3.2.</span> <span class="toc-text">Lax(default)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#None"><span class="toc-number">2.3.3.</span> <span class="toc-text">None</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#幾個防護手段"><span class="toc-number">3.</span> <span class="toc-text">幾個防護手段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">4.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#參考資料"><span class="toc-number">5.</span> <span class="toc-text">參考資料</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://robinsonweng.github.io/2023/12/31/intro-for-csrf/" target="_blank" rel="noopener"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://robinsonweng.github.io/2023/12/31/intro-for-csrf/&text=CSRF 簡介" target="_blank" rel="noopener"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://robinsonweng.github.io/2023/12/31/intro-for-csrf/&title=CSRF 簡介" target="_blank" rel="noopener"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://robinsonweng.github.io/2023/12/31/intro-for-csrf/&is_video=false&description=CSRF 簡介" target="_blank" rel="noopener"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CSRF 簡介&body=Check out this article: https://robinsonweng.github.io/2023/12/31/intro-for-csrf/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://robinsonweng.github.io/2023/12/31/intro-for-csrf/&title=CSRF 簡介" target="_blank" rel="noopener"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://robinsonweng.github.io/2023/12/31/intro-for-csrf/&title=CSRF 簡介" target="_blank" rel="noopener"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://robinsonweng.github.io/2023/12/31/intro-for-csrf/&title=CSRF 簡介" target="_blank" rel="noopener"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://robinsonweng.github.io/2023/12/31/intro-for-csrf/&title=CSRF 簡介" target="_blank" rel="noopener"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://robinsonweng.github.io/2023/12/31/intro-for-csrf/&name=CSRF 簡介&description=" target="_blank" rel="noopener"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 選單</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 文章目錄</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 頁首</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2023 robinson
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首頁</a></li>
+         
+          <li><a href="/about/">關於</a></li>
+         
+          <li><a href="/archives/">文章</a></li>
+         
+          <li><a href="/projects">專案</a></li>
+         
+          <li><a href="/categories/">分類</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight .code pre").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-148363298-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+</html>
